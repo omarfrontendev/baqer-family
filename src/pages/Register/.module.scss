@@ -1,0 +1,310 @@
+@import '../../styles/variables.scss';
+
+.page {
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .register__form {
+        width: 800px;
+        max-width: 100%;
+        margin: 0 auto;
+        .section__title {
+            color: $gray__dark__text__color;
+            margin-bottom: 14px;
+            &:not(:first-of-type) {
+                margin-top: 40px;
+            }
+        }
+        .upload__input {
+            display: none;
+        }
+        .upload__file {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 39px;
+            background-color: $main__blue__color;
+            color: $white__color;
+            margin: 0 auto 70px;
+            cursor: pointer;
+            position: relative;
+            .user__image {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: calc(100% - 6px);
+                height: calc(100% - 6px);
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            &.uploaded {
+                svg {
+                    position: absolute;
+                    top: 14px;
+                    right: -10px;
+                    font-size: 23px;
+                    color: #FFF;
+                    background: $main__blue__color;
+                    padding: 4px;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+        .label__text {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 600;
+            color: $gray__dark__text__color;
+        }
+        .user__name__inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px 20px;
+            margin-bottom: 36px;
+        }
+        .radio__box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: #26c0ff14;
+            font-weight: 600;
+            margin: 36px 0;
+            position: relative;
+            &.invalid {
+                background-color: #e9212114;
+            }
+            .gender__labels {
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                >div {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    input,
+                    label {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+            input,label {
+                cursor: pointer;
+            }
+        }
+        .submit__btn {
+            display: flex;
+            width: 100%;
+            margin: 40px auto 24px;
+            > button {
+                width: 100%;
+            }
+        }
+        .date__box {
+            height: 64px;
+            padding-top: 0;
+            padding-bottom: 0;
+            width: 100%;
+            box-sizing: inherit;
+            border: 1px solid #DEDEDE;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            position: relative;
+            cursor: pointer;
+            &.invalid {
+                border-color: $error__color;
+                > div {
+                    input {
+                        &::placeholder {
+                            color: $error__color;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+            > div {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                padding-right: 22px;
+                padding-left: 20px;
+                > div:first-of-type,
+                input {
+                    height: 100%;
+                    width: 100%;
+                    &::placeholder {
+                        color: $black__color;
+                        opacity: .3;
+                        font-size: $ft__16;
+                        text-transform: capitalize;
+                        transition: .3s ease-in-out;
+                    }
+                }
+            }
+            .date__input__label {
+                color: #474747;
+                font-size: 16px;
+                text-transform: capitalize;
+                margin-bottom: 0;
+                position: absolute;
+                top: 50%;
+                right: 24px;
+                transform: translateY(-50%);
+                opacity: 0;
+                scale: 0;
+                transition: .3s ease-in-out; 
+                &.focus {
+                    opacity: 1;
+                    scale: 1;
+                    font-size: 14px;
+                    top: 0;
+                    background: #FFF;
+                    z-index: 1;
+                    padding: 0 5px;
+                    right: 19px;
+                    color: $main__blue__color;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .register__btn {
+        margin-top: 40px;
+        text-align: center;
+        color: $gray__light__text__color;
+        a {
+            font-weight: bold;
+            color: $main__blue__color;
+        }
+    }
+    .map__container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .5;
+        }
+        .close__btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #000;
+            font-size: 27px;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .back__marker__btn,
+        .back__btn__location {
+            position: absolute;
+            z-index: 10000000;
+            color: #000;
+            right: 11px;
+            bottom: 115px;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .back__marker__btn {
+            bottom: 165px;
+        }
+    }
+    .map__button {
+        height: 64px;
+        padding-top: 0;
+        padding-bottom: 0;
+        width: 100%;
+        padding-right: 22px;
+        padding-left: 20px;
+        box-sizing: inherit;
+        border: 1px solid #DEDEDE;
+        border-radius: 8px;
+        transition: 0.3s ease-in-out;
+        color: rgb(0 0 0 / 30%);
+        font-size: $ft__16;
+        text-transform: capitalize;
+        transition: .3s ease-in-out;
+        position: relative;
+        .label {
+            color: #474747;
+            font-size: 16px;
+            text-transform: capitalize;
+            margin-bottom: 0;
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            transform: translateY(-50%);
+            opacity: 0;
+            scale: 0;
+            transition: 0.3s ease-in-out;
+        }
+        &.active {
+            .label {
+                opacity: 1;
+                scale: 1;
+                font-size: 14px;
+                top: 0;
+                background: #FFF;
+                z-index: 1;
+                padding: 0 5px;
+                right: 19px;
+                color: $main__blue__color;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .page {
+        padding: 40px 14px;
+        .register__form {
+            .user__name__inputs {
+                column-gap: 10px;
+            }
+        }
+    }
+}

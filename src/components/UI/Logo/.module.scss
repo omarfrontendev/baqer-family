@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.logo {
+    font-size: 53px;
+    line-height: 80px;
+    font-weight: bold;
+    color: $main__blue__color;
+    text-align: center;
+}
+.subtitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: $main__blue__color;
+    margin-bottom: 55px;
+    display: block;
+    text-align: center;
+}

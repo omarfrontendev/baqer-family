@@ -1,0 +1,49 @@
+@import '../../styles/variables.scss';
+
+.page {
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .page__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .title {
+            font-size: $ft__16;
+            font-weight: 700;
+            margin: 13px auto 8px;
+        }
+        .subtitle {
+            color: $gray__text__color;
+            font-size: $ft__14;
+            max-width: 400px;
+            text-align: center;
+        }
+    }
+    .forget__form {
+        flex: 1;
+        margin-top: 20px;
+        .submit__btn {
+            display: flex;
+            width: 100%;
+            margin: 40px auto 24px;
+            > button {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .page {
+        padding: 40px 14px;
+        .register__form {
+            .user__name__inputs {
+                column-gap: 10px;
+            }
+        }
+    }
+}

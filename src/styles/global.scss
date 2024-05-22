@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;    
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    scroll-behavior: smooth;
+}
+a,button {
+    all: unset;
+    cursor: pointer;
+}
+input {
+    &:not([type="radio"]):not([type="checkbox"])  {
+        all: unset;
+    }
+}
+textarea {
+    all: unset;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+// global classes
+.inputs__box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 36px;
+}

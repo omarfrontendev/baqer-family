@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.page {
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .login__form {
+        width: 600px;
+        max-width: 100%;
+        margin: 0 auto;
+        .submit__btn {
+            display: flex;
+            width: 100%;
+            margin: 40px auto 24px;
+            > button {
+                width: 100%;
+            }
+        }
+        .forget__pass {
+            text-align: center;
+            color: #0D49C3;
+            font-weight: bold;
+            display: block;
+        }
+    }
+    .register__btn {
+        margin-top: 40px;
+        text-align: center;
+        color: $gray__light__text__color;
+        a {
+            font-weight: bold;
+            color: $main__blue__color;
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .page {
+        padding: 40px 14px;
+    }
+}

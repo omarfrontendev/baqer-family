@@ -1,0 +1,139 @@
+@import "../../../styles/variables.scss";
+
+.input__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .label {
+    color: #474747;
+    font-size: 16px;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    opacity: 0;
+    scale: 0;
+    transition: .3s ease-in-out; 
+    &.focus {
+      opacity: 1;
+      scale: 1;
+      font-size: 14px;
+      top: 0;
+      background: #FFF;
+      z-index: 1;
+      padding: 0 5px;
+      right: 19px;
+      color: $main__blue__color;
+      font-weight: 600;
+    }
+  }
+  .input__box {
+    position: relative;
+    width: 100%;
+    .input {
+      height: 64px;
+      padding-top: 0;
+      padding-bottom: 0;
+      width: 100%;
+      padding-right: 57px;
+      padding-left: 20px;
+      box-sizing: inherit;
+      border: 1px solid #DEDEDE;
+      border-radius: 8px;
+      transition: .3s ease-in-out;
+      &[type = "password"] {
+        padding-left: 40px;
+      }
+      &:focus {
+        border-color: $main__blue__color;
+        &::placeholder {
+          opacity: 0 !important;
+        }
+        & + .icon {
+          color: $main__blue__color;
+        }
+        & + .label {
+          opacity: 1;
+          scale: 1;
+          font-size: 14px;
+          top: 0;
+          background: #FFF;
+          z-index: 1;
+          padding: 0 5px;
+          right: 19px;
+          color: $main__blue__color;
+          font-weight: 600;
+        }
+      }
+      &.input__invalid {
+        border-color: $error__color;
+        & + .label,
+        & + .icon {
+          color: $error__color;
+        }
+        &::placeholder {
+          color: $error__color;
+          opacity: 1;
+        }
+      }
+      &::placeholder {
+        color: $black__color;
+        opacity: .3;
+        font-size: $ft__16;
+        text-transform: capitalize;
+        transition: .3s ease-in-out;
+      }
+      &.textarea {
+        padding: 22px 17px;
+        min-height: 118px;
+      }
+      &.no__icon {
+        padding-right: 22px;
+      }
+    }
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 10px;
+      color: #b2b2b2;
+      font-size: 27px;
+      display: flex;
+    }
+    .eyeIcon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 13px;
+      color: #b2b2b2;
+      font-size: 22px;
+    }
+  }
+  .err__msg {
+    position: absolute;
+    left: 10px;
+    bottom: -25px;
+    font-size: 14px;
+    color: $error__color;
+  }
+}
+
+@media (max-width: 575px) {
+  .input__container {
+    .input__box {
+      .input {
+        height: 50px;
+      }
+    }
+    .err__msg {
+      font-size: 12px;
+    }
+  }   
+}
