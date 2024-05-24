@@ -1,12 +1,14 @@
+// import config from "../config";
 import axios from "axios";
 import Cookies from "js-cookie";
 
 const instance = axios.create({
-  baseURL: process.env.SERVER_API_URL,
+  baseURL: "https://baqerapi.fayrouztransport.com",
   timeout: 50000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
   },
 });
 

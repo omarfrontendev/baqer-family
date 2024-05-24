@@ -49,6 +49,7 @@ const LoginForm = () => {
 
   const onSubmit = async (e) => {
       const res = await onLogin(e, t("loginSuccessfully"));
+      console.log(res)
       if(res?.success === true) {
           Cookies.set("token", res?.data?.token)
           Cookies.set("user", JSON.stringify(res?.data?.user))
