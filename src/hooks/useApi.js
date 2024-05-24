@@ -19,12 +19,13 @@ export const useApi = (endpoint, method, body) => {
         : toast.success(res?.message || successMsg || "تمت العملية بنجاح!");
       return res;
     } catch (err) {
-      console.log(err);
       typeof err?.response?.data?.message === "string"
         ? toast.error(err?.response?.data?.message)
-        : Object.entries(err?.response?.data?.message).forEach(([key]) =>
+        : typeof err?.response?.data?.message === "object"
+        ? Object?.entries(err?.response?.data?.message).forEach(([key]) =>
             toast.error(err?.response?.data?.message[key][0])
-          );
+          )
+        : toast.error("حدث خطأ ما! أعد المحاولة من فضلك");
       setError(err);
       setLoading(false);
       return error;
