@@ -14,9 +14,6 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
   const { t } = useTranslation();
   const [openMap, setOpenMap] = useState(false);
 
-  const phoneValue = watch()?.phone;
-  const whatsappValue = watch()?.whatsapp;
-
   return (
     <>
       <Radio
@@ -97,14 +94,6 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               error={errors?.company?.whatsapp?.message}
               required
             />
-
-            {/* <input name="phone" ref={register} />
-            {errors.phone && <p>{errors.phone.message}</p>}
-            <input name="whatsapp" ref={register} />
-            {errors.whatsapp && <p>{errors.whatsapp.message}</p>}
-            {(phoneValue || whatsappValue) &&
-              !errors.phone &&
-              !errors.whatsapp && <p>{t("errors.oneOfRequired")}</p>} */}
             <MainInput
               register={register}
               placeholder={t("inputs.instagram")}
@@ -139,8 +128,8 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               // onBlur={() => setBtnFocus(false)}
             >
               {watch()?.location?.lat
-                ? `lat: ${watch()?.location?.lat} | lng: ${
-                    watch()?.location?.lng
+                ? `lat: ${watch()?.company?.location?.lat} | lng: ${
+                    watch()?.company?.location?.lng
                   }`
                 : "الموقع"}
               <div className={styles.label}>الموقع</div>
@@ -177,7 +166,7 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
           rules={{
             required: true,
           }}
-          name="location"
+          name="company.location"
           render={({ field: { onChange } }) => (
             <MainGoogleMap
               onChange={(e) => onChange(e)}

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 // global components
 import { Logo } from '../../components';
+
 // page components
 import LoginForm from './_components/LoginForm';
 import styles from './.module.scss';
-import { useTranslation } from 'react-i18next';
-import api from '../../api';
 
 const Login = () => {
 

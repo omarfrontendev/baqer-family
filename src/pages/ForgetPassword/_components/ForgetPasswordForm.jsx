@@ -2,52 +2,76 @@ import React from 'react'
 
 // external
 import * as yup from "yup";
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
+import Select from "react-select";
 
 // internal
-import { MainButton, MainInput } from '../../../components';
+import { ErrorMessage, MainButton, MainInput } from '../../../components';
 
 // styles
 import styles from '../.module.scss';
+import { useApi } from '../../../hooks/useApi';
 
 const ForgetPasswordForm = () => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+
+    const options = [
+      { value: 1, label: t("inputs.password") },
+      { value: 2, label: t("inputs.email") },
+    ];
 
     // schema
     const registerSchema = yup
       .object({
         name: yup.string("").required(t("errors.required")),
-        email: yup
-          .string()
-          .email(t("errors.email"))
+        type: yup
+          .number()
+          .typeError(t("errors.must__number"))
           .required(t("errors.required")),
+        email: yup.string().when("type", {
+          is: 2,
+          then: () =>
+            yup
+              .string()
+              .email(t("errors.email"))
+              .required(t("errors.required")),
+        }),
         civil_number: yup
           .number()
           .typeError(t("errors.must__number"))
           .integer(t("errors.mustBeInteger"))
           .required(t("errors.required")),
-        type: yup.number().required(t("errors.required")),
-        // title: yup.string("").required(t("errors.required")),
         description: yup.string(""),
+        title: yup.string("").required(t("errors.required")),
       })
       .required();
 
     // useForm
     const {
-    register,
-    handleSubmit,
-    // control,
-    watch,
-    formState: { errors, isValid },
+      register,
+      handleSubmit,
+      control,
+      watch,
+      formState: { errors },
     } = useForm({
-    resolver: yupResolver(registerSchema),
-    mode: "all",
+      resolver: yupResolver(registerSchema),
+      mode: "all",
     });
 
-    const onSubmit = e => console.log(e)
+
+    const { loading, onRequest } = useApi("/api/forget-request", "post");
+
+    const onSubmit = e => {
+      const body = {
+        ...e,
+        civil_number: e.civil_number.toString(),
+      };
+
+      onRequest(body, "تم طلب إعادة تعيين كلمة المرور بنجاح");
+    };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.forget__form}>
@@ -61,15 +85,51 @@ const ForgetPasswordForm = () => {
           error={errors?.name?.message}
           required
         />
-        <MainInput
-          register={register}
-          placeholder={t("inputs.email")}
-          type="email"
-          name="email"
-          value={watch()?.email}
-          error={errors?.email?.message}
-          required
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          name="type"
+          render={({ field: { onChange, onBlur } }) => (
+            <div style={{ position: "relative" }}>
+              <Select
+                styles={{
+                  control: (styles) => ({
+                    ...styles,
+                    height: "64px",
+                    borderRadius: "8px",
+                    borderColor: errors?.type?.message ? "#E92121" : "#DEDEDE",
+                    outline: "none !important",
+                    borderWidth: "1px",
+                  }),
+                  placeholder: (styles) => ({
+                    ...styles,
+                    color: errors?.type?.message ? "#E92121" : "",
+                  }),
+                }}
+                options={options}
+                onBlur={onBlur}
+                onChange={(e) => onChange(e?.value)}
+                placeholder={t("chooseServiceType")}
+              />
+              {errors?.type?.message && (
+                <ErrorMessage msg={errors?.type?.message} />
+              )}
+            </div>
+          )}
         />
+        {watch()?.type === 2 && (
+          <MainInput
+            register={register}
+            placeholder={t("inputs.email")}
+            type="email"
+            name="email"
+            value={watch()?.email}
+            error={errors?.email?.message}
+            required
+          />
+        )}
         <MainInput
           register={register}
           placeholder={t("inputs.civilNo")}
@@ -99,7 +159,7 @@ const ForgetPasswordForm = () => {
       </div>
       {/* submit button */}
       <div className={styles.submit__btn}>
-        <MainButton disabled={!isValid} type={"submit"}>
+        <MainButton type={"submit"} loading={loading} disabled={loading}>
           {t("buttons.forget__pass__btn")}
         </MainButton>
       </div>

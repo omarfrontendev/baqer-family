@@ -1,11 +1,17 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { ForgetPassword, Login, Register, WelcomePage } from './pages'
+import { ForgetPassword, FreeBusiness, Home, Login, Register, SingleFreeBusiness, WelcomePage } from './pages'
+import { PagesGuard } from './components/AuthGuard';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<WelcomePage />} />
+      <Route path="" element={<PagesGuard />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/free-business" element={<FreeBusiness />} />
+        <Route path="/free-business/:slug" element={<SingleFreeBusiness />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forget-password" element={<ForgetPassword />} />

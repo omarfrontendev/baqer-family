@@ -38,3 +38,42 @@ input[type=number] {
     flex-direction: column;
     row-gap: 36px;
 }
+.container {
+    width: 1300px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+}
+.mySwiper {
+    .swiper-wrapper {
+        padding-bottom: 30px;
+    }
+    .swiper-pagination {
+        bottom: 0;
+        .swiper-pagination-bullet {
+            width: 14px;
+            height: 4px;
+            border-radius: 11px;
+            transition: .2s;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #26C0FF;
+        }
+    }
+}
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 24px;
+}
+
+
+// start media max-width 575px
+@media(max-width: 575px) {
+    .container {
+        padding: 0 10px 10px;
+    }
+    .list {
+        gap: 10px;
+    }
+}

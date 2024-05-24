@@ -1,0 +1,74 @@
+.company__image {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    object-fit: cover;
+    margin: 0 auto;
+}
+.title {
+    text-align: center;
+    font-size: 18px;
+    margin: 0 auto 20px;
+}
+.contact__section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 32px 0 14px;
+    .contact__box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #26c0ff26;
+        font-size: 14px;
+        padding: 4px 20px;
+        width: 200px;
+        max-width: 100%;
+        > span {
+            color: #26C0FF;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+    }
+}
+
+.social__section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+    }
+}
+
+.footer__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 80px auto 0;
+    max-width: 400px;
+    > a {
+        color: #FFF;
+        font-size: 16px;
+        background-color: #FF8426;
+        height: 50px;
+        border-radius: 7px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.btn__blue {
+            background-color: #0D49C3;
+        }
+    }
+}

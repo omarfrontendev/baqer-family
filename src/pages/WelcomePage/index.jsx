@@ -13,8 +13,8 @@ const WelcomePage = () => {
           النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق
         </p>
       </div>
-      <MainButton to="/login" type="link">
-        تسجيل الدخول
+      <MainButton to="/" type="link">
+        الصفحة الرئيسية
       </MainButton>
     </div>
   );

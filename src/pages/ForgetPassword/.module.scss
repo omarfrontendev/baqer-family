@@ -11,6 +11,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        margin-bottom: 40px;
         .title {
             font-size: $ft__16;
             font-weight: 700;
@@ -26,6 +27,9 @@
     .forget__form {
         flex: 1;
         margin-top: 20px;
+        width: 800px;
+        max-width: 100%;
+        margin: 0 auto;
         .submit__btn {
             display: flex;
             width: 100%;

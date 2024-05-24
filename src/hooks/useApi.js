@@ -7,7 +7,7 @@ export const useApi = (endpoint, method, body) => {
   const [error, setError] = useState(false);
   const [data, setData] = useState(null);
 
-  const onRequest = async (data, onSuccess) => {
+  const onRequest = async (data, successMsg) => {
     setLoading(true);
     try {
       const res = await api[method](endpoint, data || body);
@@ -16,12 +16,16 @@ export const useApi = (endpoint, method, body) => {
       // eslint-disable-next-line no-unused-expressions
       method === "get"
         ? null
-        : toast.success(res?.message || "تمت العملية بنجاح!");
-      onSuccess && onSuccess();
+        : toast.success(res?.message || successMsg || "تمت العملية بنجاح!");
       return res;
     } catch (err) {
       console.log(err);
-      toast.error(err?.message);
+      typeof err?.response?.data?.message === "string"
+        ? toast.error(err?.response?.data?.message)
+        : Object.entries(err?.response?.data?.message).forEach(([key]) =>
+            toast.error(err?.response?.data?.message[key][0])
+          );
+      setError(err);
       setLoading(false);
       return error;
     }

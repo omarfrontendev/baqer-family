@@ -21,7 +21,7 @@ const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
   });
 
   const [location, setLocation] = useState(
-    watch()?.location?.lat ? watch()?.location : null
+    watch()?.company?.location?.lat ? watch()?.company?.location : null
   );
   const [map, setMap] = useState(null);
 

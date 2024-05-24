@@ -1,0 +1,29 @@
+@import '../../../../styles/variables.scss';
+
+.sidebar__content {
+    position: relative;
+    .logo {
+        background-color: #FFF;
+        min-height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .close__btn {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 12px;
+        left: 16px;
+        color: $main__blue__color;
+        font-size: 28px;
+    }
+    .list {
+        list-style: none;
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        font-size: $ft__16;
+    }
+}

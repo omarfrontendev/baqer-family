@@ -1,0 +1,33 @@
+.box {
+    border: 1px solid #E9E9E9;
+    border-radius: 4px;
+    width: fit-content;
+    // margin: 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    .image {
+        max-width: 100%;
+        img {
+            width: 100%;
+        }
+    }
+    .title {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 8px;
+        font-weight: 400;
+    }
+    .button {
+        margin: 0 auto 20px;
+        padding: 4px;
+        flex: 1 1;
+        max-width: 90%;
+        width: 150px;
+        border-radius: 50px;
+        background-color: #26C0FF;
+        color: #FFF;
+        cursor: pointer;
+        text-align: center;
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApi } from '../../../hooks/useApi';
 
 // external
@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import * as yup from "yup";
 
 // internal component
@@ -16,12 +17,15 @@ import WorkPlaceInfo from './WorkPlaceInfo';
 
 // styles 
 import styles from '../.module.scss';
+import dayjs from 'dayjs';
 
 
 
 const RegisterForm = () => {
 
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
 
   const getPlatformRegex = (platform) => {
     const regexes = {
@@ -140,7 +144,7 @@ const RegisterForm = () => {
     handleSubmit,
     control,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       workPlace: "yes",
@@ -161,47 +165,54 @@ const RegisterForm = () => {
   const isWork = watch("workPlace") === "yes";
 
   // register
-  const { data, loading, error, onRequest } = useApi(
+  const { loading, onRequest: onRegister } = useApi(
     "/api/register?",
     "post"
   );
 
-
   const onSubmit = async (data) => {
-    // const res = await onRequest({
-    //   first_name: "first_name",
-    //   second_name: "second_name",
-    //   third_name: "third_name",
-    //   fourth_name: "fourth_name",
-    //   gender: "male", // required
-    //   phone_number: "1234567890", // required
-    //   email: "test@test.test11", // required | unique
-    //   civil_number: "123111", // required | unique
-    //   residential_address: "1234 Main St",
-    //   date_of_birth: "1990-01-01", // required | unique
-    //   password: "123456789", // required | unique
-    //   confirm_password: "123456789", // required | unique
-    //   workplace_name: "Company Inc.",
-    //   workplace_type: "electrical",
-    //   workplace_service_type: "serviceType",
-    //   workplace_description: "A great place to work",
-    //   freelance_company_name: "Freelance Inc.",
-    //   freelance_description: "Freelance services",
-    //   freelance_employer_name: "Self",
-    //   freelance_contact_number: "0987654321",
-    //   social_media_links:
-    //     '{"twitter":"@johndoe","facebook":"facebook.com/johndoe"}',
-    //   company_address: "5678 Secondary St",
-    //   show_workspace_name: "true", //
-    //   freelance_contact_type: "رقم هاتف", // إمكانية تحديد اتصال هاتف او واتس اب او كلاهم
-    //   whats_app_number: "1235355998",
-    //   show_data: true, // ظهار البيانات الشخصية لصاحب العمل
-    //   role: "user",
-    // });
+    const body = {
+      first_name: data?.firstName,
+      second_name: data?.secondName,
+      third_name: data?.secondName,
+      fourth_name: data?.fourthName,
+      gender: data?.gender,
+      phone_number: data?.phone.toString(),
+      email: data?.email,
+      civil_number: data?.civilNo.toString(),
+      residential_address: data?.address,
+      date_of_birth: dayjs(data?.birthDate).format("YYYY-MM-DD"),
+      password: data?.password,
+      confirm_password: data?.confirmPassword,
+      workplace_name: data?.workPlace?.workPlaceName,
+      workplace_type: data?.workPlace?.serviceType,
+      freelance_company_name: data?.company?.companyName,
+      freelance_description: data?.company?.description,
+      freelance_employer_name: data?.company?.managerName,
+      freelance_contact_number: data?.company?.phone,
+      company_address: data?.company?.address,
+      show_workspace_name: data?.workPlace?.showDetails,
+      whats_app_number: data?.company?.whatsapp,
+      show_data: data?.company?.showDetailsCompany,
+      instagram: data?.company?.instagram,
+      twitter: data?.company?.twitter,
+      facebook: data?.company?.facebook,
+      lat: data?.company?.location?.lat,
+      long: data?.company?.location?.lng,
+      role: "user",
+    };
+
+    try {
+      const res = await onRegister(body, t("registerSuccessfully"));
+      res && navigate('/login')
+    }catch (err) {
+      console.log(err)
+    }
 
   };
 
-  const [openMap, setOpenMap] = useState(false);
+
+  // const [openMap, setOpenMap] = useState(false);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.register__form}>
@@ -236,7 +247,7 @@ const RegisterForm = () => {
 
       {/* submit button */}
       <div className={styles.submit__btn}>
-        <MainButton disabled={!isValid} type={"submit"}>
+        <MainButton type={"submit"} loading={loading} disabled={loading}>
           {t("new__account")}
         </MainButton>
       </div>

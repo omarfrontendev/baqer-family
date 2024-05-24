@@ -1,0 +1,18 @@
+.details__container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #EBEBEB;
+        color: #7B7B7B;
+        font-size: 14px;
+        padding: 4px 20px;
+        min-width: 110px;
+        text-align: center;
+        border-radius: 4px;
+    }
+}

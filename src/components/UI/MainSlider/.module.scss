@@ -1,0 +1,17 @@
+.slider__content {
+    // height: 250px;
+    width: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    .slider__img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+}
+
+
+
