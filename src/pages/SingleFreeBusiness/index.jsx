@@ -9,6 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
 import DetailsBox from './_components/DetailsBox';
 import { FacebookIcon, InstagramIcon, TwitterIcon, WhatsappIcon } from '../../icons';
+import dayjs from 'dayjs';
 
 const SingleFreeBusiness = () => {
 
@@ -16,6 +17,8 @@ const SingleFreeBusiness = () => {
     const { t } = useTranslation()
 
     const { data, loading, onRequest } = useApi(`/api/freelanceJob/${slug}`, "get");
+
+  console.log(data?.data);
 
     useEffect(() => {
         if(slug) {
@@ -42,27 +45,43 @@ const SingleFreeBusiness = () => {
             alt="company__image"
           />
           <h4 className={styles.title}>
-            {data?.data?.company_name || "شركة الخطيب للبرمجيات"}
+            {data?.data?.company_name || data?.data}
           </h4>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            <DetailsBox title={t("department")} value="شركة الخطيب للبرمجيات" />
+            <DetailsBox title={t("department")} value={data?.data?.user_name} />
+            <DetailsBox
+              title={t("inputs.managerName")}
+              value={data?.data?.owner_name}
+            />
             <DetailsBox
               title={t("description")}
-              value="شركة الخطيب تقوم بتصميم وبرمجة المواقع والتطبيقات على هواتف"
+              value={data?.data?.description}
             />
-            <DetailsBox title={t("yearFounded")} value="2017" />
-            <DetailsBox title={t("inputs.address")} value="رميثية ق 3 ج3" />
+            <DetailsBox
+              title={t("yearFounded")}
+              value={dayjs(data?.data?.created_at).format("YYYY-MM-DD")}
+            />
+            <DetailsBox
+              title={t("inputs.address")}
+              value={data?.data?.company_address}
+            />
           </div>
           <div className={styles.contact__section}>
-            <a href={`tel:0321132132`} className={styles.contact__box}>
+            <a
+              href={`tel:${data?.data?.contact_phone}`}
+              className={styles.contact__box}
+            >
               {t("inputs.phone")}
               <span>
                 <FaPhone />
               </span>
             </a>
-            <a href={`mailto:asdasdasdasd`} className={styles.contact__box}>
+            <a
+              href={`mailto:${data?.data?.freelance_email}`}
+              className={styles.contact__box}
+            >
               {t("inputs.email")}
               <span>
                 <MdEmail />
@@ -70,22 +89,30 @@ const SingleFreeBusiness = () => {
             </a>
           </div>
           <div className={styles.social__section}>
-            <a href="#" target="_blank">
+            <a href={data?.data?.facebook} target="_blank" rel="noreferrer">
               <FacebookIcon />
             </a>
-            <a href="#" target="_blank">
+            <a href={data?.data?.instagram} target="_blank" rel="noreferrer">
               <InstagramIcon />
             </a>
-            <a href="#" target="_blank">
+            <a href={data?.data?.twitter} target="_blank" rel="noreferrer">
               <TwitterIcon />
             </a>
-            <a href="#" target="_blank">
+            <a
+              href={`https://wa.me/${data?.data?.contact_whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               <WhatsappIcon />
             </a>
           </div>
           <div className={styles.footer__btn}>
-            <Link to='/' className={styles.btn__orange}>استفسار</Link>
-            <Link to='/' className={styles.btn__blue}>الموقع</Link>
+            <Link to="/" className={styles.btn__orange}>
+              استفسار
+            </Link>
+            <Link to="/" className={styles.btn__blue}>
+              الموقع
+            </Link>
           </div>
         </div>
       ); 

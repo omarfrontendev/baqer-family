@@ -13,7 +13,7 @@ const WelcomePage = () => {
   }, []);
 
 
-  if(loading) return <Loading style={{ height: "100vh" }} />
+  if(loading) return <Loading style={{height: "100vh"}} />
 
   return (
     <div className={`${styles.page}`}>

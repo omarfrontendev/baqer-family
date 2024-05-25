@@ -245,6 +245,7 @@ const RegisterForm = () => {
     }
 
   };
+  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.register__form}>
