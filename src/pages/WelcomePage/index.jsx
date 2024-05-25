@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './.module.scss';
-import { Logo, MainButton } from '../../components';
+import { Loading, Logo, MainButton } from '../../components';
+import { useApi } from '../../hooks/useApi';
 
 const WelcomePage = () => {
+
+  const { data, loading, onRequest } = useApi("/api/settings", "get");
+
+  useEffect(() => {
+    onRequest();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  if(loading) return <Loading style={{ height: "100vh" }} />
+
   return (
     <div className={`${styles.page}`}>
       <div className={styles.content}>
         <Logo />
         <p className={styles.text}>
-          هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-          النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من
-          النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق
+          {data?.data?.welcome_message}
         </p>
       </div>
       <MainButton to="/" type="link">

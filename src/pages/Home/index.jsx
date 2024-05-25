@@ -93,13 +93,16 @@ const Home = () => {
         <section className={styles.section}>
           <h3 className={styles.title}>آخر أخبار العائلة</h3>
           <Swiper
-            slidesPerView={2.5}
+            slidesPerView={1.5}
             cssMode={false} // Enable Swiper native transitions for better control
             spaceBetween={10}
             pagination={{
               clickable: true,
             }}
             breakpoints={{
+              400: {
+                slidesPerView: 2.5,
+              },
               768: {
                 slidesPerView: 4,
               },

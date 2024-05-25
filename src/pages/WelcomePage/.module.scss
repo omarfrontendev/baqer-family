@@ -19,4 +19,16 @@
         }
 
     }
+    .skeleton {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        div {
+            flex: 1;
+            height: 4px;
+            width: 100%;
+            background-color: #DDD;
+        }
+    }
 }

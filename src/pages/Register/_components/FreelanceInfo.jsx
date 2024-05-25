@@ -127,7 +127,7 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               // onFocus={() => setBtnFocus(true)}
               // onBlur={() => setBtnFocus(false)}
             >
-              {watch()?.location?.lat
+              {watch()?.company?.location?.lat
                 ? `lat: ${watch()?.company?.location?.lat} | lng: ${
                     watch()?.company?.location?.lng
                   }`

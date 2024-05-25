@@ -3,12 +3,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const instance = axios.create({
-  baseURL: "https://baqerapi.fayrouztransport.com",
+  baseURL: "https://fasterlink.me",
   timeout: 50000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
   },
 });
 

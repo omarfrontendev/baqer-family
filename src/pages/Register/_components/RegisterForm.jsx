@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useApi } from '../../../hooks/useApi';
 
 // external
@@ -24,8 +24,8 @@ import dayjs from 'dayjs';
 const RegisterForm = () => {
 
   const { t } = useTranslation();
-
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false)
 
   const getPlatformRegex = (platform) => {
     const regexes = {
@@ -171,6 +171,7 @@ const RegisterForm = () => {
   );
 
   const onSubmit = async (data) => {
+    setSubmitting(true);
     const body = {
       first_name: data?.firstName,
       second_name: data?.secondName,
@@ -204,19 +205,49 @@ const RegisterForm = () => {
 
     try {
       const res = await onRegister(body, t("registerSuccessfully"));
-      res && navigate('/login')
-    }catch (err) {
+      console.log(res);
+      if(res?.success) {
+        const formdata = new FormData();
+        formdata.append("image", data?.photo);
+        formdata.append("type", "profile");
+        formdata.append("user_id", res?.data?.user?.id);
+        const requestOptions = {
+          method: "POST",
+          body: formdata,
+          redirect: "follow",
+        };
+        await fetch(
+          `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
+          requestOptions
+        );
+        
+        if(data?.company?.company__image) {
+          const formdata2 = new FormData();
+            formdata2.append("image", data?.company?.company__image);
+            formdata2.append("type", "profile - company");
+            formdata2.append("user_id", res?.data?.user?.id);
+            const requestOptions2 = {
+              method: "POST",
+              body: formdata2,
+              redirect: "follow",
+            };
+            await fetch(
+              `https://fasterlink.me/api/upload-image?${res?.data?.user?.id}`,
+              requestOptions2
+            );
+        }
+        setSubmitting(false);
+        res && navigate('/login');
+      }
+    } catch (err) {
       console.log(err)
+      setSubmitting(false);
     }
 
   };
 
-
-  // const [openMap, setOpenMap] = useState(false);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.register__form}>
-
       {/* base info */}
       <h3 className={styles.section__title}>{t("baseInfo")}</h3>
       <BaseInfo
@@ -247,7 +278,11 @@ const RegisterForm = () => {
 
       {/* submit button */}
       <div className={styles.submit__btn}>
-        <MainButton type={"submit"} loading={loading} disabled={loading}>
+        <MainButton
+          type={"submit"}
+          loading={loading || submitting}
+          disabled={loading || submitting}
+        >
           {t("new__account")}
         </MainButton>
       </div>
