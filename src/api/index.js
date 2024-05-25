@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const instance = axios.create({
-  baseURL: "https://fasterlink.me",
+  baseURL: "https://fasterlink.me/public",
   timeout: 50000,
   headers: {
     Accept: "application/json",
