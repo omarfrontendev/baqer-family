@@ -74,7 +74,16 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               name="company.managerName"
               value={watch()?.company?.managerName}
               error={errors?.company?.managerName?.message}
-              // required
+              required
+            />
+            <MainInput
+              register={register}
+              placeholder={t("inputs.email")}
+              type="email"
+              name="company.email"
+              value={watch()?.company?.email}
+              error={errors?.company?.email?.message}
+              required
             />
             <MainInput
               register={register}

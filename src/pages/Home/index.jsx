@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './_components/Header';
 import Sidebar from './_components/Sidebar';
 import { BlogBox, MainBox, MainSlider } from '../../components';
@@ -7,6 +7,7 @@ import { images } from './_components/images';
 import imageSlider from '../../assets/slide@2x.png'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import Cookies from "js-cookie";
 import "swiper/css";
 import "swiper/css/pagination";
 import styles from './.module.scss';
@@ -58,6 +59,10 @@ const Home = () => {
         href: "/free-business",
       },
     ];
+
+  useEffect(() => {
+    Cookies.set("firstTime", "false");
+  }, [])
 
 
   return (

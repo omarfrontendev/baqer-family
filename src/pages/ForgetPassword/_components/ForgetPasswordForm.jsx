@@ -32,7 +32,7 @@ const ForgetPasswordForm = () => {
           .typeError(t("errors.must__number"))
           .required(t("errors.required")),
         email: yup.string().when("type", {
-          is: 2,
+          is: 1,
           then: () =>
             yup
               .string()
@@ -119,7 +119,7 @@ const ForgetPasswordForm = () => {
             </div>
           )}
         />
-        {watch()?.type === 2 && (
+        {watch()?.type === 1 && (
           <MainInput
             register={register}
             placeholder={t("inputs.email")}
@@ -160,7 +160,9 @@ const ForgetPasswordForm = () => {
       {/* submit button */}
       <div className={styles.submit__btn}>
         <MainButton type={"submit"} loading={loading} disabled={loading}>
-          {t("buttons.forget__pass__btn")}
+          {watch()?.type === 2
+            ? t("buttons.forget__email__btn")
+            : t("buttons.forget__pass__btn")}
         </MainButton>
       </div>
     </form>

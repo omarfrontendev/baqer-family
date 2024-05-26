@@ -9,7 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
 import DetailsBox from './_components/DetailsBox';
 import { FacebookIcon, InstagramIcon, TwitterIcon, WhatsappIcon } from '../../icons';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 
 const SingleFreeBusiness = () => {
 
@@ -59,10 +59,10 @@ const SingleFreeBusiness = () => {
               title={t("description")}
               value={data?.data?.description}
             />
-            <DetailsBox
+            {/* <DetailsBox
               title={t("yearFounded")}
               value={dayjs(data?.data?.created_at).format("YYYY-MM-DD")}
-            />
+            /> */}
             <DetailsBox
               title={t("inputs.address")}
               value={data?.data?.company_address}
@@ -73,7 +73,8 @@ const SingleFreeBusiness = () => {
               href={`tel:${data?.data?.contact_phone}`}
               className={styles.contact__box}
             >
-              {t("inputs.phone")}
+              {data?.data?.contact_phone}
+              {/* {t("inputs.phone")} */}
               <span>
                 <FaPhone />
               </span>
@@ -82,7 +83,8 @@ const SingleFreeBusiness = () => {
               href={`mailto:${data?.data?.freelance_email}`}
               className={styles.contact__box}
             >
-              {t("inputs.email")}
+              {data?.data?.freelance_email}
+              {/* {t("inputs.email")} */}
               <span>
                 <MdEmail />
               </span>

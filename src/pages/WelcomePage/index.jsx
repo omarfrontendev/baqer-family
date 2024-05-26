@@ -2,18 +2,31 @@ import React, { useEffect } from 'react';
 import styles from './.module.scss';
 import { Loading, Logo, MainButton } from '../../components';
 import { useApi } from '../../hooks/useApi';
+import Cookies from "js-cookie";
+import { Navigate } from 'react-router-dom';
 
 const WelcomePage = () => {
 
   const { data, loading, onRequest } = useApi("/api/settings", "get");
+  const firstTimeLogin = Cookies.get("firstTime") === "true";
+
+  console.log(Cookies.get("firstTime"));
+  console.log(firstTimeLogin);
 
   useEffect(() => {
-    onRequest();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    firstTimeLogin && onRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstTimeLogin]);
 
+  console.log(firstTimeLogin);
 
-  if(loading) return <Loading style={{height: "100vh"}} />
+  if (!firstTimeLogin) return (
+    <>
+      <Navigate to="/" />
+    </>
+  );
+
+    if (loading && firstTimeLogin) return <Loading style={{ height: "100vh" }} />;
 
   return (
     <div className={`${styles.page}`}>

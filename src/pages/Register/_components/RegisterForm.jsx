@@ -30,7 +30,7 @@ const RegisterForm = () => {
   const getPlatformRegex = (platform) => {
     const regexes = {
       instagram: /^(?:http(?:s)?:\/\/)?(?:www\.)?instagram\.com\/([a-zA-Z0-9_]+)/,
-      twitter: /^(?:http(?:s)?:\/\/)?(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/,
+      twitter: /^(?:http(?:s)?:\/\/)?(?:www\.)?x\.com\/([a-zA-Z0-9_]+)/,
       facebook: /^(?:http(?:s)?:\/\/)?(?:www\.)?facebook\.com\/([a-zA-Z0-9_]+)/,
     };
 
@@ -88,7 +88,7 @@ const RegisterForm = () => {
       confirmPassword: yup
         .string()
         .required(t("errors.required"))
-        .oneOf([yup.ref("password")], "must matched with password"),
+        .oneOf([yup.ref("password")], t("errors.mustPassword")),
       workPlace: yup.string("").required(t("errors.required")),
       work: yup.object({}).when(["workPlace"], {
         is: "yes",
@@ -99,7 +99,7 @@ const RegisterForm = () => {
               workPlaceName: yup.string("").required(t("errors.required")),
               serviceType: yup.string("").required(t("errors.required")),
               description: yup.string("").required(t("errors.required")),
-              showDetails: yup.boolean(""),
+              // showDetails: yup.boolean(""),
             })
             .required(t("errors.required")),
       }),
@@ -112,10 +112,14 @@ const RegisterForm = () => {
               company__image: yup.mixed("").required(t("errors.required")),
               companyName: yup.string().required(t("errors.required")),
               description: yup.string().required(t("errors.required")),
-              managerName: yup.string(),
+              managerName: yup.string().required(t("errors.required")),
               phone: yup
                 .string()
                 .matches(/^$|^\d+$/, t("errors.mustBePositiveInteger"))
+                .required(t("errors.required")),
+              email: yup
+                .string()
+                .email(t("errors.email"))
                 .required(t("errors.required")),
               whatsapp: yup
                 .string()
@@ -125,7 +129,7 @@ const RegisterForm = () => {
               twitter: createUrlValidation("twitter"),
               facebook: createUrlValidation("facebook"),
               address: yup.string().required(t("errors.required")),
-              showDetailsCompany: yup.boolean(""),
+              // showDetailsCompany: yup.boolean(""),
               location: yup
                 .object({
                   lat: yup.string().required(t("errors.required")),
@@ -150,9 +154,6 @@ const RegisterForm = () => {
       workPlace: "yes",
       freelance: "yes",
       gender: "male",
-      company: {
-        showDetailsCompany: true
-      },
       work: {
         workType: "main",
       },
@@ -192,9 +193,9 @@ const RegisterForm = () => {
       freelance_employer_name: data?.company?.managerName,
       freelance_contact_number: data?.company?.phone,
       company_address: data?.company?.address,
-      show_workspace_name: data?.workPlace?.showDetails,
+      // show_workspace_name: data?.workPlace?.showDetails,
       whats_app_number: data?.company?.whatsapp,
-      show_data: data?.company?.showDetailsCompany,
+      // show_data: data?.company?.showDetailsCompany,
       instagram: data?.company?.instagram,
       twitter: data?.company?.twitter,
       facebook: data?.company?.facebook,
