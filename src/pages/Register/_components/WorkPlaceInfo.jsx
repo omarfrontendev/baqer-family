@@ -70,7 +70,7 @@ const WorkPlaceInfo = ({ register, isWork, errors, watch }) => {
             />
           </div>
 
-          <div className={styles.checkbox}>
+          {/* <div className={styles.checkbox}>
             <label htmlFor="showDetails">{t("showDetailsForManager")}</label>
             <input
               {...register("work.showDetails", `work.showDetails is required!`)}
@@ -78,7 +78,7 @@ const WorkPlaceInfo = ({ register, isWork, errors, watch }) => {
               name="work.showDetails"
               id="showDetails"
             />
-          </div>
+          </div> */}
         </>
       )}
     </>

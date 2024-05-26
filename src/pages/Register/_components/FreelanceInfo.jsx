@@ -153,7 +153,7 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               required
             />
           </div>
-          <div className={styles.checkbox}>
+          {/* <div className={styles.checkbox}>
             <label htmlFor="showDetailsCompany">
               {t("showDetailsForManager")}
             </label>
@@ -166,7 +166,7 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               name="company.showDetailsCompany"
               id="showDetailsCompany"
             />
-          </div>
+          </div> */}
         </>
       )}
       {openMap && (
