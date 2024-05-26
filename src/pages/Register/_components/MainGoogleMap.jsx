@@ -17,7 +17,7 @@ const containerStyle = {
 const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDi80ddjmq0ineWLqyk7q4NyiAm6ask2iM", // Replace with your Google Maps API key
+    googleMapsApiKey: "AIzaSyDGnjcgnojm_7IimdzBTnlhUgpwzhfv-1I", // Replace with your Google Maps API key
   });
 
   const [location, setLocation] = useState(

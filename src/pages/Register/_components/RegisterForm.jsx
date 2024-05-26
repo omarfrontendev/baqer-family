@@ -171,6 +171,7 @@ const RegisterForm = () => {
     "post"
   );
 
+
   const onSubmit = async (data) => {
     setSubmitting(true);
     const body = {
@@ -186,8 +187,10 @@ const RegisterForm = () => {
       date_of_birth: dayjs(data?.birthDate).format("YYYY-MM-DD"),
       password: data?.password,
       confirm_password: data?.confirmPassword,
-      workplace_name: data?.workPlace?.workPlaceName,
-      workplace_type: data?.workPlace?.serviceType,
+      workplace_name: data?.work?.workPlaceName,
+      workplace_type: data?.work?.workType,
+      workplace_service_type: data?.work?.serviceType,
+      workplace_description: data?.work?.description,
       freelance_company_name: data?.company?.companyName,
       freelance_description: data?.company?.description,
       freelance_employer_name: data?.company?.managerName,
