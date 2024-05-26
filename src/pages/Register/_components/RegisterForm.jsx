@@ -172,6 +172,8 @@ const RegisterForm = () => {
   );
 
 
+  console.log(watch()?.company?.company__image)
+
   const onSubmit = async (data) => {
     setSubmitting(true);
     const body = {
@@ -220,7 +222,7 @@ const RegisterForm = () => {
           body: formdata,
           redirect: "follow",
         };
-        await fetch(
+        const res2 = await fetch(
           `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
           requestOptions
         );
@@ -236,18 +238,19 @@ const RegisterForm = () => {
               redirect: "follow",
             };
             await fetch(
-              `https://fasterlink.me/api/upload-image?${res?.data?.user?.id}`,
+              `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
               requestOptions2
             );
         }
+
         setSubmitting(false);
-        res && navigate('/login');
+        res?.success && res2 && navigate("/login");
       }
     } catch (err) {
       console.log(err)
       setSubmitting(false);
     }
-
+    setSubmitting(false);
   };
   
 
@@ -285,8 +288,8 @@ const RegisterForm = () => {
       <div className={styles.submit__btn}>
         <MainButton
           type={"submit"}
-          loading={loading || submitting}
-          disabled={loading || submitting}
+          loading={submitting}
+          disabled={submitting}
         >
           {t("new__account")}
         </MainButton>
