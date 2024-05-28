@@ -40,7 +40,7 @@
     "must__number": "يجب أن يكون رقم",
     "mustBeInteger": "يجب أن يكون عددًا صحيحًا",
     "InvalidfacebookURLformat": "العنوان الخاص بفيسبوك غير صالح",
-    "InvalidtwitterURLformat": "العنوان الخاص بتويتر غير صالح",
+    "InvalidtwitterURLformat": "العنوان الخاص منصه X غير صالح",
     "InvalidinstagramURLformat": "العنوان الخاص بانستجرام غير صالح",
     "mustBePositiveInteger": "يجب أن يكون عددًا صحيحًا موجبًا",
     "mustPositive": "يجب أن يكون رقمًا موجبًا",
@@ -64,7 +64,7 @@
     "managerName": "اسم صاحب العمل",
     "whatsapp": "واتساب",
     "instagram": "حساب الانستجرام",
-    "twitter": "حساب تويتر",
+    "twitter": "حساب منصه X",
     "facebook": "حساب فيسبوك",
     "userName": "اسم المستخدم"
   },
