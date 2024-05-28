@@ -128,9 +128,18 @@
             border-radius: 8px;
             transition: 0.3s ease-in-out;
             position: relative;
+            display: block;
             cursor: pointer;
+            padding: 0 22px;
+            &.placeholder {
+                color: rgb(0 0 0 / 30%);
+                font-size: $ft__16;
+                text-transform: capitalize;
+                transition: .3s ease-in-out;
+            }
             &.invalid {
                 border-color: $error__color;
+                color: $error__color;
                 > div {
                     input {
                         &::placeholder {
@@ -307,4 +316,8 @@
             }
         }
     }
+}
+
+.calendar__container {
+    position: relative;
 }

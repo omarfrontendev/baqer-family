@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // external
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,9 +11,36 @@ import Radio from "./Radio";
 // style
 import styles from '../.module.scss';
 
+import { Calendar } from "react-date-range";
+import { addDays } from "date-fns";
+import { ar } from "date-fns/locale";
+
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import dayjs from 'dayjs';
+
+
+
+
 const BaseInfo = ({ register, control, errors, watch }) => {
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const [showCalendar, setShowCalendar] = useState(false);
+
+  useEffect(() => {
+    const closeDropMenu = (e) => {
+      if (e?.target?.id !== "date-calendar") {
+        setShowCalendar(false);
+      } else {
+        setShowCalendar((prev) => !prev);
+      }
+    };
+    document.body.addEventListener("click", closeDropMenu);
+    return () => {
+      document.body.removeEventListener("click", closeDropMenu);
+    };
+  }, []);
+
 
   return (
     <>
@@ -132,30 +159,70 @@ const BaseInfo = ({ register, control, errors, watch }) => {
           }}
           name="birthDate"
           render={({ field: { onChange, onBlur } }) => (
-            <div
-              className={`${styles.date__box} ${
-                errors?.birthDate?.message ? styles.invalid : ""
-              }`}
-            >
-              <DatePicker
+            <div className={styles.calendar__container}>
+              <button
+                id="date-calendar"
                 onBlur={onBlur}
-                selected={watch()?.birthDate}
-                onChange={(date) => onChange(date)}
-                placeholderText="تاريخ الميلاد*"
-                className={`${styles.date__input}`}
-              />
-              <span
-                className={`${styles.date__input__label} ${
-                  watch()?.birthDate ? styles.focus : ""
-                }`}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowCalendar((prev) => !prev);
+                }}
+                className={`${styles.date__box} ${
+                  errors?.birthDate?.message ? styles.invalid : ""
+                } ${watch()?.birthDate ? "" : styles.placeholder}
+                  `}
               >
-                تاريخ الميلاد*
-              </span>
-              <ErrorMessage msg={errors?.birthDate?.message} />
+                <span
+                  className={`${styles.date__input__label} 
+                  ${watch()?.birthDate ? styles.focus : ""}
+                  `}
+                >
+                  تاريخ الميلاد*
+                </span>
+                {watch()?.birthDate
+                  ? dayjs(watch()?.birthDate).format("DD/MM/YYYY")
+                  : "تاريخ الميلاد*"}
+                <ErrorMessage msg={errors?.birthDate?.message} />
+              </button>
+
+              {showCalendar && (
+                <div
+                  id="date-calendar"
+                  onClick={(e) => e.stopPropagation()}
+                  style={
+                    {
+                      // direction: "rtl",
+                      // textAlign: "right",
+                    }
+                  }
+                  className={`${styles.picker__container} picker__container`}
+                >
+                  <Calendar
+                    onBlur={onBlur}
+                    date={watch()?.birthDate || new Date(1995, 0, 1)}
+                    onChange={(e) => onChange(e)}
+                    locale={ar}
+                    minDate={new Date(1990, 0, 1)}
+                    maxDate={new Date(2002, 11, 31)}
+                    color="#26C0FF" // Custom color
+                  />
+                </div>
+              )}
             </div>
           )}
         />
-
+        {/* 
+        <div style={{ direction: "rtl", textAlign: "right", padding: "20px" }}>
+          <Calendar
+            date={value}
+            onChange={(e) => setValue(e)}
+            locale={ar}
+            minDate={new Date(1990, 0, 1)}
+            maxDate={new Date(2002, 11, 31)}
+            color="#26C0FF" // Custom color
+          />
+        </div> */}
         {/* ========================= */}
         <MainInput
           register={register}

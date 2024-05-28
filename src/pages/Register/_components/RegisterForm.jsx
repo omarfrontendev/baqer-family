@@ -99,7 +99,6 @@ const RegisterForm = () => {
               workPlaceName: yup.string("").required(t("errors.required")),
               serviceType: yup.string("").required(t("errors.required")),
               description: yup.string("").required(t("errors.required")),
-              // showDetails: yup.boolean(""),
             })
             .required(t("errors.required")),
       }),
@@ -166,13 +165,11 @@ const RegisterForm = () => {
   const isWork = watch("workPlace") === "yes";
 
   // register
-  const { loading, onRequest: onRegister } = useApi(
+  const {  onRequest: onRegister } = useApi(
     "/api/register?",
     "post"
   );
 
-
-  console.log(watch()?.company?.company__image)
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -211,7 +208,6 @@ const RegisterForm = () => {
 
     try {
       const res = await onRegister(body, t("registerSuccessfully"));
-      console.log(res);
       if(res?.success) {
         const formdata = new FormData();
         formdata.append("image", data?.photo);
@@ -226,7 +222,6 @@ const RegisterForm = () => {
           `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
           requestOptions
         );
-        
         if(data?.company?.company__image) {
           const formdata2 = new FormData();
             formdata2.append("image", data?.company?.company__image);

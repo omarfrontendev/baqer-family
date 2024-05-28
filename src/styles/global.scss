@@ -67,6 +67,34 @@ input[type=number] {
     gap: 24px;
 }
 
+.picker__container {
+    position: absolute;
+    top: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #FFF;
+    z-index: 10;
+    left: 0;
+    border: 1px solid #DDD;
+    .rdrMonthAndYearWrapper {
+        // flex-direction: row-reverse;
+        padding-top: 0;
+    }
+    .rdrDateDisplayWrapper {
+        display: none;
+    }
+    .rdrNextPrevButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        transform: rotate(180deg);
+    }
+    .rdrNextButton i {
+        margin: 0;
+    }
+}
+
 
 // start media max-width 575px
 @media(max-width: 575px) {
