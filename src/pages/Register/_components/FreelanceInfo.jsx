@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 // internal
 import UploadImage from "./UploadImage";
-import { MainInput } from "../../../components";
+import { ErrorMessage, MainInput } from "../../../components";
 import Radio from "./Radio";
 // style
 import styles from "../.module.scss";
@@ -129,19 +129,20 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
             />
             <button
               className={`${styles.map__button} ${
-                watch()?.location?.lat ? styles.active : ""
+                watch()?.company?.location?.lat ? styles.active : ""
               }`}
               type="button"
               onClick={() => setOpenMap(true)}
-              // onFocus={() => setBtnFocus(true)}
-              // onBlur={() => setBtnFocus(false)}
             >
               {watch()?.company?.location?.lat
                 ? `lat: ${watch()?.company?.location?.lat} | lng: ${
                     watch()?.company?.location?.lng
                   }`
-                : "الموقع"}
-              <div className={styles.label}>الموقع</div>
+                : "الموقع*"}
+              <div className={styles.label}>*الموقع</div>
+            {errors?.company?.location?.lat?.message && (
+              <ErrorMessage msg={errors?.company?.location?.lat?.message} />
+            )}
             </button>
             <MainInput
               register={register}
@@ -176,10 +177,14 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
             required: true,
           }}
           name="company.location"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, onBlur } }) => (
             <MainGoogleMap
               onChange={(e) => onChange(e)}
-              onCloseMap={() => setOpenMap(false)}
+              onCloseMap={() => {
+                onBlur();
+                setOpenMap(false);
+              }}
+              onBlur={onBlur}
               watch={watch}
             />
           )}

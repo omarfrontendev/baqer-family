@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApi } from '../../../hooks/useApi';
 
 // external
@@ -142,11 +142,13 @@ const RegisterForm = () => {
     })
     .required();
 
+
   const {
     register,
     handleSubmit,
     control,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -164,11 +166,20 @@ const RegisterForm = () => {
   const isFreelance = watch("freelance");
   const isWork = watch("workPlace") === "yes";
 
+
   // register
   const {  onRequest: onRegister } = useApi(
     "/api/register?",
     "post"
   );
+  
+  useEffect(() => {
+    if (!isWork) setValue("work", {});
+  }, [isWork, setValue]);
+
+  useEffect(() => {
+    if (isFreelance === "no") setValue("company", {});
+  }, [isFreelance, setValue]);
 
 
   const onSubmit = async (data) => {

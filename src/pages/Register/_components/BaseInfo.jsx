@@ -203,7 +203,7 @@ const BaseInfo = ({ register, control, errors, watch }) => {
                     date={watch()?.birthDate || new Date(1995, 0, 1)}
                     onChange={(e) => onChange(e)}
                     locale={ar}
-                    minDate={new Date(1990, 0, 1)}
+                    minDate={new Date(1900, 0, 1)}
                     maxDate={new Date(2002, 11, 31)}
                     color="#26C0FF" // Custom color
                   />

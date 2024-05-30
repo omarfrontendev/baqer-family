@@ -219,6 +219,7 @@
         align-items: center;
         justify-content: center;
         z-index: 1000;
+        padding: 40px;
         .overlay {
             position: absolute;
             top: 0;
@@ -240,6 +241,8 @@
             align-items: center;
             justify-content: center;
             border-radius: 4px;
+            background-color: #000;
+            color: #FFF;
         }
         .back__marker__btn,
         .back__btn__location {
@@ -247,7 +250,7 @@
             z-index: 10000000;
             color: #000;
             right: 11px;
-            bottom: 115px;
+            bottom: 20px;
             background: #FFF;
             display: flex;
             align-items: center;
@@ -255,10 +258,59 @@
             height: 40px;
             border-radius: 50%;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
+            background-color: #000;
+            color: #FFF;
         }
         .back__marker__btn {
-            bottom: 165px;
+            bottom: 70px;
+        }
+        .search__box {
+            padding: 10px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            background-color: #FFF;
+            width: 500px;
+            border-radius: 10px;
+        }
+        .confirm {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #26C0FF;
+            color: #FFF;
+            width: 100px;
+            text-align: center;
+            padding: 3px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 20px;
+        }
+        .map {
+            width: 100%;
+            height: 100%;
+            // border-radius: 10px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .latLngBox {
+            position: absolute;
+            bottom: 77px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFF;
+            min-width: 250px;
+            text-align: left;
+            padding: 4px 20px;
+            border-radius: 4px;
+            color: #696767;
         }
     }
     .map__button {

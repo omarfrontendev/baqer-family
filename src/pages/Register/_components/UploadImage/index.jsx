@@ -9,6 +9,7 @@ const UploadImage = ({ onChange, value, error, id, label }) => {
     <div style={{ position: "relative" }}>
       <input
         type="file"
+        accept="image/*"
         id={id}
         className={styles.upload__input}
         onChange={(e) => {
@@ -29,7 +30,16 @@ const UploadImage = ({ onChange, value, error, id, label }) => {
         <FaCamera />
       </label>
       <span className={styles.label__text}>{label}</span>
-      {error && <ErrorMessage msg={error} style={{left: "50%", transform: "translateX(-50%)", bottom: "-52px"}} />}
+      {error && (
+        <ErrorMessage
+          msg={error}
+          style={{
+            left: "50%",
+            transform: "translateX(-50%)",
+            bottom: "-52px",
+          }}
+        />
+      )}
     </div>
   );
 };
