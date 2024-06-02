@@ -18,8 +18,6 @@ const SingleFreeBusiness = () => {
 
     const { data, loading, onRequest } = useApi(`/api/freelanceJob/${slug}`, "get");
 
-  console.log(data?.data);
-
     useEffect(() => {
         if(slug) {
             onRequest();
@@ -59,10 +57,6 @@ const SingleFreeBusiness = () => {
               title={t("description")}
               value={data?.data?.description}
             />
-            {/* <DetailsBox
-              title={t("yearFounded")}
-              value={dayjs(data?.data?.created_at).format("YYYY-MM-DD")}
-            /> */}
             <DetailsBox
               title={t("inputs.address")}
               value={data?.data?.company_address}
@@ -112,9 +106,18 @@ const SingleFreeBusiness = () => {
             <Link to="/" className={styles.btn__orange}>
               استفسار
             </Link>
-            <Link to="/" className={styles.btn__blue}>
+            {/* <a href="" target="" className={styles.btn__blue}>
               الموقع
-            </Link>
+            </a> */}
+            {console.log(data?.data)}
+            <a
+              target='_blank'
+              className={styles.btn__blue}
+              href={`http://maps.google.com/?q=${data?.data?.lat},${data?.data?.long}`} 
+              rel="noreferrer"
+            >
+              الموقع
+            </a>
           </div>
         </div>
       ); 

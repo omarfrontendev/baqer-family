@@ -2,9 +2,14 @@ import React from 'react';
 import styles from '../../.module.scss'
 import { FaCamera } from "react-icons/fa";
 import { ErrorMessage } from '../../../../components';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 
 const UploadImage = ({ onChange, value, error, id, label }) => {
+
+  const { t } = useTranslation()
+
   return (
     <div style={{ position: "relative" }}>
       <input
@@ -13,6 +18,10 @@ const UploadImage = ({ onChange, value, error, id, label }) => {
         id={id}
         className={styles.upload__input}
         onChange={(e) => {
+          if(!e.target.files[0]?.type?.includes("image")) {
+            toast.error(t("errors.mustBreImage"));
+            return
+          }
           onChange(e?.target?.files[0]);
         }}
       />

@@ -188,11 +188,15 @@ const ForgetPasswordForm = () => {
           <div className={styles.popup__content}>
             <h4 className={styles.popup__title}>شكرا</h4>
             <p className={styles.popup__text}>
-              سيتم التواصل معكم وتزويدكم بكلمة المرور والبريد الإلكتروني في أقرب
-              وقت ممكن، يرجى الانتظار للرد من أحد مدراء التطبيق في حال عدم الرد
-              يرجى المحاولة مرة أخرى
+              سيتم التواصل معكم وتزويدكم{" "}
+              {watch()?.type === 1 ? "بكلمة المرور" : "بالبريد الإلكتروني"}{" "}
+              في أقرب وقت ممكن، يرجى الانتظار للرد من أحد مدراء التطبيق في حال
+              عدم الرد يرجى المحاولة مرة أخرى
             </p>
-            <button onClick={() => navigate("/login")} className={styles.enter__btn}>
+            <button
+              onClick={() => navigate("/login")}
+              className={styles.enter__btn}
+            >
               دخول
             </button>
           </div>
