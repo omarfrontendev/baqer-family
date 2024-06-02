@@ -205,10 +205,9 @@ const RegisterForm = () => {
       freelance_description: data?.company?.description,
       freelance_employer_name: data?.company?.managerName,
       freelance_contact_number: data?.company?.phone,
+      free_lance_email: data?.company?.email,
       company_address: data?.company?.address,
-      // show_workspace_name: data?.workPlace?.showDetails,
       whats_app_number: data?.company?.whatsapp,
-      // show_data: data?.company?.showDetailsCompany,
       instagram: data?.company?.instagram,
       twitter: data?.company?.twitter,
       facebook: data?.company?.facebook,
@@ -236,7 +235,7 @@ const RegisterForm = () => {
         if(data?.company?.company__image) {
           const formdata2 = new FormData();
             formdata2.append("image", data?.company?.company__image);
-            formdata2.append("type", "profile - company");
+            formdata2.append("type", "company");
             formdata2.append("user_id", res?.data?.user?.id);
             const requestOptions2 = {
               method: "POST",

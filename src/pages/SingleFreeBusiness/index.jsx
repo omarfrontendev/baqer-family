@@ -73,6 +73,7 @@ const SingleFreeBusiness = () => {
                 <FaPhone />
               </span>
             </a>
+            {console.log(data?.data?.freelance_email)}
             <a
               href={`mailto:${data?.data?.freelance_email}`}
               className={styles.contact__box}
@@ -111,9 +112,9 @@ const SingleFreeBusiness = () => {
             </a> */}
             {console.log(data?.data)}
             <a
-              target='_blank'
+              target="_blank"
               className={styles.btn__blue}
-              href={`http://maps.google.com/?q=${data?.data?.lat},${data?.data?.long}`} 
+              href={`http://maps.google.com/?q=${data?.data?.lat},${data?.data?.long}`}
               rel="noreferrer"
             >
               الموقع
