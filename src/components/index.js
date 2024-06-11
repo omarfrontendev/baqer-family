@@ -12,6 +12,7 @@ export { default as Error } from "./UI/Error";
 export { default as Popup } from "./UI/Popup";
 export { default as DeleteModal } from "./UI/DeleteModal";
 export { default as EmptyList } from "./UI/EmptyList";
+export { default as UserNameAndImage } from "./UI/UserNameAndImage";
 // Forms
 export { default as MainInput } from "./Forms/MainInput";
 export { default as UploadImages } from "./Forms/UploadImages";

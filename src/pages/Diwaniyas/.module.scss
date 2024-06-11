@@ -37,6 +37,14 @@
     display: flex;
     flex-direction: column;
     row-gap: 30px;
+    .content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        max-height: calc(100vh - 200px);
+        overflow-x: hidden;
+        padding: 0 10px;
+    }
 }
 .category__btns {
     display: flex;

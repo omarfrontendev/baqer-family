@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PageHeader } from "../../../layout";
 import LiquidationForm from "../LiquidationForm";
 import { useApi } from "../../../hooks/useApi";
+import uploadFile from "../../../utils/uploadImages";
 
 const AddLiquidation = () => {
   const { t } = useTranslation();
@@ -64,20 +65,15 @@ const AddLiquidation = () => {
       lat: e?.location?.lat,
       long: e?.location?.lng,
     };
-
-    // images
-    const formdata = new FormData();
-    formdata.append("images", e?.images);
-    formdata.append("category_type", "diwan");
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
+    
     try {
       const res = await onAddProduct(body);
-      res?.success && await fetch(`/api/uploadMultipleImage`, requestOptions);
-      res?.success && reset();
+      res?.success &&
+        (await uploadFile({
+          images: e?.images,
+          category_type: "occasion",
+          category_id: res?.data?.id,
+        }));      res?.success && reset();
     } catch (err) {
       console.log(err);
       setSubmitting(false);

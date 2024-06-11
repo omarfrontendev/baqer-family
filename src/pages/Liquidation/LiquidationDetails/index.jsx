@@ -2,7 +2,7 @@ import React from "react";
 import { PageHeader } from "../../../layout";
 import styles from "./.module.scss";
 import { DeleteIcon } from "../../../icons";
-import { MainLabel, MainSlider } from "../../../components";
+import { MainLabel, MainSlider, UserNameAndImage } from "../../../components";
 import slideImage from "../../../assets/business@2x.png";
 import { MdModeEdit } from "react-icons/md";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ const LiquidationDetails = () => {
           </div>
         </div>
         <MainSlider
-          image={slideImage}
+          images={[slideImage]}
           height="calc(100vh - 200px)"
           breakpoints={{
             768: {
@@ -37,18 +37,21 @@ const LiquidationDetails = () => {
             },
           }}
         />
-        <section className={styles.details__section}>
-          <h4 className={styles.title}>قنفة موديل ايكيا</h4>
-          <div className={styles.details__info}>
-            <MainLabel>05 نوفمبر 2022</MainLabel>
-            <p>
-              هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
-              هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
-              العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
-              التطبيق.
-            </p>
-          </div>
-        </section>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
+          <section className={styles.details__section}>
+            <h4 className={styles.title}>قنفة موديل ايكيا</h4>
+            <div className={styles.details__info}>
+              <MainLabel>05 نوفمبر 2022</MainLabel>
+              <p>
+                هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
+                هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
+                العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                التطبيق.
+              </p>
+            </div>
+          </section>
+          <UserNameAndImage name="احمد الخطيب" />
+        </div>
         <div className={styles.footer__btn}>
           <button className={styles.book__btn}>
             حـجـز

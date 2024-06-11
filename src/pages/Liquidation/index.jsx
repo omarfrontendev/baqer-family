@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { PageHeader } from "../../layout";
 import { useTranslation } from "react-i18next";
-import { Error, MainSlider } from "../../components";
+import { DeleteModal, Error, MainSlider } from "../../components";
 import styles from "./.module.scss";
 import DefaultCover from '../../assets/DefaultCover.png';
 import { Link, useNavigate } from "react-router-dom";
@@ -9,8 +9,10 @@ import { DeleteIcon, EditIcon } from "../../icons";
 import { IoMdAdd } from "react-icons/io";
 import { useApi } from "../../hooks/useApi";
 import Skeleton from "react-loading-skeleton";
+import { ModalContext } from "../../context/ModalContext";
 
 const Liquidation = () => {
+  const { idModal, setIdModal } = useContext(ModalContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -52,13 +54,13 @@ const Liquidation = () => {
       </Link>
       {productsLoading ? (
         <div className={styles.list}>
-          {Array(5)
+          {Array(10)
             ?.fill("")
             ?.map((_, i) => (
               <Skeleton
                 key={i}
                 width="100%"
-                height="213px"
+                height="147px"
                 borderRadius="4px"
               />
             ))}
@@ -80,19 +82,33 @@ const Liquidation = () => {
                 {product?.view_status === "1" ? t("forSale") : t("ToBorrow")}
               </button>
               <div className={styles.btns}>
-                <button 
+                <button
                   onClick={() => {
                     navigate(`/liquidation/${product?.id}/edit`, {
                       state: { data: product },
                     });
-                  }} 
-                  to="/liquidation/edit">
+                  }}
+                  to="/liquidation/edit"
+                >
                   <EditIcon />
                 </button>
-                <button className={styles.delete__btn}>
+                <button
+                  className={styles.delete__btn}
+                  onClick={() => setIdModal(`delete-${product?.id}`)}
+                >
                   <DeleteIcon />
                 </button>
               </div>
+              {idModal === `delete-${product?.id}` && (
+                <DeleteModal
+                  body={{
+                    occasion_id: product?.id,
+                  }}
+                  endpoint="deleteOccasion"
+                  title="هل أنت متأكد أنك تريد حذف هذه المناسبة؟"
+                  getList={onGetProducts}
+                />
+              )}
             </button>
           ))}
         </div>

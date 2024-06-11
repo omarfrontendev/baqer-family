@@ -26,11 +26,7 @@ const AddNewDiwaniya = () => {
       lng: yup.string().required(t("errors.required")),
       })
       .required(t("errors.required")),
-    // diwanWorkDays: yup.array().min(1, "at least 1 item").required("days is Required!"),
-    // phone_number: yup
-    //   .string()
-    //   .matches(/^$|^\d+$/, t("errors.mustBePositiveInteger"))
-    //   .required(t("errors.required")),
+    diwanWorkDays: yup.array().min(1, "at least 1 item").required("days is Required!"),
     images: yup
       .array()
       .min(1, "at least 1 item")

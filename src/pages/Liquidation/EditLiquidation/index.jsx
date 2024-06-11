@@ -7,6 +7,7 @@ import { PageHeader } from "../../../layout";
 import LiquidationForm from "../LiquidationForm";
 import { useLocation, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
+import uploadFile from "../../../utils/uploadImages";
 
 const EditLiquidation = () => {
   const { t } = useTranslation();
@@ -56,7 +57,6 @@ const EditLiquidation = () => {
         lat: state?.data?.long,
       },
       type: state?.data?.proccess_type,
-      // owner: "asasdasddsa",
       description: state?.data?.description,
       name: state?.data?.name,
     },
@@ -65,7 +65,7 @@ const EditLiquidation = () => {
   });
 
   // updates product
-  const { onRequest: onUpdateProduct } = useApi("/api/editPost", "post");
+  const { onRequest: onUpdateProduct } = useApi("/api/addProduct", "post");
 
   const onSubmit = async (e) => {
     setSubmitting(true);
@@ -82,19 +82,14 @@ const EditLiquidation = () => {
       product_id: slug,
     };
 
-    // images
-    const formdata = new FormData();
-    formdata.append("images", e?.images);
-    formdata.append("category_type", "diwan");
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
     try {
       const res = await onUpdateProduct(body);
-      res?.success && (await fetch(`/api/uploadMultipleImage`, requestOptions));
-    } catch (err) {
+      res?.success &&
+        (await uploadFile({
+          images: e?.images,
+          category_type: "occasion",
+          category_id: res?.data?.id,
+        }));    } catch (err) {
       console.log(err);
       setSubmitting(false);
     }

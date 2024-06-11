@@ -4,14 +4,14 @@ import { IoCloseSharp } from "react-icons/io5";
 import { ModalContext } from '../../../context/ModalContext';
 
 
-const Popup = ({ children }) => {
+const Popup = ({ children, style }) => {
 
     const { setIdModal } = useContext(ModalContext)
 
   return (
     <div className={styles.popup}>
       <div className={styles.overlay}></div>
-      <div className={styles.popup__content}>
+      <div className={styles.popup__content} style={style}>
         <button onClick={() => setIdModal("")} className={styles.close__btn}>
           <IoCloseSharp />
         </button>

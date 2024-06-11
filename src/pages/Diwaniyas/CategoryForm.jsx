@@ -7,15 +7,18 @@ import { useTranslation } from "react-i18next";
 import { useApi } from "../../hooks/useApi";
 import styles from "./.module.scss";
 import { ModalContext } from "../../context/ModalContext";
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/css";
+
 
 const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
   const { t } = useTranslation();
   const { setIdModal } = useContext(ModalContext);
+  const [color, setColor] = useColor("#561ecb");
 
   // ADD SCHEMA
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
-    // color: yup.string("").required(t("errors.required")),
   });
 
   const {
@@ -47,12 +50,12 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
               ...e,
               index_num: "0",
               category_id: categoryId,
-              color: "#DDD",
+              color: color?.hex,
             }
           : {
               ...e,
               index_num: "0",
-              color: "#DDD",
+              color: color?.hex,
             }
       );
       res?.success && setIdModal("");
@@ -65,17 +68,23 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
   return (
     <Popup>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form__content}>
-        {/* Name */}
-        <MainInput
-          register={register}
-          placeholder={t("اسم الفئة")}
-          label="اسم الفئة"
-          type="text"
-          name="name"
-          value={watch()?.name}
-          error={errors?.name?.message}
-          required
-        />
+        <div className={styles.content}>
+
+          {/* Name */}
+          <MainInput
+            register={register}
+            placeholder={t("اسم الفئة")}
+            label="اسم الفئة"
+            type="text"
+            name="name"
+            value={watch()?.name}
+            error={errors?.name?.message}
+            required
+          />
+
+          <ColorPicker color={color} onChange={setColor} />
+        </div>
+
         <MainButton loading={loading} disabled={loading} type="submit">
           {categoryId ? t("edit") : t("add")}
         </MainButton>

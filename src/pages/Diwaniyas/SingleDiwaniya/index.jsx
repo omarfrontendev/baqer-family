@@ -8,8 +8,6 @@ import { ArrowIcon } from '../../../icons';
 import DiwaniyaBox from './_components/DiwaniyaBox';
 import { useApi } from "../../../hooks/useApi";
 import Skeleton from "react-loading-skeleton";
-import Popup from "../../../components/UI/Popup";
-import { ModalContext } from "../../../context/ModalContext";
 
 const SingleDiwaniya = () => {
   const { t } = useTranslation();
