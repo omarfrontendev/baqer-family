@@ -1,31 +1,29 @@
-import {
-  GoogleMap,
-  Marker,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-import React, { useEffect, useRef, useState } from 'react';
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import React, { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { MdMyLocation } from "react-icons/md";
 import { FaLocationArrow } from "react-icons/fa";
-import styles from '../.module.scss';
+import styles from "./.module.scss";
 
 const containerStyle = {
   width: "100%",
   height: "100%",
 };
 
-const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
+const MainGoogleMap = ({ onCloseMap, onChange, activeLocation }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDGnjcgnojm_7IimdzBTnlhUgpwzhfv-1I", // Replace with your Google Maps API key
   });
 
+  
   const [location, setLocation] = useState(
-    watch()?.company?.location?.lat ? watch()?.company?.location : null
-  );
-  const [currentLocation, setCurrentLocation] = useState(null)
+    activeLocation?.lat ? activeLocation : null
+    );
   const [map, setMap] = useState(null);
-  const [confirm, setConfirm] = useState(false);
+  const [
+    confirm,
+     setConfirm] = useState(false);
 
   const handleMapClick = (event) => {
     const lat = event.latLng.lat();
@@ -53,11 +51,10 @@ const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
   };
 
   useEffect(() => {
-    if (navigator.geolocation && !watch()?.location?.lat) {
+    if (navigator.geolocation && !activeLocation?.lat) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         setLocation({ lat: latitude, lng: longitude });
-        setCurrentLocation({ lat: latitude, lng: longitude });
         map?.panTo({ lat: latitude, lng: longitude });
       });
     }
@@ -87,7 +84,7 @@ const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
       <div className={styles.map}>
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={currentLocation}
+          center={location}
           zoom={15}
           disableDefaultUI={true}
           onClick={handleMapClick}
@@ -125,7 +122,7 @@ const MainGoogleMap = ({ onCloseMap, onChange, watch }) => {
         className={styles.confirm}
         onClick={() => {
           setConfirm(true);
-          onChange(location)
+          onChange(location);
           onCloseMap();
         }}
       >

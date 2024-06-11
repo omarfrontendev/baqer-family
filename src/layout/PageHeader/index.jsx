@@ -12,7 +12,7 @@ const PageHeader = ({ title }) => {
       <button className={styles.back__btn} onClick={() => navigate(-1)}>
         <MdArrowForwardIos />
       </button>
-      {title && <h3>{title}</h3>}
+      {title && <h3 className={styles.title}>{title}</h3>}
     </div>
   );
 }

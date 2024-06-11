@@ -1055,3 +1055,114 @@ export const WhatsappIcon = () => (
     />
   </svg>
 );
+
+export const ArrowIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14.153" height="19.127" viewBox="0 0 14.153 19.127">
+  <path id="up-arrow" d="M9.468,19.385a.946.946,0,0,1-.74-.371L2.687,12.974a.924.924,0,1,1,1.306-1.307L8.555,16.2V1.185a.925.925,0,1,1,1.85,0V16.2l4.537-4.538a.924.924,0,1,1,1.307,1.307l-6.042,6.042A.878.878,0,0,1,9.468,19.385Z" transform="translate(-2.393 -0.259)" fill="#26c0ff"/>
+</svg>
+
+);
+
+export const DeleteIcon = () => (
+  <svg
+    id="delete"
+    xmlns="http://www.w3.org/2000/svg"
+    width="22.725"
+    height="29.218"
+    viewBox="0 0 22.725 29.218"
+  >
+    <path
+      id="Path_2622"
+      data-name="Path 2622"
+      d="M21.232,3a1.622,1.622,0,0,1,1.623,1.622H26.1a1.622,1.622,0,1,1,0,3.244H6.623a1.622,1.622,0,1,1,0-3.244H9.87A1.622,1.622,0,0,1,11.493,3Z"
+      transform="translate(-5 -3)"
+      fill="#26c0ff"
+    />
+    <path
+      id="Path_2623"
+      data-name="Path 2623"
+      d="M6,7H25.482V26.461A3.245,3.245,0,0,1,22.235,29.7H9.247A3.245,3.245,0,0,1,6,26.461Zm5.682,3.244a.811.811,0,0,0-.812.811v14.6a.812.812,0,0,0,1.623,0v-14.6A.811.811,0,0,0,11.682,10.244Zm8.117,0a.811.811,0,0,0-.812.811v14.6a.812.812,0,0,0,1.623,0v-14.6A.811.811,0,0,0,19.8,10.244Z"
+      transform="translate(-4.378 -0.486)"
+      fill="#26c0ff"
+      fill-rule="evenodd"
+    />
+  </svg>
+);
+
+export const EditIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+  >
+    <g id="edit" transform="translate(0.365)">
+      <rect
+        id="Rectangle_2222"
+        data-name="Rectangle 2222"
+        width="30"
+        height="30"
+        rx="5"
+        transform="translate(-0.365)"
+        fill="#e89300"
+      />
+      <path
+        id="edit-2"
+        data-name="edit"
+        d="M16.873,3.578a.926.926,0,0,0-1.31,0l-1.31,1.311,3.929,3.929,1.31-1.31a.926.926,0,0,0,0-1.31Zm0,6.55L12.943,6.2,4.7,14.442a.926.926,0,0,0-.27.654v2.62a.926.926,0,0,0,.926.926H7.975a.926.926,0,0,0,.655-.271l8.243-8.243Z"
+        transform="translate(2.719 3.657)"
+        fill="#fff"
+      />
+    </g>
+  </svg>
+);
+
+// export const BookingIcon = () => (
+//   <svg
+//     xmlns="http://www.w3.org/2000/svg"
+//     xmlns:xlink="http://www.w3.org/1999/xlink"
+//     width="18"
+//     height="18"
+//     viewBox="0 0 18 18"
+//   >
+//     <defs>
+//       <clipPath id="clip-path">
+//         <rect
+//           id="Rectangle_1772"
+//           data-name="Rectangle 1772"
+//           width="18"
+//           height="18"
+//           transform="translate(61.5 372)"
+//           fill="#fff"
+//         />
+//       </clipPath>
+//     </defs>
+//     <g id="check" transform="translate(-61.5 -372)" clip-path="url(#clip-path)">
+//       <g id="Layer_2" data-name="Layer 2" transform="translate(61.5 372)">
+//         <g id="checkmark-circle">
+//           <rect
+//             id="Rectangle_2202"
+//             data-name="Rectangle 2202"
+//             width="18"
+//             height="18"
+//             fill="#fff"
+//             opacity="0"
+//           />
+//           <path
+//             id="Path_2599"
+//             data-name="Path 2599"
+//             d="M7.283,8.467A.753.753,0,0,0,6.217,9.533l2.25,2.25a.728.728,0,0,0,1.073-.038l5.25-6a.75.75,0,0,0-1.125-.99L9,10.155Z"
+//             fill="#fff"
+//           />
+//           <path
+//             id="Path_2600"
+//             data-name="Path 2600"
+//             d="M18.592,9.6a.9.9,0,0,0-.9.9,7.2,7.2,0,1,1-7.2-7.2,7.911,7.911,0,0,1,1.71.2.9.9,0,1,0,.423-1.746A9.486,9.486,0,0,0,10.492,1.5a9,9,0,1,0,9,9,.9.9,0,0,0-.9-.9Z"
+//             transform="translate(-1.496 -1.5)"
+//             fill="#fff"
+//           />
+//         </g>
+//       </g>
+//     </g>
+//   </svg>
+// );

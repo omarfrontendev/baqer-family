@@ -110,7 +110,6 @@ const SingleFreeBusiness = () => {
             {/* <a href="" target="" className={styles.btn__blue}>
               الموقع
             </a> */}
-            {console.log(data?.data)}
             <a
               target="_blank"
               className={styles.btn__blue}

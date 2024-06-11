@@ -26,7 +26,7 @@ export const useApi = (endpoint, method, body) => {
             toast.error(err?.response?.data?.message[key][0])
           )
         : toast.error("حدث خطأ ما! أعد المحاولة من فضلك");
-      setError(err);
+        setError(err?.response?.data);
       setLoading(false);
       return error;
     }

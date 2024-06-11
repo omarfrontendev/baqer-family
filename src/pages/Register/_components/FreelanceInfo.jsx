@@ -4,11 +4,10 @@ import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 // internal
 import UploadImage from "./UploadImage";
-import { ErrorMessage, MainInput } from "../../../components";
+import { ErrorMessage, MainGoogleMap, MainInput } from "../../../components";
 import Radio from "./Radio";
 // style
 import styles from "../.module.scss";
-import MainGoogleMap from "./MainGoogleMap";
 
 const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
   const { t } = useTranslation();
@@ -140,9 +139,9 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
                   }`
                 : "الموقع*"}
               <div className={styles.label}>*الموقع</div>
-            {errors?.company?.location?.lat?.message && (
-              <ErrorMessage msg={errors?.company?.location?.lat?.message} />
-            )}
+              {errors?.company?.location?.lat?.message && (
+                <ErrorMessage msg={errors?.company?.location?.lat?.message} />
+              )}
             </button>
             <MainInput
               register={register}
@@ -154,20 +153,6 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
               required
             />
           </div>
-          {/* <div className={styles.checkbox}>
-            <label htmlFor="showDetailsCompany">
-              {t("showDetailsForManager")}
-            </label>
-            <input
-              {...register(
-                "company.showDetailsCompany",
-                `company.showDetailsCompany is required!`
-              )}
-              type="checkbox"
-              name="company.showDetailsCompany"
-              id="showDetailsCompany"
-            />
-          </div> */}
         </>
       )}
       {openMap && (
@@ -185,7 +170,7 @@ const FreelanceInfo = ({ register, control, errors, watch, isFreelance }) => {
                 setOpenMap(false);
               }}
               onBlur={onBlur}
-              watch={watch}
+              activeLocation={watch()?.company?.location}
             />
           )}
         />

@@ -8,6 +8,17 @@
     // padding: 20px 0;
     height: 75px;
     margin-bottom: 20px;
+    // &::after {
+    //     content: '';
+    //     position: absolute;
+    //     bottom: 0px;
+    //     left: 0;
+    //     width: calc(100% + 300px);
+    //     // background-color: #0000001A;
+    //     height: 1px;
+    //     transform: translateX(-150px);
+    //     box-shadow: 0px 2px 4px #0000001A;
+    // }
     .back__btn {
         position: absolute;
         right: 0;
@@ -17,5 +28,8 @@
         font-size: 24px;
         display: flex;
         align-items: center;
+    }
+    .title {
+        font-size: 23px;
     }
 }

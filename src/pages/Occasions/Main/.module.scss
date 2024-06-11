@@ -1,0 +1,168 @@
+@import '../../../styles/variables.scss';
+
+.categories__box {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    overflow-y: hidden;
+    height: 64px;
+    background-color: #F8F8F8;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    &::-webkit-scrollbar {
+        height: 8px;
+        border-radius: 50px;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+        // background: var(--gray-background, #f7f7f7);
+        background: #fff;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $main__blue__color;
+        border-radius: 2px;
+    }
+    > button {
+        text-align: center;
+        min-width: 200px;
+        height: 61px;
+        color: #BEBEBE;
+        font-size: 18px;
+        position: relative;
+        transition: .2s ease-in-out;
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #BEBEBE;
+            transition: .2s ease-in-out;
+        }
+        &.active {
+            color: $main__blue__color;
+            &::after {
+                background-color: $main__blue__color;
+                height: 2px;
+                transform: translateY(25%);
+            }
+            .delete {
+                color: red;
+            }  
+            .edit {
+                color: $main__blue__color;
+            }
+        }
+        .category__btns {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 8px; 
+            > button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            } 
+        }
+    }
+}
+.add__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $main__blue__color;
+    font-size: 20px;
+}
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+    .box{
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        border-radius: 3px;
+        border: 1px solid #E9E9E9;
+        .title {
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            padding: 16px;
+        }
+        .date{
+            background-color: $main__blue__color;
+            color: #FFF;
+            border-radius: 50px;
+            padding: 4px 26px;
+            text-align: center;
+            width: fit-content;
+            margin: 0 auto 16px;
+            font-size: 14px;
+        }
+        .image__box {
+            height: 147px;
+            position: relative;
+            overflow: hidden;
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                opacity: .2;
+                transition: .3s ease-in-out;
+            }
+            &:hover {
+                &::after {
+                    opacity: 0;
+                }
+            }
+            .img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .btns {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            >button {
+                display: flex;
+            }
+            .delete__btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: red;
+                width: 30px;
+                height: 30px;
+                border-radius: 4px;
+                svg {
+                    height: 18px;
+                    path {
+                        fill: #FFF
+                    }
+                }
+            }
+        }
+    }
+}

@@ -24,27 +24,27 @@ const Home = () => {
       },
       {
         title: "الديوانيات",
-        href: "/",
+        href: "/diwaniyas",
       },
       {
         title: "المناسبات",
-        href: "/",
+        href: "/occasions",
       },
       {
         title: "التهاني",
-        href: "/",
+        href: "/congratulations",
       },
       {
         title: "الأخبار",
-        href: "/",
+        href: "/news",
       },
       {
         title: "تصفية",
-        href: "/",
+        href: "/liquidation",
       },
       {
         title: "الأنشطة والفاعليات",
-        href: "/",
+        href: "/activities",
       },
       {
         title: "تصويت",
@@ -62,7 +62,7 @@ const Home = () => {
 
   useEffect(() => {
     Cookies.set("firstTime", "false");
-  }, [])
+  }, []);
 
 
   return (
@@ -81,7 +81,8 @@ const Home = () => {
       </div>
       <div className={`${styles.content} container`}>
         {/* <UserWidget /> */}
-        <MainSlider image={imageSlider} />
+        <MainSlider images={[imageSlider]} />
+
         <section className={styles.section}>
           <h3 className={styles.title}>{t("sections")}</h3>
           <div className={`${styles.list} list`}>
@@ -95,6 +96,7 @@ const Home = () => {
             ))}
           </div>
         </section>
+
         <section className={styles.section}>
           <h3 className={styles.title}>آخر أخبار العائلة</h3>
           <Swiper

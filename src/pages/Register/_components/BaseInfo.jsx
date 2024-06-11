@@ -212,17 +212,6 @@ const BaseInfo = ({ register, control, errors, watch }) => {
             </div>
           )}
         />
-        {/* 
-        <div style={{ direction: "rtl", textAlign: "right", padding: "20px" }}>
-          <Calendar
-            date={value}
-            onChange={(e) => setValue(e)}
-            locale={ar}
-            minDate={new Date(1990, 0, 1)}
-            maxDate={new Date(2002, 11, 31)}
-            color="#26C0FF" // Custom color
-          />
-        </div> */}
         {/* ========================= */}
         <MainInput
           register={register}

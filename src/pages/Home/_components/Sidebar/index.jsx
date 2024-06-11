@@ -9,7 +9,7 @@ import styles from './.module.scss';
 const Sidebar = ({ onClose }) => {
 
   const { t } = useTranslation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className={styles.sidebar__content}>
@@ -25,7 +25,7 @@ const Sidebar = ({ onClose }) => {
             <Link to="/">{t("mainPage")}</Link>
           </li>
           <li onClick={onClose}>
-            <Link to="/">{t("profile")}</Link>
+            <Link to="/profile/sadsadsda">{t("profile")}</Link>
           </li>
           <li onClick={onClose}>
             <Link to="/">{t("familyArchive")}</Link>

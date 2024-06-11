@@ -8,19 +8,10 @@ import { Logo } from '../../components';
 // page components
 import LoginForm from './_components/LoginForm';
 import styles from './.module.scss';
-import { useApi } from '../../hooks/useApi';
 
 const Login = () => {
 
   const { t } = useTranslation();
-
-
-    const { onRequest } = useApi("/public/aaaaaa/test.json", "get");
-
-    useEffect(() => {
-      onRequest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
   return (
     <div className={`${styles.page}`}>

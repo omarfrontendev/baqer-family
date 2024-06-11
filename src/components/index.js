@@ -6,5 +6,13 @@ export { default as MainSlider } from "./UI/MainSlider";
 export { default as MainBox } from "./UI/MainBox";
 export { default as Loading } from "./UI/Loading";
 export { default as BlogBox } from "./UI/BlogBox";
+export { default as MainLabel } from "./UI/MainLabel";
+export { default as MainGoogleMap } from "./UI/MainGoogleMap";
+export { default as Error } from "./UI/Error";
+export { default as Popup } from "./UI/Popup";
+export { default as DeleteModal } from "./UI/DeleteModal";
+export { default as EmptyList } from "./UI/EmptyList";
 // Forms
 export { default as MainInput } from "./Forms/MainInput";
+export { default as UploadImages } from "./Forms/UploadImages";
+export { default as DatePicker } from "./Forms/DatePicker";
