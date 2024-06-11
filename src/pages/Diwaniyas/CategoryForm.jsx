@@ -1,20 +1,21 @@
-import React, { useContext } from 'react';
-import { MainButton, MainInput, Popup } from '../../../../../components';
+import React, { useContext } from "react";
+import { MainButton, MainInput, Popup } from "../../components";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from 'react-i18next';
-import { useApi } from '../../../../../hooks/useApi';
-import { ModalContext } from '../../../../../context/ModalContext';
-import styles from './.module.scss';
+import { useTranslation } from "react-i18next";
+import { useApi } from "../../hooks/useApi";
+import styles from "./.module.scss";
+import { ModalContext } from "../../context/ModalContext";
 
 const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
   const { t } = useTranslation();
   const { setIdModal } = useContext(ModalContext);
-  
+
   // ADD SCHEMA
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
+    // color: yup.string("").required(t("errors.required")),
   });
 
   const {
@@ -25,7 +26,7 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
   } = useForm({
     defaultValues: defaultData
       ? {
-          name: defaultData?.name
+          name: defaultData?.name,
         }
       : null,
     resolver: yupResolver(schema),
@@ -34,7 +35,7 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
 
   // add new category
   const { onRequest: onAddCategory, loading } = useApi(
-    `/api/${categoryId ? "editOccasionCategory" : "addOccasionCategory"}`,
+    `/api/${categoryId ? "editDiwanCategory" : "addDiwanCategory"}`,
     "post"
   );
 
@@ -44,12 +45,14 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
         categoryId
           ? {
               ...e,
-              order: "0",
+              index_num: "0",
               category_id: categoryId,
+              color: "#DDD",
             }
           : {
               ...e,
-              order: "0",
+              index_num: "0",
+              color: "#DDD",
             }
       );
       res?.success && setIdModal("");

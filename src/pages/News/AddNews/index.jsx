@@ -35,6 +35,7 @@ const AddNews = () => {
   const { onRequest: onSendNews } = useApi("/api/addNews", "post");
 
   const onSubmit = async (e) => {
+    console.log(e?.images)
     setSubmitting(true);
     const body = {
       title: e?.name,
@@ -43,6 +44,7 @@ const AddNews = () => {
 
     try {
       const res = await onSendNews(body);
+      console.log(res?.data?.id);
       res?.success &&
         (await uploadFile({
           images: e?.images,

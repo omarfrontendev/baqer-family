@@ -31,34 +31,36 @@ const SingleDiwaniya = () => {
   }, [slug]);
 
   return (
-    <div className={`container`}>
-      <PageHeader title={"ديوانية رسمية"} />
-      <div className={styles.page__header}>
-        <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
-          {t("AddNewDiwaniya")} <IoMdAdd />
-        </Link>
-        <button className={styles.header__btn}>
-          <ArrowIcon />
-          {t("sortingByName")}
-        </button>
+    <>
+      <div className={`container`}>
+        <PageHeader title={"ديوانية رسمية"} />
+        <div className={styles.page__header}>
+          <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
+            {t("AddNewDiwaniya")} <IoMdAdd />
+          </Link>
+          <button className={styles.header__btn}>
+            <ArrowIcon />
+            {t("sortingByName")}
+          </button>
+        </div>
+        <div className={styles.list}>
+          {diwaniyasLoading
+            ? Array(4)
+                ?.fill("")
+                ?.map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    width="100%"
+                    height="213px"
+                    borderRadius="4px"
+                  />
+                ))
+            : diwaniyas?.data?.map((diwaniya) => (
+                <DiwaniyaBox key={diwaniya?.id} diwaniya={diwaniya} />
+              ))}
+        </div>
       </div>
-      <div className={styles.list}>
-        {diwaniyasLoading
-          ? Array(4)
-              ?.fill("")
-              ?.map((_, i) => (
-                <Skeleton
-                  key={i}
-                  width="100%"
-                  height="213px"
-                  borderRadius="4px"
-                />
-              ))
-          : diwaniyas?.data?.map((diwaniya) => (
-              <DiwaniyaBox key={diwaniya?.id} diwaniya={diwaniya} />
-            ))}
-      </div>
-    </div>
+    </>
   );
 }
 
