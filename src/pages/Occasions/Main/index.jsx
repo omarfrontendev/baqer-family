@@ -111,7 +111,7 @@ const Occasions = () => {
                     className={styles.edit}
                     onClick={() => setIdModal(`edit-${category?.id}-`)}
                   >
-                    <MdEdit />category
+                    <MdEdit />
                   </button>
                   <button
                     className={styles.delete}
