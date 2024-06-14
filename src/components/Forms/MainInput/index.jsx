@@ -13,9 +13,46 @@ const MainInput = ({
   error,
   defaultValue,
   value,
+  normal,
+  onChange,
 }) => {
   const [showPass, SetShowPass] = useState(false);
-
+  if (normal)
+    return (
+      <div className={styles.input__container}>
+        <div className={styles.input__box}>
+          <input
+            defaultValue={defaultValue}
+            autoComplete=""
+            id={name}
+            onChange={onChange}
+            value={value || ""}
+            type={type === "password" ? (showPass ? "text" : "password") : type}
+            className={`${styles.input} ${!icon ? styles.no__icon : ""}`}
+            placeholder={`${placeholder} ${required ? "*" : ""}`}
+          />
+          <label
+            className={`${styles.label} ${value ? styles.focus : ""}`}
+            htmlFor={name}
+          >
+            {placeholder} {required ? "*" : ""}
+          </label>
+          <label htmlFor={name} className={styles.icon}>
+            {icon}
+          </label>
+          {type === "password" && (
+            <button
+              type="button"
+              className={styles.eyeIcon}
+              onClick={() => SetShowPass((prev) => !prev)}
+            >
+              {showPass ? <FaEye /> : <FaEyeSlash />}
+            </button>
+          )}
+        </div>
+        <p className={styles.err__msg}>{error}</p>
+      </div>
+    );
   if (type === "textarea")
     return (
       <div className={styles.input__container}>

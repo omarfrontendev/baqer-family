@@ -3,7 +3,7 @@ import { PageHeader } from '../../layout';
 import { useTranslation } from 'react-i18next';
 import { DeleteModal, Error, MainSlider } from '../../components';
 import styles from './.module.scss';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 import Skeleton from 'react-loading-skeleton';
 import { IoMdAdd } from 'react-icons/io';
@@ -12,7 +12,7 @@ import CategoryForm from './CategoryForm';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
 const Diwaniyas = () => {
-
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
 
@@ -74,15 +74,19 @@ const Diwaniyas = () => {
                     backgroundColor: diwaniya?.color,
                   }}
                 >
-                  <Link
-                    to={`${diwaniya?.id}`}
+                  <button
+                    onClick={() =>
+                      navigate(`${diwaniya?.id}`, {
+                        state: { data: diwaniya?.name },
+                      })
+                    }
                     className={styles.link}
                     key={i}
-                  ></Link>
+                  ></button>
                   {diwaniya?.name}
                   <div className={styles.category__btns}>
                     <button
-                    style={{color: diwaniya?.color || "#000"}}
+                      style={{ color: diwaniya?.color || "#000" }}
                       className={styles.edit}
                       onClick={() =>
                         setIdModal(`edit-${diwaniya?.id}-category`)
@@ -91,7 +95,7 @@ const Diwaniyas = () => {
                       <MdEdit />
                     </button>
                     <button
-                    style={{color: diwaniya?.color || "#000"}}
+                      style={{ color: diwaniya?.color || "#000" }}
                       className={styles.delete}
                       onClick={() =>
                         setIdModal(`delete-category-${diwaniya?.id}`)

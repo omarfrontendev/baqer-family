@@ -7,6 +7,7 @@ import { PageHeader } from '../../../layout';
 import DiwaniyaForm from '../DiwaniyaForm';
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
+import uploadFile from "../../../utils/uploadImages";
     
 const EditDiwaniya = () => {
   const { t } = useTranslation();
@@ -33,10 +34,10 @@ const EditDiwaniya = () => {
         lng: yup.string().required(t("errors.required")),
       })
       .required(t("errors.required")),
-    // phone_number: yup
-    //   .string()
-    //   .matches(/^$|^\d+$/, t("errors.mustBePositiveInteger"))
-    //   .required(t("errors.required")),
+    diwanWorkDays: yup
+      .array()
+      .min(1, "at least 1 item")
+      .required("days is Required!"),
     images: yup.array().min(1, "at least 1 item").required("image is required"),
   });
 
@@ -58,19 +59,18 @@ const EditDiwaniya = () => {
       date: diwaniya?.created_at,
       description: diwaniya?.description,
       name: diwaniya?.name,
+      diwanWorkDays: location?.state?.data?.workDays,
     },
     resolver: yupResolver(schema),
     mode: "all",
   });
 
   // send diwaniya base-info
-  const { onRequest: onSendBaseInfo } = useApi("/api/addDiwan", "post");
-
-  console.log(errors)
+  const { onRequest: onSendBaseInfo } = useApi("/api/editDiwan", "post");
 
   const onSubmit = async (e) => {
+
     setSubmitting(true);
-    console.log(e)
 
     // Base-info
     const body = {
@@ -80,22 +80,20 @@ const EditDiwaniya = () => {
       category_id: slug,
       lat: e?.location?.lat,
       long: e?.location?.lng,
-    };
-
-    // images
-    const formdata = new FormData();
-    formdata.append("images", e?.images);
-    formdata.append("category_type", "diwan");
-    formdata.append("category_id", slug);
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
+      diwan_id: diwaniya?.id,
+      date: e.diwanWorkDays,
     };
 
     try {
-      await onSendBaseInfo(body);
-      await fetch(`/api/uploadMultipleImage`, requestOptions);
+      const res = await onSendBaseInfo(body);
+      if(res?.success) {
+       await uploadFile({
+         images: e?.images,
+         category_type: "diwan",
+         category_id: res?.data?.id,
+       });
+        navigate(`/diwaniyas/${location?.state?.data?.category_id}`);
+      }
     } catch (err) {
       console.log(err);
       setSubmitting(false);
@@ -113,7 +111,7 @@ const EditDiwaniya = () => {
         formData={watch()}
         errors={errors}
         submitting={submitting}
-        update
+        edit
       />
     </div>
   );

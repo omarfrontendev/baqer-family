@@ -178,52 +178,42 @@
             font-size: 14px;
         }
     }
-    // .images__container {
-    //     position: relative;
-    //     display: grid;
-    //     gap: 24px;
-    //     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    //     .add__image__btn {
-    //         display: flex;
-    //         align-items: center;
-    //         justify-content: center;
-    //         background-color: $main__blue__color;
-    //         color: #FFF;
-    //         height: 85px;
-    //         border-radius: 7px;
-    //         font-size: 30px;
-    //         cursor: pointer;
-    //     }
-    //     .image__box {
-    //         position: relative;
-    //         height: 85px;
-    //         width: 100%;
-    //         border-radius: 7px;
-    //         // overflow: hidden;
-    //         .img {
-    //             border-radius: 7px;
-    //             width: 100%;
-    //             height: 100%;
-    //             object-fit: cover;
-    //         }
-    //         .delete__img__btn {
-    //             position: absolute;
-    //             display: flex;
-    //             align-items: center;
-    //             justify-content: center;
-    //             top: -10px;
-    //             left: -10px;
-    //             width: 30px;
-    //             height: 30px;
-    //             background: red;
-    //             border-radius: 50%;
-    //             >svg {
-    //                 height: 15px;
-    //                 path {
-    //                     fill: #FFF;
-    //                 }
-    //             }      
-    //         }
-    //     }
-    // }
+    .days__container {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #DDD;
+        position: relative;
+        .days__inputs {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .diwanWorkDaysList {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            > .diwanWorkDay {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 24px;
+                padding: 20px;
+                background-color: #26c0ff24;
+                color: #333;
+                font-weight: 600;
+                border-radius: 4px;
+                > div {
+                    display: flex;
+                    align-items: center;
+                    gap: 32px;  
+                }
+                > button {
+                    color: red;
+                }
+            }
+        }
+    }
 }

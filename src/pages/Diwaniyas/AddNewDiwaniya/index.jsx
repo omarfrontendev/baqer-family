@@ -6,13 +6,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import DiwaniyaForm from '../DiwaniyaForm';
 import { PageHeader } from '../../../layout';
 import { useApi } from '../../../hooks/useApi';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import uploadFile from '../../../utils/uploadImages';
 
 const AddNewDiwaniya = () => {
 
   const { t } = useTranslation();
   const { slug } = useParams();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -46,6 +48,10 @@ const AddNewDiwaniya = () => {
 
   // send diwaniya base-info
   const { onRequest: onSendBaseInfo } = useApi("/api/addDiwan", "post");
+  const { onRequest: onAddDiwanWorkDays } = useApi(
+    "/api/addDiwanWorkDays",
+    "post"
+  );
 
 
   const onSubmit = async e => {
@@ -61,23 +67,25 @@ const AddNewDiwaniya = () => {
       long: e?.location?.lng,
     };
 
-    // images
-    const formdata = new FormData();
-    formdata.append("images", e?.images);
-    formdata.append("category_type", "diwan");
-    formdata.append("category_id", slug);
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
     try {
-      await onSendBaseInfo(body);
-      await fetch(`/api/uploadMultipleImage`, requestOptions);
+      const res = await onSendBaseInfo(body);
+      if(res?.success) {
+        await onAddDiwanWorkDays({
+          date: e?.diwanWorkDays,
+          diwan_id: res?.data?.id,
+        });
+        await uploadFile({
+          images: e?.images,
+          category_type: "diwan",
+          category_id: res?.data?.id,
+        });
+        navigate(`/diwaniyas/${slug}`);
+      }
+        // res?.success
     }catch(err) {
       console.log(err);
       setSubmitting(false);
-      }
+    }
     setSubmitting(false);
   }
 

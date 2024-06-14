@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { DeleteModal, EmptyList, Error, MainSlider, Popup } from "../../../components";
+import { DeleteModal, EmptyList, Error, MainSlider } from "../../../components";
 import styles from "./.module.scss";
 import { PageHeader } from "../../../layout";
 import { Link, useNavigate } from "react-router-dom";

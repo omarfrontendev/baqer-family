@@ -3,23 +3,25 @@ import styles from './.module.scss';
 import DefaultCover from "../../../../../assets/DefaultCover.png";
 import { useNavigate } from 'react-router-dom';
 import { DeleteIcon, EditIcon } from '../../../../../icons';
-import { Popup } from '../../../../../components';
+import { DeleteModal } from '../../../../../components';
 import { ModalContext } from '../../../../../context/ModalContext';
 
-const DiwaniyaBox = ({ diwaniya }) => {
+const DiwaniyaBox = ({ diwaniya, onGetList }) => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const navigate = useNavigate();
 
   return (
     <>
-      <button
+      <div
         type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          // navigate(`${diwaniya?.id}`, { state: { data: diwaniya } });
-        }}
         className={styles.box}
       >
+        <button
+          className={styles.overlay}
+          onClick={() => {
+            navigate(`${diwaniya?.id}`, { state: { data: diwaniya } });
+          }}
+        ></button>
         <div className={styles.image__box}>
           <img
             src={diwaniya?.image || DefaultCover}
@@ -32,27 +34,31 @@ const DiwaniyaBox = ({ diwaniya }) => {
           <button
             style={{ display: "flex" }}
             onClick={() => {
-              navigate(`/diwaniyas/edit/10`, { state: { data: diwaniya } });
+              navigate(`/diwaniyas/edit/${diwaniya?.category_id}`, {
+                state: { data: diwaniya },
+              });
             }}
           >
             <EditIcon />
           </button>
           <button
-            onClick={() => setIdModal("delete-diwaniya")}
+            onClick={() => setIdModal(`delete-diwaniya-${diwaniya?.id}`)}
             type="button"
             className={styles.delete__btn}
           >
             <DeleteIcon />
           </button>
         </div>
-      </button>
-      {idModal === "delete-diwaniya" && (
-        <Popup>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          voluptate temporibus, dolorum, unde placeat eligendi repellat et
-          dolores laudantium enim voluptates. Vitae sunt minima praesentium
-          placeat! Soluta sequi obcaecati a!
-        </Popup>
+      </div>
+      {idModal === `delete-diwaniya-${diwaniya?.id}` && (
+        <DeleteModal
+          body={{
+            diwan_id: diwaniya?.id,
+          }}
+          endpoint="deleteDiwan"
+          title="هل أنت متأكد أنك تريد حذف هذه الديوان"
+          getList={onGetList}
+        />
       )}
     </>
   );
