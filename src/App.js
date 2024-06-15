@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Activities, AddActivities, AddCategory, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, ForgetPassword, FreeBusiness, Home, Liquidation, LiquidationDetails, Login, NewDetails, News, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, WelcomePage } from './pages'
+import { Activities, AddActivities, AddCategory, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, ForgetPassword, FreeBusiness, Home, Liquidation, LiquidationDetails, Login, NewDetails, News, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
 // import { PagesGuard } from './components/AuthGuard';
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -12,6 +12,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/free-business" element={<FreeBusiness />} />
       <Route path="/free-business/:slug" element={<SingleFreeBusiness />} />
+      <Route path="/free-business/:slug/request" element={<UserFreelanceRequest />} />
       <Route path="/profile/:slug" element={<Profile />} />
       {/* ========== diwaniyas ========== */}
       <Route path="/diwaniyas" element={<Diwaniyas />} />
@@ -43,6 +44,8 @@ const App = () => {
       <Route path="/activities" element={<Activities />} />
       <Route path="/activities/add" element={<AddActivities />} />
       <Route path="/activities/edit" element={<EditActivities />} />
+      {/* ================================================== */}
+      <Route path="/tech-support" element={<TechSupport />} />
 
       {/* </Route> */}
       <Route path="/login" element={<Login />} />

@@ -52,7 +52,7 @@ const Home = () => {
       },
       {
         title: "الدعم فني",
-        href: "/",
+        href: "/tech-support",
       },
       {
         title: "أعمال حرة",

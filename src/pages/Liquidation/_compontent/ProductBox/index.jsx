@@ -16,11 +16,12 @@ const ProductBox = ({ product, onGetProducts }) => {
   return (
     <>
       <div key={product?.id} to="details" className={styles.box}>
-        <button 
-        className={styles.details__btn}
-        onClick={() => {
-            navigate(`${product?.id}`, { state: { data: product } })
-        }}></button>
+        <button
+          className={styles.details__btn}
+          onClick={() => {
+            navigate(`${product?.id}`, { state: { data: product } });
+          }}
+        ></button>
         <div className={styles.image__box}>
           <img
             src={product?.image || DefaultCover}
@@ -41,7 +42,6 @@ const ProductBox = ({ product, onGetProducts }) => {
                 state: { data: product },
               });
             }}
-            to="/liquidation/edit"
           >
             <EditIcon />
           </button>
@@ -62,7 +62,7 @@ const ProductBox = ({ product, onGetProducts }) => {
             product_id: product?.id,
           }}
           endpoint="deleteProduct"
-          title="هل أنت متأكد أنك تريد حذف هذه المنتج؟"
+          title="هل أنت متأكد أنك تريد حذف هذا المنتج؟"
           getList={onGetProducts}
         />
       )}

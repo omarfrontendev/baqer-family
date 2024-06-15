@@ -1,20 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './.module.scss';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PageHeader } from '../../../layout';
 import { IoMdAdd } from "react-icons/io";
-import { ArrowIcon } from '../../../icons';
 import DiwaniyaBox from './_components/DiwaniyaBox';
 import { useApi } from "../../../hooks/useApi";
 import Skeleton from "react-loading-skeleton";
 import { EmptyList, Error } from "../../../components";
+import { FaLongArrowAltDown } from "react-icons/fa";
 
 const SingleDiwaniya = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [sorting, setSorting] = useState(null);
+
+  console.log(sorting);
 
   useEffect(() => {
     !state?.data && navigate("/diwaniyas");
@@ -27,12 +30,25 @@ const SingleDiwaniya = () => {
     loading: diwaniyasLoading,
     onRequest: onGetDiwaniyas,
     error: diwaniyasError,
-  } = useApi(`/api/viewDiwan?current_page=1&per_page=10000&category_id=${slug}`, "get");
+  } = useApi(
+    `/api/viewDiwan?current_page=1&per_page=10000&category_id=${slug}&sort=${sorting}`,
+    "get"
+  );
 
   useEffect(() => {
     if (slug) onGetDiwaniyas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, [slug, sorting]);
+
+  const handelSorting = () => {
+    if (sorting === null) {
+      setSorting("asc");
+    } else if(sorting === "asc") {
+      setSorting("desc");
+    } else {
+      setSorting(null);
+    }
+  }
 
   return (
     <>
@@ -42,8 +58,17 @@ const SingleDiwaniya = () => {
           <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
             {t("AddNewDiwaniya")} <IoMdAdd />
           </Link>
-          <button className={styles.header__btn}>
-            <ArrowIcon />
+          <button
+            onClick={handelSorting}
+            className={`${styles.header__btn} ${
+              sorting === null
+                ? styles.off
+                : sorting === "asc"
+                ? styles.increase
+                : styles.decrease
+            }`}
+          >
+            <FaLongArrowAltDown />
             {t("sortingByName")}
           </button>
         </div>

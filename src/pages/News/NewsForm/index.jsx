@@ -36,7 +36,7 @@ const NewsForm = ({
         name="description"
         value={formData?.description}
         error={errors?.description?.message}
-        required
+        // required
       />
 
       {/* Diwaniya image */}

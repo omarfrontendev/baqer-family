@@ -6,6 +6,7 @@ export { default as Home } from "./Home";
 export { default as FreeBusiness } from "./FreeBusiness";
 export { default as SingleFreeBusiness } from "./SingleFreeBusiness";
 export { default as Profile } from "./Profile";
+export { default as UserFreelanceRequest } from "./UserFreelanceRequest";
 // ============= Diwaniyas ==============
 export { default as Diwaniyas } from "./Diwaniyas";
 export { default as SingleDiwaniya } from "./Diwaniyas/SingleDiwaniya";
@@ -41,3 +42,6 @@ export { default as LiquidationDetails } from "./Liquidation/LiquidationDetails"
 export { default as Activities } from "./Activities";
 export { default as AddActivities } from "./Activities/AddActivities";
 export { default as EditActivities } from "./Activities/EditActivities";
+
+
+export { default as TechSupport } from "./TechSupport";

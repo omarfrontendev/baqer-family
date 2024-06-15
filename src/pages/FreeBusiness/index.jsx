@@ -26,7 +26,7 @@ const FreeBusiness = () => {
   return (
     <div className={`${styles.page} container`}>
       <PageHeader title={t("FreeBusiness")} />
-      <MainSlider image={slideImage} />
+      <MainSlider images={[slideImage]} />
       {loading ? (
         <Loading />
       ) : (

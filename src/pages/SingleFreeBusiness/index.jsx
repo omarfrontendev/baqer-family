@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './.module.scss';
 import { PageHeader } from '../../layout';
 import { useApi } from '../../hooks/useApi';
@@ -14,7 +14,8 @@ import { FacebookIcon, InstagramIcon, TwitterIcon, WhatsappIcon } from '../../ic
 const SingleFreeBusiness = () => {
 
     const { slug } = useParams();
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const { data, loading, onRequest } = useApi(`/api/freelanceJob/${slug}`, "get");
 
@@ -73,7 +74,6 @@ const SingleFreeBusiness = () => {
                 <FaPhone />
               </span>
             </a>
-            {console.log(data?.data?.freelance_email)}
             <a
               href={`mailto:${data?.data?.freelance_email}`}
               className={styles.contact__box}
@@ -104,12 +104,13 @@ const SingleFreeBusiness = () => {
             </a>
           </div>
           <div className={styles.footer__btn}>
-            <Link to="/" className={styles.btn__orange}>
+            <button 
+              onClick={() => {
+                navigate("request", { state: { data: data?.data } });
+              }}
+               to="request" className={styles.btn__orange}>
               استفسار
-            </Link>
-            {/* <a href="" target="" className={styles.btn__blue}>
-              الموقع
-            </a> */}
+            </button>
             <a
               target="_blank"
               className={styles.btn__blue}

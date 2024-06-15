@@ -1,0 +1,15 @@
+.text {
+    color: #000000;
+    text-align: center;
+    opacity: .3;
+    font-size: 18px;
+    font-weight: 600;
+}
+.form__content {
+    display: flex;  
+    flex-direction: column;
+    row-gap: 40px;
+    width: 700px;
+    max-width: 100%;
+    margin: 47px auto 0;
+}

@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { PageHeader } from "../../../layout";
 import styles from "./.module.scss";
 import { DeleteIcon } from "../../../icons";
-import { MainLabel, MainSlider, UserNameAndImage } from "../../../components";
+import { DeleteModal, MainLabel, MainSlider, UserNameAndImage } from "../../../components";
 import { MdModeEdit } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { TiLocation } from "react-icons/ti";
 import { FaPhone } from "react-icons/fa6";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import BookModal from "../_compontent/BookModal";
 import { ModalContext } from "../../../context/ModalContext";
@@ -27,8 +27,6 @@ const LiquidationDetails = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
-  console.log(product);
-
 
   return (
     <>
@@ -36,12 +34,22 @@ const LiquidationDetails = () => {
         <div className={styles.page__header}>
           <PageHeader title={product?.name} />
           <div className={styles.header__btns}>
-            <button className={styles.header__btn}>
+            <button
+              className={styles.header__btn}
+              onClick={() => setIdModal(`delete-modal`)}
+            >
               <DeleteIcon />
             </button>
-            <Link to="/liquidation/edit" className={styles.header__btn}>
+            <button
+              className={styles.header__btn}
+              onClick={() => {
+                navigate(`/liquidation/${product?.id}/edit`, {
+                  state: { data: product },
+                });
+              }}
+            >
               <MdModeEdit />
-            </Link>
+            </button>
           </div>
         </div>
         <MainSlider
@@ -79,7 +87,9 @@ const LiquidationDetails = () => {
             </div>
             <div className={styles.details__info}>
               <MainLabel>
-                {product?.proccess_type === "sale" ? t("forSale") : t("ToBorrow")}
+                {product?.proccess_type === "sale"
+                  ? t("forSale")
+                  : t("ToBorrow")}
               </MainLabel>
             </div>
           </section>
@@ -113,6 +123,16 @@ const LiquidationDetails = () => {
       </div>
       {idModal === `book__product__${product?.id}` && (
         <BookModal id={product?.id} type={product?.proccess_type} />
+      )}
+      {idModal === `delete-modal` && (
+        <DeleteModal
+          body={{
+            product_id: product?.id,
+          }}
+          endpoint="deleteProduct"
+          title="هل أنت متأكد أنك تريد حذف هذا المنتج؟"
+          getList={() => navigate('/liquidation')}
+        />
       )}
     </>
   );

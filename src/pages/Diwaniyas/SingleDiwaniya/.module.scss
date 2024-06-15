@@ -8,8 +8,20 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        color: $main__blue__color;
         font-size: 20px;
+        color: $main__blue__color;
+        &.off {
+            color: $gray__light__text__color;
+        }
+        &.decrease,
+        &.increase {
+            color: $main__blue__color;
+        }
+        &.decrease {
+            > svg {
+                transform: rotate(180deg);
+            }
+        }
     }
 }
 .list {
