@@ -8,10 +8,12 @@ import CongratulationsForm from "../CongratulationsForm";
 import { useApi } from "../../../hooks/useApi";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
+import { useNavigate } from "react-router-dom";
 
 const AddCongratulations = () => {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -27,7 +29,6 @@ const AddCongratulations = () => {
     handleSubmit,
     control,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -51,14 +52,15 @@ const AddCongratulations = () => {
 
     try {
       const res = await onSendCongratulations(body);
-      res?.success &&
-        (await uploadFile({
+      if(res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "congratulate",
           category_id: res?.data?.id,
-        }));
-      res?.success && reset();
-      setSubmitting(false);
+        })
+        setSubmitting(false);
+        navigate("/congratulations");
+      }
       } catch (err) {
         console.log(err);
         setSubmitting(false);

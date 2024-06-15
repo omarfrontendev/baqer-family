@@ -36,9 +36,6 @@ const Congratulations = () => {
   return (
     <div className={`${styles.page} container`}>
       <PageHeader title={t("التهاني")} />
-      <Link to={`/congratulations/add`} className={styles.add__btn}>
-        {t("AddNewCongratulation")} <IoMdAdd />
-      </Link>
       {SliderError ? (
         <Error msg={SliderError?.message} />
       ) : (
@@ -47,7 +44,9 @@ const Congratulations = () => {
           images={slider?.data?.map((item) => item?.image) || []}
         />
       )}
-
+      <Link to={`/congratulations/add`} className={styles.add__btn}>
+        {t("AddNewCongratulation")} <IoMdAdd />
+      </Link>
       {/* List */}
       {congratulationsLoading ? (
         <div className={styles.list}>

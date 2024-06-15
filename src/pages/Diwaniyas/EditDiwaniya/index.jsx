@@ -103,7 +103,7 @@ const EditDiwaniya = () => {
 
   return (
     <div className="container">
-      <PageHeader title={t("تعديل ديوان ملا باقر")} />
+      <PageHeader title={`${t("edit")} ${diwaniya?.name}`} />
       <DiwaniyaForm
         onSubmit={handleSubmit((e) => onSubmit(e))}
         control={control}

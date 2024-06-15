@@ -98,7 +98,7 @@ const EditLiquidation = () => {
 
   return (
     <div className="container">
-      <PageHeader title={t("Edit")} />
+      <PageHeader title={`${t("edit")} ${state?.data?.name}`} />
       <LiquidationForm
         onSubmit={handleSubmit((e) => onSubmit(e))}
         control={control}

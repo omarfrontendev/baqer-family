@@ -65,13 +65,15 @@ const EditCongratulations = () => {
 
     try {
       const res = await onUpdateCongratulations(body);
-      res?.success &&
-        (await uploadFile({
+      if(res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "congratulate",
           category_id: res?.data?.id,
-        }));
-      setSubmitting(false);
+        });
+        navigate("/congratulations");
+        setSubmitting(false);
+      }
     } catch (err) {
       setSubmitting(false);
     }
@@ -80,7 +82,7 @@ const EditCongratulations = () => {
 
   return (
     <div className="container">
-      <PageHeader title={t("Edit")} />
+      <PageHeader title={`${t("edit")} ${state?.data?.title}`} />
       <CongratulationsForm
         onSubmit={handleSubmit((e) => onSubmit(e))}
         control={control}
