@@ -37,9 +37,6 @@ const News = () => {
   return (
     <div className={`${styles.page} container`}>
       <PageHeader title={t("news")} />
-      <Link to={`/news/add`} className={styles.add__btn}>
-        {t("AddNewNews")} <IoMdAdd />
-      </Link>
       {SliderError ? (
         <Error msg={SliderError?.message} />
       ) : (
@@ -48,6 +45,9 @@ const News = () => {
           images={slider?.data?.map((item) => item?.image) || []}
         />
       )}
+      <Link to={`/news/add`} className={styles.add__btn}>
+        {t("AddNewNews")} <IoMdAdd />
+      </Link>
       {newsLoading ? (
         <div className={styles.list}>
           {Array(5)
@@ -66,7 +66,11 @@ const News = () => {
       ) : news?.data?.length ? (
         <div className={styles.list}>
           {news?.data?.map((singleNew) => (
-            <Box key={singleNew?.id} diwaniya={singleNew} onGetList={onGetNews} />
+            <Box
+              key={singleNew?.id}
+              diwaniya={singleNew}
+              onGetList={onGetNews}
+            />
           ))}
         </div>
       ) : (

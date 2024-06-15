@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PageHeader } from "../../../layout";
 import LiquidationForm from "../LiquidationForm";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
 
@@ -14,16 +14,14 @@ const EditLiquidation = () => {
   const { slug } = useParams();
   const { state } = useLocation();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
     description: yup.string("").required(t("errors.required")),
     owner: yup.string("").required(t("errors.required")),
-    type: yup
-      .number()
-      .typeError(t("errors.must__number"))
-      .required(t("errors.required")),
+    type: yup.string().required(t("errors.required")),
     location: yup
       .object({
         lat: yup.string().required(t("errors.required")),
@@ -65,7 +63,7 @@ const EditLiquidation = () => {
   });
 
   // updates product
-  const { onRequest: onUpdateProduct } = useApi("/api/addProduct", "post");
+  const { onRequest: onUpdateProduct } = useApi("/api/editProduct", "post");
 
   const onSubmit = async (e) => {
     setSubmitting(true);
@@ -84,13 +82,15 @@ const EditLiquidation = () => {
 
     try {
       const res = await onUpdateProduct(body);
-      res?.success &&
-        (await uploadFile({
-          images: e?.images,
-          category_type: "occasion",
-          category_id: res?.data?.id,
-        }));    } catch (err) {
-      console.log(err);
+      if(res?.success) {
+          await uploadFile({
+            images: e?.images,
+            category_type: "products",
+            category_id: res?.data[0]?.id,
+          });
+          navigate("/liquidation");
+        }
+      } catch (err) {
       setSubmitting(false);
     }
     setSubmitting(false);

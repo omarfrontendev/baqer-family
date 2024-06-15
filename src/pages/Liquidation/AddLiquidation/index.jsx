@@ -7,10 +7,12 @@ import { PageHeader } from "../../../layout";
 import LiquidationForm from "../LiquidationForm";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
+import { useNavigate } from "react-router-dom";
 
 const AddLiquidation = () => {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate()
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -68,12 +70,15 @@ const AddLiquidation = () => {
     
     try {
       const res = await onAddProduct(body);
-      res?.success &&
-        (await uploadFile({
+      if (res?.success) {
+        await uploadFile({
           images: e?.images,
-          category_type: "occasion",
-          category_id: res?.data?.id,
-        }));      res?.success && reset();
+          category_type: "products",
+          category_id: res?.data[0]?.id,
+        });
+        reset();
+        navigate("/liquidation");
+      }
     } catch (err) {
       console.log(err);
       setSubmitting(false);

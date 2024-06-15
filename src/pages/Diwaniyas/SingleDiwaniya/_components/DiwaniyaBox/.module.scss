@@ -17,7 +17,7 @@
         text-align: center;
         font-size: 17px;
         font-weight: 700;
-        padding: 16px;
+        padding: 6px 16px;
     }
     .image__box {
         height: 147px;
@@ -46,32 +46,33 @@
         }
     }
     .btns {
+        position: relative;
         z-index: 2;
-        position: absolute;
-        top: 10px;
-        left: 10px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        a {
+        justify-content: space-between;
+        width: 100%;
+        height: 31px;
+        > button {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 14px;
+            color: #FFF;
+            height: 31px;
         }
         .delete__btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: red;
-            width: 30px;
-            height: 30px;
-            border-radius: 4px;
-            svg {
-                height: 18px;
-                path {
-                    fill: #FFF
-                }
-            }
+            background-color: rgb(209, 62, 62);
+            height: 100%;
+            font-size: 20px;
+        }
+        .edit__btn {
+            background-color: #26C0FF;
+            font-size: 20px;
+        }
+        .cancel__btn {
+            background-color: rgb(104, 17, 17);
         }
     }
 }

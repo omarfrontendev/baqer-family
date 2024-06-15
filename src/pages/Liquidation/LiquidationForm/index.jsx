@@ -75,6 +75,9 @@ const LiquidationForm = ({
         render={({ field: { onChange, onBlur } }) => (
           <div style={{ position: "relative" }}>
             <Select
+              defaultValue={formData?.type ? options.find(
+                (item) => item?.value === formData?.type
+              ) : null}
               styles={{
                 control: (styles) => ({
                   ...styles,
@@ -111,8 +114,8 @@ const LiquidationForm = ({
       >
         {formData?.location?.lat
           ? `lat: ${formData?.location?.lat} | lng: ${formData?.location?.lng}`
-          : "موقع الديوان (لوكيشن)*"}
-        <div className={styles.label}>*موقع الديوان (لوكيشن)</div>
+          : "موقع المنتج (لوكيشن)*"}
+        <div className={styles.label}>*موقع المنتج (لوكيشن)</div>
         {errors?.location?.lat?.message && (
           <ErrorMessage msg={errors?.location?.lat?.message} />
         )}

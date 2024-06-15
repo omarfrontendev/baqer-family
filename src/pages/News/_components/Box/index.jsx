@@ -57,7 +57,7 @@ const Box = ({ diwaniya, onGetList }) => {
             news_id: diwaniya?.id,
           }}
           endpoint="deleteNews"
-          title="هل أنت متأكد أنك تريد حذف هذه التهنئة"
+          title="هل أنت متأكد أنك تريد حذف هذا الخبر"
           getList={onGetList}
         />
       )}

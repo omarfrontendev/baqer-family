@@ -18,13 +18,15 @@ const OccasionDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(location?.state?.data)
+
 
   useEffect(() => {
-    if(!location?.state) {
+    if(!location?.state?.data) {
       navigate("/occasions");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location?.state]);
+  }, [location?.state?.data]);
 
 
   return (
@@ -59,7 +61,9 @@ const OccasionDetails = () => {
           </div>
         </div>
         <MainSlider
-          images={location?.state?.images || []}
+          images={
+            location?.state?.data?.images?.map((item) => item?.image) || []
+          }
           height="calc(100vh - 200px)"
           breakpoints={{
             768: {
@@ -74,7 +78,7 @@ const OccasionDetails = () => {
           <h4 className={styles.title}>{location?.state?.data?.title}</h4>
           <div className={styles.details__info}>
             <MainLabel>
-              {dayjs(location?.state?.date?.date)
+              {dayjs(location?.state?.data?.date)
                 .locale("ar")
                 .format("DD  MMMM  YYYY")}
             </MainLabel>
@@ -82,14 +86,10 @@ const OccasionDetails = () => {
           </div>
         </section>
         <div className={styles.footer__btn}>
-          {/* <button className={styles.book__btn}>
-            حـجـز
-            <TiLocation size={20} />
-          </button> */}
           <a
             target="_blank"
             className={styles.btn__blue}
-            href={`http://maps.google.com/?q=${location?.state?.date?.lat},${location?.state?.date?.long}`}
+            href={`http://maps.google.com/?q=${location?.state?.data?.lat},${location?.state?.data?.long}`}
             rel="noreferrer"
           >
             {t("location")}
@@ -99,7 +99,7 @@ const OccasionDetails = () => {
             href={`tel:${location?.state?.data?.phone}`}
             className={styles.contact__box}
           >
-            {t("call")}
+            {location?.state?.data?.phone}
             <FaPhone size={20} />
           </a>
         </div>
@@ -111,7 +111,7 @@ const OccasionDetails = () => {
           }}
           endpoint="deleteOccasion"
           title="هل أنت متأكد أنك تريد حذف هذه المناسبة؟"
-          getList={() => navigate('/occasions')}
+          getList={() => navigate("/occasions")}
         />
       )}
     </>

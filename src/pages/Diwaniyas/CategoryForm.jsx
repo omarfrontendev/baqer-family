@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useApi } from "../../hooks/useApi";
 import styles from "./.module.scss";
 import { ModalContext } from "../../context/ModalContext";
-import { ColorPicker, useColor } from "react-color-palette";
+import { Hue, Saturation, useColor } from "react-color-palette";
 import "react-color-palette/css";
 
 
@@ -69,7 +69,6 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
     <Popup>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form__content}>
         <div className={styles.content}>
-
           {/* Name */}
           <MainInput
             register={register}
@@ -82,10 +81,20 @@ const CategoryForm = ({ categoryId, onGetList, defaultData }) => {
             required
           />
 
-          <ColorPicker color={color} onChange={setColor} />
+          <div className={styles.custom__layout}>
+            <div className={styles.saturation}>
+              <Saturation height={100} color={color} onChange={setColor} />
+            </div>
+            <Hue color={color} onChange={setColor} />
+          </div>
         </div>
 
-        <MainButton loading={loading} disabled={loading} type="submit">
+        <MainButton
+          style={{ backgroundColor: color?.hex }}
+          loading={loading}
+          disabled={loading}
+          type="submit"
+        >
           {categoryId ? t("edit") : t("add")}
         </MainButton>
       </form>

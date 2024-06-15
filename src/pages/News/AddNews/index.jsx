@@ -7,15 +7,17 @@ import { PageHeader } from "../../../layout";
 import NewsForm from "../NewsForm";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
+import { useNavigate } from "react-router-dom";
 
 const AddNews = () => {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
-    description: yup.string("").required(t("errors.required")),
+    description: yup.string(""),
     images: yup.array().min(1, "at least 1 item").required("image is required"),
   });
 
@@ -24,7 +26,6 @@ const AddNews = () => {
     handleSubmit,
     control,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -45,14 +46,15 @@ const AddNews = () => {
     try {
       const res = await onSendNews(body);
       console.log(res?.data?.id);
-      res?.success &&
-        (await uploadFile({
+      if(res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "news",
           category_id: res?.data?.id,
-        }));
-      res?.success && reset();
-      res?.success && setSubmitting(false);
+        });
+        navigate("/news");
+        setSubmitting(false);
+      }
     } catch (err) {
       setSubmitting(false);
       console.log(err);

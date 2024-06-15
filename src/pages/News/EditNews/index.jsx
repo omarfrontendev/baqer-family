@@ -23,7 +23,7 @@ const EditNews = () => {
   // ADD SCHEMA
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
-    description: yup.string("").required(t("errors.required")),
+    description: yup.string(""),
     images: yup.array().min(1, "at least 1 item").required("image is required"),
   });
 
@@ -37,7 +37,7 @@ const EditNews = () => {
     defaultValues: {
       name: state?.data?.title,
       description: state?.data?.content,
-      images: state?.data?.image,
+      images: [state?.data?.image],
     },
     resolver: yupResolver(schema),
     mode: "all",
@@ -56,13 +56,15 @@ const EditNews = () => {
 
     try {
       const res = await onUpdateNews(body);
-      res?.success &&
-        (await uploadFile({
+      if(res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "news",
           category_id: res?.data?.id,
-        }));
-      res?.success && setSubmitting(false);
+        });
+        navigate('/news')
+        setSubmitting(false)
+      }
     } catch (err) {
       setSubmitting(false);
       console.log(err);

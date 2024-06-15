@@ -5,17 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { DeleteIcon, EditIcon } from '../../../../../icons';
 import { DeleteModal } from '../../../../../components';
 import { ModalContext } from '../../../../../context/ModalContext';
+import { useTranslation } from 'react-i18next';
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import RejectedReason from '../RejectedReason';
 
 const DiwaniyaBox = ({ diwaniya, onGetList }) => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
-      <div
-        type="button"
-        className={styles.box}
-      >
+      <div type="button" className={styles.box}>
         <button
           className={styles.overlay}
           onClick={() => {
@@ -32,21 +33,27 @@ const DiwaniyaBox = ({ diwaniya, onGetList }) => {
         <h4 className={styles.title}>{diwaniya?.name}</h4>
         <div className={styles.btns}>
           <button
-            style={{ display: "flex" }}
+            className={styles.cancel__btn}
+            onClick={() => setIdModal(`cancel-diwaniya-${diwaniya?.id}`)}
+          >
+            {t("cancel")}
+          </button>
+          <button
             onClick={() => {
               navigate(`/diwaniyas/edit/${diwaniya?.category_id}`, {
                 state: { data: diwaniya },
               });
             }}
+            className={styles.edit__btn}
           >
-            <EditIcon />
+            <MdEdit />
           </button>
           <button
             onClick={() => setIdModal(`delete-diwaniya-${diwaniya?.id}`)}
             type="button"
             className={styles.delete__btn}
           >
-            <DeleteIcon />
+            <MdDeleteForever />
           </button>
         </div>
       </div>
@@ -56,7 +63,13 @@ const DiwaniyaBox = ({ diwaniya, onGetList }) => {
             diwan_id: diwaniya?.id,
           }}
           endpoint="deleteDiwan"
-          title="هل أنت متأكد أنك تريد حذف هذه الديوان"
+          title="هل أنت متأكد أنك تريد حذف هذا الديوان"
+          getList={onGetList}
+        />
+      )}
+      {idModal === `cancel-diwaniya-${diwaniya?.id}` && (
+        <RejectedReason
+          id={diwaniya?.id}
           getList={onGetList}
         />
       )}

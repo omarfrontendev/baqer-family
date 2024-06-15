@@ -1,18 +1,16 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PageHeader } from '../../layout';
 import { useTranslation } from 'react-i18next';
-import { DeleteModal, Error, MainSlider } from '../../components';
+import { Error, MainSlider } from '../../components';
 import styles from './.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 import Skeleton from 'react-loading-skeleton';
 import { IoMdAdd } from 'react-icons/io';
 import { ModalContext } from '../../context/ModalContext';
 import CategoryForm from './CategoryForm';
-import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import CategoryBox from './CategoryBox';
 
 const Diwaniyas = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
 
@@ -67,63 +65,11 @@ const Diwaniyas = () => {
             <Error msg={categoryError?.message} />
           ) : (
             categories?.data?.map((diwaniya, i) => (
-              <Fragment key={i}>
-                <div
-                  className={styles.box}
-                  style={{
-                    backgroundColor: diwaniya?.color,
-                  }}
-                >
-                  <button
-                    onClick={() =>
-                      navigate(`${diwaniya?.id}`, {
-                        state: { data: diwaniya?.name },
-                      })
-                    }
-                    className={styles.link}
-                    key={i}
-                  ></button>
-                  {diwaniya?.name}
-                  <div className={styles.category__btns}>
-                    <button
-                      style={{ color: diwaniya?.color || "#000" }}
-                      className={styles.edit}
-                      onClick={() =>
-                        setIdModal(`edit-${diwaniya?.id}-category`)
-                      }
-                    >
-                      <MdEdit />
-                    </button>
-                    <button
-                      style={{ color: diwaniya?.color || "#000" }}
-                      className={styles.delete}
-                      onClick={() =>
-                        setIdModal(`delete-category-${diwaniya?.id}`)
-                      }
-                    >
-                      <MdDeleteForever />
-                    </button>
-                  </div>
-                </div>
-                {idModal === `edit-${diwaniya?.id}-category` && (
-                  <CategoryForm
-                    categoryId={diwaniya?.id}
-                    onGetList={onGetCategories}
-                    defaultData={diwaniya}
-                  />
-                )}
-                {idModal === `delete-category-${diwaniya?.id}` && (
-                  <DeleteModal
-                    body={{
-                      category_id: diwaniya?.id,
-                    }}
-                    id={diwaniya?.id}
-                    endpoint="deleteDiwanCategory"
-                    title="هل أنت متأكد أنك تريد حذف هذه الفئة"
-                    getList={onGetCategories}
-                  />
-                )}
-              </Fragment>
+              <CategoryBox
+                key={i}
+                diwaniya={diwaniya}
+                onGetCategories={onGetCategories}
+              />
             ))
           )}
         </div>

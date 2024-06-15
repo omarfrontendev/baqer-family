@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PageHeader } from "../../../layout";
 import OccasionForm from "../OccasionForm";
 import { useApi } from "../../../hooks/useApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
 
@@ -14,6 +14,7 @@ const AddOccasion = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -38,7 +39,6 @@ const AddOccasion = () => {
     handleSubmit,
     control,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -63,13 +63,14 @@ const AddOccasion = () => {
 
     try {
       const res = await onSendOccasion(body);
-      res?.success &&
-        (await uploadFile({
+      if(res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "occasion",
           category_id: res?.data?.id,
-        }));
-      reset();
+        });
+        navigate("/occasions");
+      }
     } catch (err) {
       console.log(err);
       setSubmitting(false);

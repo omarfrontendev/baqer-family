@@ -83,12 +83,15 @@ const EditOccasion = () => {
 
     try {
       const res = await onSendOccasion(body);
-      res?.success &&
-        (await uploadFile({
+      if (res?.success) {
+        await uploadFile({
           images: e?.images,
           category_type: "occasion",
           category_id: res?.data?.id,
-        }));    } catch (err) {
+        });
+        navigate("/occasions");
+      }
+    } catch (err) {
       console.log(err);
       setSubmitting(false);
     }

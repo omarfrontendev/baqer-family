@@ -13,6 +13,8 @@ const SingleCongratulation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(location?.state?.data)
+
   useEffect(() => {
     if (!location?.state?.data) {
       navigate("/news");
@@ -47,7 +49,8 @@ const SingleCongratulation = () => {
           </div>
         </div>
         <MainSlider
-          images={location?.state?.images || []}
+          // images={location?.state?.data?.images?.map(item => item?.image) || []}
+          images={[location?.state?.data?.image] || []}
           height="calc(100vh - 200px)"
           breakpoints={{
             768: {
@@ -76,8 +79,8 @@ const SingleCongratulation = () => {
             news_id: location?.state?.data?.id,
           }}
           endpoint="deleteNews"
-          title="هل أنت متأكد أنك تريد حذف هذه التهنئة"
-          getList={() => navigate('/news')}
+          title="هل أنت متأكد أنك تريد حذف هذا الخبر"
+          getList={() => navigate("/news")}
         />
       )}
     </>
