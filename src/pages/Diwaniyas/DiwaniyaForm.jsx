@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
-import { DatePicker, Error, ErrorMessage, MainButton, MainGoogleMap, MainInput, UploadImages } from '../../components';
+import { DatePicker, ErrorMessage, MainButton, MainGoogleMap, MainInput, UploadImages } from '../../components';
 import { useTranslation } from 'react-i18next';
 import Select from "react-select";
 import { FaTrashAlt } from "react-icons/fa";

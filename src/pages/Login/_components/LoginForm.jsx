@@ -16,6 +16,7 @@ import { useApi } from '../../../hooks/useApi';
 
 // styles 
 import styles from '../.module.scss'
+import { requestPermission } from '../../../firebase';
 
 const LoginForm = () => {
 
@@ -47,8 +48,20 @@ const LoginForm = () => {
     mode: "onTouched",
   });
 
+  const getFCMToken = async () => {
+    const FcmToken = await requestPermission();
+    return FcmToken;
+  };
+
   const onSubmit = async (e) => {
-      const res = await onLogin(e, t("loginSuccessfully"));
+      const fcmToken = await getFCMToken();
+      const res = await onLogin(
+        {
+          ...e,
+          device_id: fcmToken,
+        },
+        t("loginSuccessfully")
+      );
       if(res?.success === true) {
           Cookies.set("token", res?.data?.token)
           Cookies.set("user", JSON.stringify(res?.data?.user));

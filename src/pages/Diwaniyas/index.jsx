@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { PageHeader } from '../../layout';
 import { useTranslation } from 'react-i18next';
-import { EmptyList, Error, MainSlider } from '../../components';
+import { Error, MainSlider } from '../../components';
 import styles from './.module.scss';
 import { useApi } from '../../hooks/useApi';
 import Skeleton from 'react-loading-skeleton';
@@ -82,10 +82,10 @@ const Diwaniyas = () => {
               />
             ))
           )}
-          {!categories?.data?.length ? <EmptyList
+          {/* {!categories?.data?.length ? <EmptyList
             style={{ marginTop: "50px" }}
             text="لا يوجد أي منتج، الآن يمكنك إضافة منتجك"
-          /> : ""}
+          /> : ""} */}
         </div>
       </div>
       {idModal === "add-new-category" && (
