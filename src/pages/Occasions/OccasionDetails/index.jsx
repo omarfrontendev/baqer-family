@@ -11,15 +11,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import 'dayjs/locale/ar'; // Import Arabic locale
 import { ModalContext } from "../../../context/ModalContext";
+import Cookies from 'js-cookie';
+import parse from "html-react-parser";
 
 const OccasionDetails = () => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-
-  console.log(location?.state?.data)
-
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("occasion");
 
   useEffect(() => {
     if(!location?.state?.data) {
@@ -34,31 +35,33 @@ const OccasionDetails = () => {
       <div className={`container`}>
         <div className={styles.page__header}>
           <PageHeader title={location?.state?.data?.title} />
-          <div className={styles.header__btns}>
-            <button
-              className={styles.header__btn}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIdModal(`delete-occasion-${location?.state?.data?.id}`);
-              }}
-            >
-              <DeleteIcon />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(
-                  `/occasions/edit/${location?.state?.data?.category_id}`,
-                  {
-                    state: { data: location?.state?.data },
-                  }
-                );
-              }}
-              className={styles.header__btn}
-            >
-              <MdModeEdit />
-            </button>
-          </div>
+          {permission && (
+            <div className={styles.header__btns}>
+              <button
+                className={styles.header__btn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIdModal(`delete-occasion-${location?.state?.data?.id}`);
+                }}
+              >
+                <DeleteIcon />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(
+                    `/occasions/edit/${location?.state?.data?.category_id}`,
+                    {
+                      state: { data: location?.state?.data },
+                    }
+                  );
+                }}
+                className={styles.header__btn}
+              >
+                <MdModeEdit />
+              </button>
+            </div>
+          )}
         </div>
         <MainSlider
           images={
@@ -76,13 +79,18 @@ const OccasionDetails = () => {
         />
         <section className={styles.details__section}>
           <h4 className={styles.title}>{location?.state?.data?.title}</h4>
-          <div className={styles.details__info}>
+          <div
+            className={styles.details__info}
+            style={{ flexDirection: "column", alignItems: "start" }}
+          >
             <MainLabel>
               {dayjs(location?.state?.data?.date)
                 .locale("ar")
                 .format("DD  MMMM  YYYY")}
             </MainLabel>
-            <p>{location?.state?.data?.content}</p>
+            <div className="ql-editor" style={{ width: "100%" }}>
+              {parse(location?.state?.data?.content)}
+            </div>
           </div>
         </section>
         <div className={styles.footer__btn}>

@@ -8,9 +8,12 @@ import Box from '../_components/Box';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
+import Cookies from 'js-cookie';
 
 const Congratulations = () => {
   const { t } = useTranslation();
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("congratulte");
 
   // get Congratulations slider:=
   const {
@@ -35,13 +38,21 @@ const Congratulations = () => {
 
   return (
     <div className={`${styles.page} container`}>
-      <PageHeader title={t("التهاني")} />
+      <PageHeader title={t("التهاني")} backHref="/" />
       {SliderError ? (
         <Error msg={SliderError?.message} />
       ) : (
         <MainSlider
           loading={sliderLoading}
-          images={slider?.data?.map((item) => item?.image) || []}
+          images={slider?.data?.filter((item) => {
+            if (item?.image) {
+              return {
+                image: item?.image,
+                ...item,
+              };
+            }
+          })}
+          type="congratulations"
         />
       )}
       <Link to={`/congratulations/add`} className={styles.add__btn}>
@@ -68,6 +79,7 @@ const Congratulations = () => {
               key={diwaniya?.id}
               diwaniya={diwaniya}
               onGetList={onGetCongratulations}
+              permission={permission}
             />
           ))}
         </div>

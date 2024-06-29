@@ -8,7 +8,7 @@ import { DeleteIcon, EditIcon } from "../../../../icons";
 import { DeleteModal } from "../../../../components";
 import { useTranslation } from "react-i18next";
 
-const ProductBox = ({ product, onGetProducts }) => {
+const ProductBox = ({ product, onGetProducts, permission }) => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ const ProductBox = ({ product, onGetProducts }) => {
         >
           {product?.proccess_type === "sale" ? t("forSale") : t("ToBorrow")}
         </button>
-        <div className={styles.btns}>
+        {permission && <div className={styles.btns}>
           <button
             onClick={() => {
               navigate(`/liquidation/${product?.id}/edit`, {
@@ -51,7 +51,7 @@ const ProductBox = ({ product, onGetProducts }) => {
           >
             <DeleteIcon />
           </button>
-        </div>
+        </div>}
       </div>
       {idModal === `book__product__${product?.id}` && (
         <BookModal id={product?.id} type={product?.proccess_type} />

@@ -6,7 +6,7 @@ import { DeleteIcon, EditIcon } from "../../../../icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { DeleteModal } from "../../../../components";
 
-const Box = ({ diwaniya, onGetList }) => {
+const Box = ({ diwaniya, onGetList, permission }) => {
   const navigate = useNavigate();
   const { idModal, setIdModal } = useContext(ModalContext);
 
@@ -33,7 +33,7 @@ const Box = ({ diwaniya, onGetList }) => {
         >
           {diwaniya?.title}
         </h4>
-        <div className={styles.btns}>
+        {permission && <div className={styles.btns}>
           <button
             style={{ display: "flex" }}
             onClick={() => {
@@ -49,7 +49,7 @@ const Box = ({ diwaniya, onGetList }) => {
           >
             <DeleteIcon />
           </button>
-        </div>
+        </div>}
       </div>
       {idModal === `delete-congratulation-${diwaniya?.id}` && (
         <DeleteModal

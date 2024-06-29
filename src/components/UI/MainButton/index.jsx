@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const MainButton = ({ children, to, type, disabled, loading, style, onClick }) => {
   if (type === "link")
     return (
-      <Link to={to} className={styles.main__btn}>
+      <Link to={to} className={styles.main__btn} style={{ ...style }}>
         {children}
       </Link>
     );

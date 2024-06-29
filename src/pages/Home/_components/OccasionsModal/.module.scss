@@ -1,0 +1,24 @@
+.occasion__image {
+    height: 200px;
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+.occasion__title {
+    text-align: start;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.occasion__text {
+    // font-size: 14px;
+    // color: #404040;
+    // text-align: start;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds ellipsis (...) for overflowed text */
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* Limit number of lines */
+    -webkit-box-orient: vertical;
+}

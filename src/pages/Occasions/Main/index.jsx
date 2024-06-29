@@ -14,12 +14,15 @@ import CategoryForm from "./_componetns/CategoryForm";
 import { MdEdit, MdDeleteForever } from "react-icons/md";
 import dayjs from "dayjs";
 import 'dayjs/locale/ar'; // Import Arabic locale
+import Cookies from 'js-cookie';
 
 const Occasions = () => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const { t } = useTranslation();
   const [currentCat, setCurrentCat] = useState();
   const navigate = useNavigate();
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("occasion");
 
   // get Occasion slider:=
   const {
@@ -68,13 +71,22 @@ const Occasions = () => {
   return (
     <>
       <div className={`${styles.page} container`}>
-        <PageHeader title={t("Occasions")} />
+        <PageHeader title={t("Occasions")} backHref="/" />
         {SliderError ? (
           <Error msg={SliderError?.message} />
         ) : (
           <MainSlider
+          // images={slider?.data?.map((item) => item?.image) || []}
             loading={sliderLoading}
-            images={slider?.data?.map((item) => item?.image) || []}
+            images={slider?.data?.filter((item) => {
+              if (item?.image) {
+                return {
+                  image: item?.image,
+                  ...item,
+                };
+              }
+            })}
+            type="occasions"
           />
         )}
         {/*    categories  */}
@@ -197,36 +209,44 @@ const Occasions = () => {
                 >
                   {occasion?.title}
                 </h4>
-                <div
-                  onClick={(e) => {
-                    navigate(`${occasion?.id}`, { state: { data: occasion } });
-                  }}
-                  className={styles.date}
-                >
-                  {dayjs(occasion?.date).locale("ar").format("DD  MMMM  YYYY")}
-                </div>
-                <div className={styles.btns}>
-                  <button
-                    id="edit"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`edit/${currentCat}`, {
-                        state: { data: occasion },
-                      });
-                    }}
-                  >
-                    <EditIcon />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIdModal(`delete-occasion-${occasion?.id}`);
-                    }}
-                    className={styles.delete__btn}
-                  >
-                    <DeleteIcon />
-                  </button>
-                </div>
+                {permission && (
+                  <>
+                    <div
+                      onClick={(e) => {
+                        navigate(`${occasion?.id}`, {
+                          state: { data: occasion },
+                        });
+                      }}
+                      className={styles.date}
+                    >
+                      {dayjs(occasion?.date)
+                        .locale("ar")
+                        .format("DD  MMMM  YYYY")}
+                    </div>
+                    <div className={styles.btns}>
+                      <button
+                        id="edit"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`edit/${currentCat}`, {
+                            state: { data: occasion },
+                          });
+                        }}
+                      >
+                        <EditIcon />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIdModal(`delete-occasion-${occasion?.id}`);
+                        }}
+                        className={styles.delete__btn}
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>

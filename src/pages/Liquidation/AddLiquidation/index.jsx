@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const AddLiquidation = () => {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -51,6 +51,7 @@ const AddLiquidation = () => {
     mode: "all",
   });
 
+  
   // Add product
   const { onRequest: onAddProduct } = useApi("/api/addProduct", "post");
 

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import RejectedReason from '../RejectedReason';
 
-const DiwaniyaBox = ({ diwaniya, onGetList }) => {
+const DiwaniyaBox = ({ diwaniya, onGetList, permission }) => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const DiwaniyaBox = ({ diwaniya, onGetList }) => {
           />
         </div>
         <h4 className={styles.title}>{diwaniya?.name}</h4>
-        <div className={styles.btns}>
+        {permission && <div className={styles.btns}>
           <button
             className={styles.cancel__btn}
             onClick={() => setIdModal(`cancel-diwaniya-${diwaniya?.id}`)}
@@ -55,7 +55,7 @@ const DiwaniyaBox = ({ diwaniya, onGetList }) => {
           >
             <MdDeleteForever />
           </button>
-        </div>
+        </div>}
       </div>
       {idModal === `delete-diwaniya-${diwaniya?.id}` && (
         <DeleteModal
@@ -68,10 +68,7 @@ const DiwaniyaBox = ({ diwaniya, onGetList }) => {
         />
       )}
       {idModal === `cancel-diwaniya-${diwaniya?.id}` && (
-        <RejectedReason
-          id={diwaniya?.id}
-          getList={onGetList}
-        />
+        <RejectedReason id={diwaniya?.id} getList={onGetList} />
       )}
     </>
   );

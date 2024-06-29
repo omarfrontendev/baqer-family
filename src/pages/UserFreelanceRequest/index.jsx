@@ -35,7 +35,10 @@ const UserFreelanceRequest = () => {
       .typeError(t("errors.must__number"))
       .integer(t("errors.mustBeInteger"))
       .positive(t("errors.mustPositive"))
-      .required(t("errors.required")),
+      .nullable()
+      .notRequired()
+      .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+      // .required(t("errors.required")),
     content: yup.string("").required(t("errors.required")),
   });
 
@@ -99,7 +102,7 @@ const UserFreelanceRequest = () => {
           name="user_new_phone"
           value={formData?.user_new_phone}
           error={errors?.user_new_phone?.message}
-          required
+          // required
         />
 
         {/* overview */}

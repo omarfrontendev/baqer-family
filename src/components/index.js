@@ -13,7 +13,9 @@ export { default as Popup } from "./UI/Popup";
 export { default as DeleteModal } from "./UI/DeleteModal";
 export { default as EmptyList } from "./UI/EmptyList";
 export { default as UserNameAndImage } from "./UI/UserNameAndImage";
+export { default as Notification } from "./UI/Notification";
 // Forms
 export { default as MainInput } from "./Forms/MainInput";
 export { default as UploadImages } from "./Forms/UploadImages";
 export { default as DatePicker } from "./Forms/DatePicker";
+export { default as MyEditor } from "./Forms/MyEditor";

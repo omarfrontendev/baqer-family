@@ -6,6 +6,7 @@ import {
   MainButton,
   MainGoogleMap,
   MainInput,
+  MyEditor,
   UploadImages,
 } from "../../../components";
 import { useTranslation } from "react-i18next";
@@ -38,14 +39,11 @@ const OccasionForm = ({
       />
 
       {/* overview */}
-      <MainInput
-        register={register}
-        placeholder={t("inputs.description")}
-        type="textarea"
+      <MyEditor
+        control={control}
         name="description"
-        value={formData?.description}
         error={errors?.description?.message}
-        required
+        value={formData?.description || ""}
       />
 
       {/* Google Map */}

@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import BookModal from "../_compontent/BookModal";
 import { ModalContext } from "../../../context/ModalContext";
-
+import Cookies from 'js-cookie';
 
 const LiquidationDetails = () => {
   const { idModal, setIdModal } = useContext(ModalContext);
@@ -19,6 +19,10 @@ const LiquidationDetails = () => {
   const { state } = useLocation();
   const product = state?.data;
   const navigate = useNavigate();
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("product");
+
+  console.log(product?.images);
 
   useEffect(() => {
     if(!product) {
@@ -33,7 +37,7 @@ const LiquidationDetails = () => {
       <div className={`container`}>
         <div className={styles.page__header}>
           <PageHeader title={product?.name} />
-          <div className={styles.header__btns}>
+          {permission && <div className={styles.header__btns}>
             <button
               className={styles.header__btn}
               onClick={() => setIdModal(`delete-modal`)}
@@ -50,7 +54,7 @@ const LiquidationDetails = () => {
             >
               <MdModeEdit />
             </button>
-          </div>
+          </div>}
         </div>
         <MainSlider
           images={product?.images}

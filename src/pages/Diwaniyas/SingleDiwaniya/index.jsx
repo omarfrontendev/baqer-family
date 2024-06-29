@@ -9,6 +9,7 @@ import { useApi } from "../../../hooks/useApi";
 import Skeleton from "react-loading-skeleton";
 import { EmptyList, Error } from "../../../components";
 import { FaLongArrowAltDown } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 const SingleDiwaniya = () => {
   const { t } = useTranslation();
@@ -16,8 +17,8 @@ const SingleDiwaniya = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [sorting, setSorting] = useState(null);
-
-  console.log(sorting);
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("diwan");
 
   useEffect(() => {
     !state?.data && navigate("/diwaniyas");
@@ -53,7 +54,7 @@ const SingleDiwaniya = () => {
   return (
     <>
       <div className={`container`}>
-        <PageHeader title={state?.data || "Unknown"} />
+        <PageHeader title={state?.data || "Unknown"} backHref={"/diwaniyas"} />
         <div className={styles.page__header}>
           <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
             {t("AddNewDiwaniya")} <IoMdAdd />
@@ -96,6 +97,7 @@ const SingleDiwaniya = () => {
                 key={diwaniya?.id}
                 diwaniya={diwaniya}
                 onGetList={onGetDiwaniyas}
+                permission={permission}
               />
             ))}
           </div>

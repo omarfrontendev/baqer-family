@@ -6,8 +6,24 @@ import "swiper/css";
 import "swiper/css/pagination";
 import styles from "./.module.scss";
 import Skeleton from "react-loading-skeleton";
+import { useNavigate } from "react-router-dom";
 
-const MainSlider = ({ images, height, breakpoints, loading }) => {
+const MainSlider = ({ images, height, breakpoints, loading, type }) => {
+
+  const navigate = useNavigate();
+
+  const NavigateToPage = (img) => {
+    if (!type) return;
+      if (type === "diwaniyas") {
+        navigate(`/diwaniyas/${img?.category_id}/${img?.id}`, {
+          state: { data: img },
+        });
+      } else {
+        navigate(`/${type}/${img?.id}`, { state: { data: img } });
+        return;
+      }
+  }
+
   return (
     <Swiper
       slidesPerView={1}
@@ -45,12 +61,13 @@ const MainSlider = ({ images, height, breakpoints, loading }) => {
         : images.map((img, i) => (
             <SwiperSlide key={i}>
               <div
+                onClick={() => NavigateToPage(img)}
                 className={`${styles.slider__content} slider__content`}
-                style={{ height }}
+                style={{ height, cursor: "pointer" }}
               >
                 <img
                   className={styles.slider__img}
-                  src={img || DefaultCover}
+                  src={img?.image || img || DefaultCover}
                   alt="slider_image"
                 />
               </div>

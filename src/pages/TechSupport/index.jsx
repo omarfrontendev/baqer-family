@@ -40,7 +40,7 @@ const TechSupport = () => {
 
   return (
     <div className={`container`}>
-      <PageHeader title={t("TechSupportTitle")} />
+      <PageHeader title={t("TechSupportTitle")} backHref="/" />
       <p className={styles.text}>يرجى إضافة عنوان ووصف للرسالة</p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form__content}>
         {/* Name */}

@@ -40,7 +40,7 @@
     .details__info {
         margin-bottom: 18px;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 20px;
         flex-wrap: wrap;
         p { 

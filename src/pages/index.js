@@ -45,3 +45,4 @@ export { default as EditActivities } from "./Activities/EditActivities";
 
 
 export { default as TechSupport } from "./TechSupport";
+export { default as Notifications } from "./NotificationsPage";

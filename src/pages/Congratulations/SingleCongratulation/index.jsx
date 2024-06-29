@@ -7,12 +7,18 @@ import { MdModeEdit } from 'react-icons/md';
 import { DeleteModal, MainLabel, MainSlider } from '../../../components';
 import dayjs from 'dayjs';
 import { ModalContext } from '../../../context/ModalContext';
+import Cookies from "js-cookie";
+import parse from "html-react-parser";
 
 const SingleCongratulation = () => {
 
   const { idModal, setIdModal } = useContext(ModalContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const { userPermission } = JSON.parse(Cookies.get("user"));
+    const permission = userPermission.includes("congratulte");
+
+    console.log(location?.state?.images);
 
     useEffect(() => {
         if(!location?.state?.data) {
@@ -27,31 +33,33 @@ const SingleCongratulation = () => {
         <div className={`container`}>
           <div className={styles.page__header}>
             <PageHeader title={location?.state?.data?.title} />
-            <div className={styles.header__btns}>
-              <button
-                className={styles.header__btn}
-                onClick={() =>
-                  setIdModal(
-                    `delete-congratulation-${location?.state?.data?.id}`
-                  )
-                }
-              >
-                <DeleteIcon />
-              </button>
-              <button
-                onClick={() => {
-                  navigate(`/congratulations/edit`, {
-                    state: { data: location?.state?.data },
-                  });
-                }}
-                className={styles.header__btn}
-              >
-                <MdModeEdit />
-              </button>
-            </div>
+            {permission && (
+              <div className={styles.header__btns}>
+                <button
+                  className={styles.header__btn}
+                  onClick={() =>
+                    setIdModal(
+                      `delete-congratulation-${location?.state?.data?.id}`
+                    )
+                  }
+                >
+                  <DeleteIcon />
+                </button>
+                <button
+                  onClick={() => {
+                    navigate(`/congratulations/edit`, {
+                      state: { data: location?.state?.data },
+                    });
+                  }}
+                  className={styles.header__btn}
+                >
+                  <MdModeEdit />
+                </button>
+              </div>
+            )}
           </div>
           <MainSlider
-            images={location?.state?.images || []}
+            images={[location?.state?.data?.image] || []}
             height="calc(100vh - 200px)"
             breakpoints={{
               768: {
@@ -70,7 +78,9 @@ const SingleCongratulation = () => {
                   .locale("ar")
                   .format("DD  MMMM  YYYY")}
               </MainLabel>
-              <p>{location?.state?.data?.content}</p>
+              <div className="ql-editor" style={{ width: "100%" }}>
+                {parse(location?.state?.data?.content)}
+              </div>
             </div>
           </section>
         </div>

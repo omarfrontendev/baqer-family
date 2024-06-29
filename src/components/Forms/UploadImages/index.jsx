@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from './.module.scss';
 import { FaCamera } from 'react-icons/fa';
-import { DeleteIcon } from "../../../icons";
 import ErrorMessage from '../../UI/ErrorMessage';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useFieldArray } from 'react-hook-form';
+import Image from './Image';
 
 
 const UploadImages = ({ images, error, control, name }) => {
   const { t } = useTranslation();
-
   // HANDEL IMAGES CHANGERS
   const { append, remove } = useFieldArray({
     control,
     name,
   });
+
   const imagesHandler = (image, type) => {
     if (type === "ADD") {
       append(image);
@@ -43,25 +43,12 @@ const UploadImages = ({ images, error, control, name }) => {
         <FaCamera />
       </label>
       {images?.map((img, i) => (
-        <div className={styles.image__box} key={i}>
-          <button
-            type="button"
-            className={styles.delete__img__btn}
-            onClick={() => imagesHandler(i, "DELETE")}
-          >
-            <DeleteIcon />
-          </button>
-          <img
-            key={i}
-            className={styles.img}
-            src={
-              typeof img !== "string" && !img?.image
-                ? window.URL.createObjectURL(img)
-                : img?.image || img
-            }
-            alt="diwaniya__image"
-          />
-        </div>
+        <Image
+          key={i}
+          imagesHandler={imagesHandler} 
+          i={i} 
+          img={img}
+        />
       ))}
       {error && <ErrorMessage msg={"يجب إضافة صورة واحدة على الأقل"} />}
     </div>

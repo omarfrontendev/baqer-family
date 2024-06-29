@@ -1,24 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { PageHeader } from "../../layout";
 import { useTranslation } from "react-i18next";
-import { DeleteModal, EmptyList, Error, MainSlider } from "../../components";
+import { EmptyList, Error, MainSlider } from "../../components";
 import styles from "./.module.scss";
-import DefaultCover from '../../assets/DefaultCover.png';
-import { Link, useNavigate } from "react-router-dom";
-import { DeleteIcon, EditIcon } from "../../icons";
+import { Link } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
 import { useApi } from "../../hooks/useApi";
 import Skeleton from "react-loading-skeleton";
-import { ModalContext } from "../../context/ModalContext";
-import BookModal from "./_compontent/BookModal";
 import OrderBox from "./_compontent/OrderBox";
 import ProductBox from "./_compontent/ProductBox";
-
+import Cookies from 'js-cookie';
 
 const Liquidation = () => {
-  const { idModal, setIdModal } = useContext(ModalContext);
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("product");
 
   // get Liquidation slider:=
   const {
@@ -59,7 +55,15 @@ const Liquidation = () => {
         ) : (
           <MainSlider
             loading={sliderLoading}
-            images={slider?.data?.map((item) => item?.image) || []}
+            images={slider?.data?.filter((item) => {
+              if (item?.image) {
+                return {
+                  image: item?.image,
+                  ...item,
+                };
+              }
+            })}
+            type="liquidation"
           />
         )}
         {orders?.data?.length ? (
@@ -99,11 +103,12 @@ const Liquidation = () => {
                 key={product?.id}
                 onGetProducts={onGetProducts}
                 product={product}
+                permission={permission}
               />
             ))}
           </div>
         ) : (
-          <EmptyList text="لا يوجد أي منتج، الآن يمكنك إضافة منتجك" />
+          <EmptyList style={{marginTop: "50px"}} text="لا يوجد أي منتج، الآن يمكنك إضافة منتجك" />
         )}
       </div>
     </>

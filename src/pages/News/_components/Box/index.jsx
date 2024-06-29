@@ -6,7 +6,7 @@ import { DeleteIcon, EditIcon } from "../../../../icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { DeleteModal } from "../../../../components";
 
-const Box = ({ diwaniya, onGetList }) => {
+const Box = ({ diwaniya, onGetList, permission }) => {
   const navigate = useNavigate();
   const { idModal, setIdModal } = useContext(ModalContext);
 
@@ -27,29 +27,32 @@ const Box = ({ diwaniya, onGetList }) => {
         </div>
         <h4
           className={styles.title}
-          onClick={(e) => {
+          onClick={() => {
             navigate(`${diwaniya?.id}`, { state: { data: diwaniya } });
           }}
         >
           {diwaniya?.title}
         </h4>
-        <div className={styles.btns}>
-          <button
-            style={{ display: "flex" }}
-            onClick={() => {
-              navigate(`edit`, { state: { data: diwaniya } });
-            }}
-          >
-            <EditIcon />
-          </button>
-          <button
-            type="button"
-            className={styles.delete__btn}
-            onClick={() => setIdModal(`delete-news-${diwaniya?.id}`)}
-          >
-            <DeleteIcon />
-          </button>
-        </div>
+        {permission && 
+        <>
+          <div className={styles.btns}>
+            <button
+              style={{ display: "flex" }}
+              onClick={() => {
+                navigate(`edit`, { state: { data: diwaniya } });
+              }}
+            >
+              <EditIcon />
+            </button>
+            <button
+              type="button"
+              className={styles.delete__btn}
+              onClick={() => setIdModal(`delete-news-${diwaniya?.id}`)}
+            >
+              <DeleteIcon />
+            </button>
+          </div>
+        </>}
       </div>
       {idModal === `delete-news-${diwaniya?.id}` && (
         <DeleteModal

@@ -52,9 +52,6 @@ const LoginForm = () => {
       if(res?.success === true) {
           Cookies.set("token", res?.data?.token)
           Cookies.set("user", JSON.stringify(res?.data?.user));
-          if(!Cookies.get("firstTime")) {
-            Cookies.set("firstTime", "true");
-          }
         }
   };
 

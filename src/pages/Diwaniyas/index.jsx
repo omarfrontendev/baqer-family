@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { PageHeader } from '../../layout';
 import { useTranslation } from 'react-i18next';
-import { Error, MainSlider } from '../../components';
+import { EmptyList, Error, MainSlider } from '../../components';
 import styles from './.module.scss';
 import { useApi } from '../../hooks/useApi';
 import Skeleton from 'react-loading-skeleton';
@@ -13,6 +13,7 @@ import CategoryBox from './CategoryBox';
 const Diwaniyas = () => {
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
+
 
   // get diwaniya slider:=
   const { data: slider, loading: sliderLoading, onRequest: onGetSlider, error: SliderError } = useApi("/api/viewDiwanSlider", "get");
@@ -31,16 +32,25 @@ const Diwaniyas = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   return (
     <>
       <div className={`${styles.page} container`}>
-        <PageHeader title={t("Diwaniyas")} />
+        <PageHeader title={t("Diwaniyas")} backHref="/" />
         {SliderError ? (
           <Error msg={SliderError?.message} />
         ) : (
           <MainSlider
             loading={sliderLoading}
-            images={slider?.data?.map((item) => item?.image)}
+            images={slider?.data?.filter((item) => {
+              if (item?.image) {
+                return {
+                  image: item?.image,
+                  ...item,
+                };
+              }
+            })}
+            type="diwaniyas"
           />
         )}
         <button
@@ -72,6 +82,10 @@ const Diwaniyas = () => {
               />
             ))
           )}
+          {!categories?.data?.length ? <EmptyList
+            style={{ marginTop: "50px" }}
+            text="لا يوجد أي منتج، الآن يمكنك إضافة منتجك"
+          /> : ""}
         </div>
       </div>
       {idModal === "add-new-category" && (

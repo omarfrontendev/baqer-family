@@ -7,13 +7,14 @@ import { MdModeEdit } from "react-icons/md";
 import { DeleteModal, MainLabel, MainSlider } from "../../../components";
 import dayjs from "dayjs";
 import { ModalContext } from "../../../context/ModalContext";
+import Cookies from 'js-cookie';
 
 const SingleCongratulation = () => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const location = useLocation();
   const navigate = useNavigate();
-
-  console.log(location?.state?.data)
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("news");
 
   useEffect(() => {
     if (!location?.state?.data) {
@@ -27,26 +28,28 @@ const SingleCongratulation = () => {
       <div className={`container`}>
         <div className={styles.page__header}>
           <PageHeader title={location?.state?.data?.title} />
-          <div className={styles.header__btns}>
-            <button
-              className={styles.header__btn}
-              onClick={() =>
-                setIdModal(`delete-news-${location?.state?.data?.id}`)
-              }
-            >
-              <DeleteIcon />
-            </button>
-            <button
-              onClick={() => {
-                navigate(`/news/edit`, {
-                  state: { data: location?.state?.data },
-                });
-              }}
-              className={styles.header__btn}
-            >
-              <MdModeEdit />
-            </button>
-          </div>
+          {permission && 
+            <div className={styles.header__btns}>
+              <button
+                className={styles.header__btn}
+                onClick={() =>
+                  setIdModal(`delete-news-${location?.state?.data?.id}`)
+                }
+              >
+                <DeleteIcon />
+              </button>
+              <button
+                onClick={() => {
+                  navigate(`/news/edit`, {
+                    state: { data: location?.state?.data },
+                  });
+                }}
+                className={styles.header__btn}
+              >
+                <MdModeEdit />
+              </button>
+            </div>
+          }
         </div>
         <MainSlider
           // images={location?.state?.data?.images?.map(item => item?.image) || []}

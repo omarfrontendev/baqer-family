@@ -40,7 +40,7 @@ const OrderBox = ({ order, onGetOrders }) => {
             <p className={styles.text}>
               لقد قام المستخدم {order?.user?.first_name} بطلب{" "}
               {t(order?.product?.proccess_type === "sale" ? "buy" : "booking")}{" "}
-              منتج {order?.user?.first_name}
+              منتج {order?.product?.name}
             </p>
             <p className={styles.text}>
               {t("inputs.email")}:{" "}

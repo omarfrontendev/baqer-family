@@ -11,8 +11,7 @@ import DefaultCover from "../../../assets/DefaultCover.png";
 import dayjs from "dayjs";
 import 'dayjs/locale/ar'; // Import Arabic locale
 import { ModalContext } from "../../../context/ModalContext";
-
-
+import Cookies from "js-cookie";
 
 const DiwaniyaDetails = () => {
 
@@ -21,6 +20,8 @@ const DiwaniyaDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const diwaniya = location?.state?.data;
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("diwan");
 
   useEffect(() => {
     if (!diwaniya) navigate(`/diwaniyas/${diwaniya?.category_id}`);
@@ -32,7 +33,7 @@ const DiwaniyaDetails = () => {
       <div className={`container`}>
         <div className={styles.page__header}>
           <PageHeader title={diwaniya?.name} />
-          <div className={styles.header__btns}>
+          {permission && <div className={styles.header__btns}>
             <button
               className={styles.header__btn}
               onClick={() => setIdModal(`delete-diwaniya-${diwaniya?.id}`)}
@@ -49,7 +50,7 @@ const DiwaniyaDetails = () => {
             >
               <MdModeEdit />
             </button>
-          </div>
+          </div>}
         </div>
         <MainSlider
           images={

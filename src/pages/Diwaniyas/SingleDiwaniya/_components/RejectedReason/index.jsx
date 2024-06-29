@@ -44,7 +44,7 @@ const RejectedReason = ({  getList, id }) => {
           style={{ background: "#fb6e6e", color: "#FFF" }}
           onClick={onSubmit}
         >
-          إلغاء
+          تأكيد الإلغاء
         </MainButton>
         <MainButton
           onClick={() => setIdModal("")}

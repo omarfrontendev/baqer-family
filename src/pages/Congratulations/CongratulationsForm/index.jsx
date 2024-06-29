@@ -3,6 +3,7 @@ import {
   DatePicker,
   MainButton,
   MainInput,
+  MyEditor,
   UploadImages,
 } from "../../../components";
 import { useTranslation } from "react-i18next";
@@ -34,16 +35,14 @@ const CongratulationsForm = ({
       />
 
       {/* overview */}
-      <MainInput
-        register={register}
-        placeholder={t("inputs.description")}
-        type="textarea"
+      <MyEditor
+        control={control}
         name="description"
-        value={formData?.description}
         error={errors?.description?.message}
-        required
+        value={formData?.description || ""}
       />
-
+      
+      {console.log(formData?.description)}
       {/* dates */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
         <div style={{ flex: 1 }}>

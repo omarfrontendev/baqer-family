@@ -9,6 +9,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
+import Cookies from 'js-cookie';
 
 const EditOccasion = () => {
   const { t } = useTranslation();
@@ -18,8 +19,8 @@ const EditOccasion = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if(!state?.data) {
-      navigate('/occasions');
+    if (!state?.data) {
+      navigate("/occasions");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state?.data])

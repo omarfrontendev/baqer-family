@@ -8,9 +8,12 @@ import { useTranslation } from 'react-i18next';
 import styles from './.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import Box from '../_components/Box';
+import Cookies from 'js-cookie';
 
 const News = () => {
   const { t } = useTranslation();
+  const { userPermission } = JSON.parse(Cookies.get("user"));
+  const permission = userPermission.includes("news");
 
   // get news slider:=
   const {
@@ -36,13 +39,21 @@ const News = () => {
 
   return (
     <div className={`${styles.page} container`}>
-      <PageHeader title={t("news")} />
+      <PageHeader title={t("news")} backHref="/" />
       {SliderError ? (
         <Error msg={SliderError?.message} />
       ) : (
         <MainSlider
           loading={sliderLoading}
-          images={slider?.data?.map((item) => item?.image) || []}
+          images={slider?.data?.filter((item) => {
+            if (item?.image) {
+              return {
+                image: item?.image,
+                ...item,
+              };
+            }
+          })}
+          type="news"
         />
       )}
       <Link to={`/news/add`} className={styles.add__btn}>
@@ -67,6 +78,7 @@ const News = () => {
         <div className={styles.list}>
           {news?.data?.map((singleNew) => (
             <Box
+              permission={permission}
               key={singleNew?.id}
               diwaniya={singleNew}
               onGetList={onGetNews}
