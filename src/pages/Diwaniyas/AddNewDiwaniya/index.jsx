@@ -8,6 +8,7 @@ import { PageHeader } from '../../../layout';
 import { useApi } from '../../../hooks/useApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import uploadFile from '../../../utils/uploadImages';
+import { toast } from 'react-toastify';
 
 const AddNewDiwaniya = () => {
 
@@ -68,17 +69,21 @@ const AddNewDiwaniya = () => {
     };
 
     try {
-      const res = await onSendBaseInfo(body);
+      const res = await onSendBaseInfo(body, "IGNOREMESSAGEEVER");
       if(res?.success) {
-        await onAddDiwanWorkDays({
-          date: e?.diwanWorkDays,
-          diwan_id: res?.data?.id,
-        });
+        await onAddDiwanWorkDays(
+          {
+            date: e?.diwanWorkDays,
+            diwan_id: res?.data?.id,
+          },
+          "IGNOREMESSAGE"
+        );
         await uploadFile({
           images: e?.images,
           category_type: "diwan",
           category_id: res?.data?.id,
         });
+        toast.success("تمت العملية بنجاح");
         navigate(`/diwaniyas/${slug}`);
       }
         // res?.success

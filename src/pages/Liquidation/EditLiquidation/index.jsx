@@ -8,6 +8,7 @@ import LiquidationForm from "../LiquidationForm";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
+import { toast } from "react-toastify";
 
 const EditLiquidation = () => {
   const { t } = useTranslation();
@@ -81,13 +82,14 @@ const EditLiquidation = () => {
     };
 
     try {
-      const res = await onUpdateProduct(body);
+      const res = await onUpdateProduct(body, "IGNOREMESSAGE");
       if(res?.success) {
           await uploadFile({
             images: e?.images,
             category_type: "products",
             category_id: res?.data[0]?.id,
           });
+          toast.success("تمت العملية بنجاح");
           navigate("/liquidation");
         }
       } catch (err) {

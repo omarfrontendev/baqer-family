@@ -8,6 +8,7 @@ import LiquidationForm from "../LiquidationForm";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddLiquidation = () => {
   const { t } = useTranslation();
@@ -69,7 +70,7 @@ const AddLiquidation = () => {
     };
     
     try {
-      const res = await onAddProduct(body);
+      const res = await onAddProduct(body, "IGNOREMESSAGE");
       if (res?.success) {
         await uploadFile({
           images: e?.images,
@@ -77,6 +78,7 @@ const AddLiquidation = () => {
           category_id: res?.data[0]?.id,
         });
         reset();
+        toast.success("تمت العملية بنجاح");
         navigate("/liquidation");
       }
     } catch (err) {

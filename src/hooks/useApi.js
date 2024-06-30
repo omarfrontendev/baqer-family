@@ -14,10 +14,12 @@ export const useApi = (endpoint, method, body) => {
       setData(res);
       setLoading(false);
       // eslint-disable-next-line no-unused-expressions
-      method === "get"
-        ? null
-        : toast.success(res?.message || successMsg || "تمت العملية بنجاح!");
-      return res;
+        method === "get" ||
+        successMsg === "IGNOREMESSAGE" ||
+        successMsg === "IGNOREMESSAGEEVER"
+          ? null
+          : toast.success(res?.message || successMsg || "تمت العملية بنجاح!");
+        return res;
     } catch (err) {
       typeof err?.response?.data?.message === "string"
         ? toast.error(err?.response?.data?.message)

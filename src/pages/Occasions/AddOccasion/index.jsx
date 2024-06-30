@@ -9,6 +9,7 @@ import { useApi } from "../../../hooks/useApi";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
+import { toast } from "react-toastify";
 
 const AddOccasion = () => {
   const { t } = useTranslation();
@@ -62,13 +63,14 @@ const AddOccasion = () => {
     };
 
     try {
-      const res = await onSendOccasion(body);
+      const res = await onSendOccasion(body, "IGNOREMESSAGE");
       if(res?.success) {
         await uploadFile({
           images: e?.images,
           category_type: "occasion",
           category_id: res?.data?.id,
         });
+        toast.success("تمت العملية بنجاح");
         navigate("/occasions");
       }
     } catch (err) {

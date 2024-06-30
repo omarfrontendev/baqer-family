@@ -8,6 +8,7 @@ import NewsForm from "../NewsForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
+import { toast } from "react-toastify";
 
 const EditNews = () => {
   const { t } = useTranslation();
@@ -55,13 +56,14 @@ const EditNews = () => {
     };
 
     try {
-      const res = await onUpdateNews(body);
+      const res = await onUpdateNews(body, "IGNOREMESSAGE");
       if(res?.success) {
         await uploadFile({
           images: e?.images,
           category_type: "news",
           category_id: res?.data?.id,
         });
+        toast.success("تمت العملية بنجاح");
         navigate('/news')
         setSubmitting(false)
       }

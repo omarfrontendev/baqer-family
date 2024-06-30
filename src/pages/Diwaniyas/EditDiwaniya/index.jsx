@@ -8,6 +8,7 @@ import DiwaniyaForm from '../DiwaniyaForm';
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import uploadFile from "../../../utils/uploadImages";
+import { toast } from "react-toastify";
     
 const EditDiwaniya = () => {
   const { t } = useTranslation();
@@ -85,13 +86,14 @@ const EditDiwaniya = () => {
     };
 
     try {
-      const res = await onSendBaseInfo(body);
+      const res = await onSendBaseInfo(body, "IGNOREMESSAGE");
       if(res?.success) {
        await uploadFile({
          images: e?.images,
          category_type: "diwan",
          category_id: res?.data?.id,
        });
+        toast.success("تمت العملية بنجاح");
         navigate(`/diwaniyas/${location?.state?.data?.category_id}`);
       }
     } catch (err) {

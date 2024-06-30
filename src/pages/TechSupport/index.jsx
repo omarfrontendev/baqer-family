@@ -7,9 +7,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useApi } from '../../hooks/useApi';
 import { MainButton, MainInput } from '../../components';
+import { useNavigate } from 'react-router-dom';
 
 const TechSupport = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -21,7 +23,6 @@ const TechSupport = () => {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -35,7 +36,7 @@ const TechSupport = () => {
 
   const onSubmit = async (e) => {
       const res = await onRequest(e);
-      res?.success && reset();
+      res?.success && navigate('/');
   };
 
   return (

@@ -10,6 +10,7 @@ import { useApi } from "../../../hooks/useApi";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
 import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
 
 const EditOccasion = () => {
   const { t } = useTranslation();
@@ -83,13 +84,14 @@ const EditOccasion = () => {
     };
 
     try {
-      const res = await onSendOccasion(body);
+      const res = await onSendOccasion(body, "IGNOREMESSAGE");
       if (res?.success) {
         await uploadFile({
           images: e?.images,
           category_type: "occasion",
           category_id: res?.data?.id,
         });
+        toast.success("تمت العملية بنجاح");
         navigate("/occasions");
       }
     } catch (err) {

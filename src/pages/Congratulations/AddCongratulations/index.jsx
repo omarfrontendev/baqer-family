@@ -9,6 +9,7 @@ import { useApi } from "../../../hooks/useApi";
 import dayjs from "dayjs";
 import uploadFile from "../../../utils/uploadImages";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddCongratulations = () => {
   const { t } = useTranslation();
@@ -51,13 +52,14 @@ const AddCongratulations = () => {
     };
 
     try {
-      const res = await onSendCongratulations(body);
+      const res = await onSendCongratulations(body, "IGNOREMESSAGE");
       if(res?.success) {
         await uploadFile({
           images: e?.images,
           category_type: "congratulate",
           category_id: res?.data?.id,
-        })
+        });
+        toast.success("تمت العملية بنجاح");
         setSubmitting(false);
         navigate("/congratulations");
       }
