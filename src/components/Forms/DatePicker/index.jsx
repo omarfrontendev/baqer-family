@@ -12,6 +12,7 @@ const DatePicker = ({
   error,
   date,
   type = "الديوان",
+  defaultDate,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -71,7 +72,11 @@ const DatePicker = ({
             >
               <Calendar
                 onBlur={onBlur}
-                date={date || new Date(1995, 0, 1)}
+                date={
+                  date || defaultDate
+                    ? new Date()
+                    : new Date(1995, 0, 1)
+                }
                 onChange={(e) => onChange(e)}
                 locale={ar}
                 color="#26C0FF" // Custom color

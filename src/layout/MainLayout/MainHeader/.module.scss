@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.header {
+    display: flex;
+    .content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+    .notification__link,
+    .menu__btn {
+        all: unset;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $main__blue__color;
+        font-size: 28px;
+    }
+}

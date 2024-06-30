@@ -152,6 +152,7 @@ const DiwaniyaForm = ({
         name="date"
         error={errors?.date?.message}
         date={formData?.date}
+        defaultDate
       />
 
       <div className={styles.days__container}>

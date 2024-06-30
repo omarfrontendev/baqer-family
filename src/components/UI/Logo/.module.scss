@@ -6,6 +6,13 @@
     font-weight: bold;
     color: $main__blue__color;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    .logo__image {
+        width: 100%;
+    }
 }
 .subtitle {
     font-size: 14px;

@@ -1,0 +1,60 @@
+@import '../../styles/variables.scss';
+
+.layout {
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        z-index: 100;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+        &.opened {
+            opacity: .5;
+            pointer-events: all;
+        }
+    }
+    .sidebar__container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 320px;
+        max-width: 100%;
+        height: 100vh;
+        background-color: $main__blue__color;
+        z-index: 10000;
+        color: #FFF;
+        transform: translateX(100%);
+        transition: .2s;
+        // opacity: 0;
+        &.opened {
+            transform: translate(0);
+            // opacity: 1;
+        }
+    }
+    .section {
+        margin: 42px 0;
+    }
+    .title {
+        font-size: $ft__16;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    .list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 24px;
+    }
+}
+
+@media(max-width: 575px) {
+    .page {
+        .list {
+            gap: 10px;
+        }
+    }
+}

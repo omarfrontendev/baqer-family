@@ -54,7 +54,7 @@ const LiquidationForm = ({
       />
 
       {/* owner */}
-      <MainInput
+      {/* <MainInput
         register={register}
         placeholder={t("اسم المستخدم على التطبيق")}
         label="اسم مالك المنتج"
@@ -63,7 +63,7 @@ const LiquidationForm = ({
         value={formData?.owner}
         error={errors?.owner?.message}
         required
-      />
+      /> */}
 
       {/* type */}
       <Controller

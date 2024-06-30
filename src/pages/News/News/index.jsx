@@ -56,9 +56,9 @@ const News = () => {
           type="news"
         />
       )}
-      <Link to={`/news/add`} className={styles.add__btn}>
+      {permission && <Link to={`/news/add`} className={styles.add__btn}>
         {t("AddNewNews")} <IoMdAdd />
-      </Link>
+      </Link>}
       {newsLoading ? (
         <div className={styles.list}>
           {Array(5)

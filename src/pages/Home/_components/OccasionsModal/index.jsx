@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const OccasionsModal = ({ occasions }) => {
   const { setIdModal } = useContext(ModalContext);
+
   const navigate = useNavigate();
   return (
     <Popup>
@@ -31,7 +32,10 @@ const OccasionsModal = ({ occasions }) => {
                 src={occasion?.image}
                 alt="occasions_image"
                 className={styles.occasion__image}
-                onClick={() => navigate(`/occasions/${occasion?.id}`, { state: { data: occasion } })}
+                onClick={() => {
+                  navigate(`/occasions/${occasion?.id}`, { state: { data: occasion } })
+                  setIdModal("");
+                }}
               />
               <h4 className={styles.occasion__title}>{occasion?.title}</h4>
               <div

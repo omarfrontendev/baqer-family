@@ -90,12 +90,12 @@ const Occasions = () => {
           />
         )}
         {/*    categories  */}
-        <button
+        {permission && <button
           className={styles.add__btn}
           onClick={() => setIdModal("add-new-category")}
         >
           إضافة فئة مناسبة جديدة <IoMdAdd />
-        </button>
+        </button>}
         <div className={styles.categories__box}>
           {categoriesLoading ? (
             Array(2)
@@ -156,9 +156,9 @@ const Occasions = () => {
             ))
           )}
         </div>
-        <Link to={`/occasions/add/${currentCat}`} className={styles.add__btn}>
+        {permission && <Link to={`/occasions/add/${currentCat}`} className={styles.add__btn}>
           {t("AddNewOccasions")} <IoMdAdd />
-        </Link>
+        </Link>}
         {/* Occasions */}
         {occasionsLoading ? (
           <div className={styles.list}>

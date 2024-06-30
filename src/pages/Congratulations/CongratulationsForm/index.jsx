@@ -41,7 +41,7 @@ const CongratulationsForm = ({
         error={errors?.description?.message}
         value={formData?.description || ""}
       />
-      
+
       {console.log(formData?.description)}
       {/* dates */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
@@ -52,6 +52,7 @@ const CongratulationsForm = ({
             error={errors?.start_date?.message}
             date={formData?.start_date}
             type="بداية التهنئة"
+            defaultDate
           />
         </div>
         <div style={{ flex: 1 }}>
@@ -61,6 +62,7 @@ const CongratulationsForm = ({
             error={errors?.end_date?.message}
             date={formData?.end_date}
             type="نهاية التهنئة"
+            defaultDate
           />
         </div>
       </div>

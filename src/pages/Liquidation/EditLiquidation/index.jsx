@@ -20,7 +20,7 @@ const EditLiquidation = () => {
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
     description: yup.string("").required(t("errors.required")),
-    owner: yup.string("").required(t("errors.required")),
+    // owner: yup.string("").required(t("errors.required")),
     type: yup.string().required(t("errors.required")),
     location: yup
       .object({

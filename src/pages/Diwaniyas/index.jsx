@@ -9,10 +9,13 @@ import { IoMdAdd } from 'react-icons/io';
 import { ModalContext } from '../../context/ModalContext';
 import CategoryForm from './CategoryForm';
 import CategoryBox from './CategoryBox';
+import Cookies from 'js-cookie';
 
 const Diwaniyas = () => {
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
+    const { userPermission } = JSON.parse(Cookies.get("user"));
+    const permission = userPermission.includes("diwan");
 
 
   // get diwaniya slider:=
@@ -53,12 +56,12 @@ const Diwaniyas = () => {
             type="diwaniyas"
           />
         )}
-        <button
+        {permission && <button
           className={styles.add__btn}
           onClick={() => setIdModal("add-new-category")}
         >
           إضافة فئة جديدة <IoMdAdd />
-        </button>
+        </button>}
         <div className={styles.list}>
           {categoriesLoading ? (
             Array(4)
@@ -82,10 +85,6 @@ const Diwaniyas = () => {
               />
             ))
           )}
-          {/* {!categories?.data?.length ? <EmptyList
-            style={{ marginTop: "50px" }}
-            text="لا يوجد أي منتج، الآن يمكنك إضافة منتجك"
-          /> : ""} */}
         </div>
       </div>
       {idModal === "add-new-category" && (

@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import Header from './_components/Header';
-import Sidebar from './_components/Sidebar';
-import { BlogBox, MainBox, MainSlider } from '../../components';
+import React, { useContext, useEffect, useState } from 'react';
+import { BlogBox, EmptyList, Error, MainBox, MainSlider } from '../../components';
 import { useTranslation } from 'react-i18next';
 import { images } from './_components/images';
 import imageSlider from '../../assets/slide@2x.png'
@@ -10,10 +8,14 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import styles from './.module.scss';
+import { ModalContext } from '../../context/ModalContext';
+import { useApi } from '../../hooks/useApi';
+import OccasionsModal from './_components/OccasionsModal';
+import Skeleton from 'react-loading-skeleton';
 
 const Home = () => {
   const { t } = useTranslation();
-  const [openMenu, setOpenMenu] = useState(false);
+  const { setIdModal, idModal } = useContext(ModalContext);
 
   const sections = [
     {
@@ -58,27 +60,64 @@ const Home = () => {
     },
   ];
 
+  // get latest occasions:=
+  const { onRequest: onGetOccasions, data: occasionsRes } = useApi(
+    "/api/viewOccasionPopUp",
+    "get"
+  );
+
+  // get Congratulations slider:=
+  const {
+    data: slider,
+    loading: sliderLoading,
+    onRequest: onGetSlider,
+    error: SliderError,
+  } = useApi("api/viewCongratulateSlider?current_page=1&per_page=10000", "get");
+
+  // get news
+  const {
+    data: news,
+    error: newsError,
+    loading: newsLoading,
+    onRequest: onGetNews,
+  } = useApi(`/api/viewNews?current_page=1&per_page=10000`, "get");
+
+  useEffect(() => {
+    onGetSlider();
+    onGetOccasions();
+    onGetNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (occasionsRes?.success) {
+      setIdModal("occasions-modal");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [occasionsRes?.success]);
+
   return (
     <>
       <div className={styles.page}>
-        <Header onOpenMenu={() => setOpenMenu(true)} />
-        <div
-          className={`${styles.overlay} ${openMenu ? styles.opened : ""}`}
-          onClick={() => setOpenMenu(false)}
-        ></div>
-        <div
-          className={`${styles.sidebar__container} ${
-            openMenu ? styles.opened : ""
-          }`}
-        >
-          <Sidebar onClose={() => setOpenMenu(false)} />
-        </div>
         <div className={`${styles.content} container`}>
-          {/* <UserWidget /> */}
-          <MainSlider
-            images={[imageSlider, imageSlider, imageSlider, imageSlider]}
-          />
-
+          {/* Slider */}
+          {SliderError ? (
+            <Error msg={SliderError?.message} />
+          ) : (
+            <MainSlider
+              loading={sliderLoading}
+              images={slider?.data?.filter((item) => {
+                if (item?.image) {
+                  return {
+                    image: item?.image,
+                    ...item,
+                  };
+                }
+              })}
+              type="congratulations"
+            />
+          )}
+          {/* Sections */}
           <section className={styles.section}>
             <h3 className={styles.title}>{t("sections")}</h3>
             <div className={`${styles.list} list`}>
@@ -93,6 +132,7 @@ const Home = () => {
             </div>
           </section>
 
+          {/* News */}
           <section className={styles.section}>
             <h3 className={styles.title}>آخر أخبار العائلة</h3>
             <Swiper
@@ -116,17 +156,42 @@ const Home = () => {
               modules={[Pagination]}
               className="mySwiper"
             >
-              {Array(10)
-                .fill("")
-                .map((_, i) => (
-                  <SwiperSlide key={i}>
-                    <BlogBox />
-                  </SwiperSlide>
-                ))}
+              {newsLoading ? (
+                <div className={styles.list}>
+                  {Array(10)
+                    ?.fill("")
+                    ?.map((_, i) => (
+                      <SwiperSlide key={i}>
+                        <Skeleton
+                          width="100%"
+                          height="348px"
+                          borderRadius="4px"
+                        />
+                      </SwiperSlide>
+                    ))}
+                </div>
+              ) : newsError ? (
+                <Error msg={newsLoading?.message} />
+              ) : news?.data?.length ? (
+                <div className={styles.list}>
+                  {news?.data?.map((singleNew, i) => (
+                    <SwiperSlide key={i}>
+                      <BlogBox singleNew={singleNew} />
+                    </SwiperSlide>
+                  ))}
+                </div>
+              ) : (
+                <EmptyList text="لا يوجد أي أخبار في الوقت الراهن، الآن يمكنك إضافة الأخبار" />
+              )}
             </Swiper>
           </section>
         </div>
       </div>
+      {idModal === "occasions-modal" && occasionsRes?.data?.length ? (
+        <OccasionsModal occasions={occasionsRes?.data} />
+      ) : (
+        ""
+      )}
     </>
   );
 }

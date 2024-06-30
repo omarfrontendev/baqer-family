@@ -55,9 +55,9 @@ const Congratulations = () => {
           type="congratulations"
         />
       )}
-      <Link to={`/congratulations/add`} className={styles.add__btn}>
+      {permission && <Link to={`/congratulations/add`} className={styles.add__btn}>
         {t("AddNewCongratulation")} <IoMdAdd />
-      </Link>
+      </Link>}
       {/* List */}
       {congratulationsLoading ? (
         <div className={styles.list}>

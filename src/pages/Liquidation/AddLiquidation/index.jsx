@@ -18,7 +18,7 @@ const AddLiquidation = () => {
   const schema = yup.object({
     name: yup.string("").required(t("errors.required")),
     description: yup.string("").required(t("errors.required")),
-    owner: yup.string("").required(t("errors.required")),
+    // owner: yup.string("").required(t("errors.required")),
     type: yup
       .string()
       .required(t("errors.required")),
@@ -51,13 +51,12 @@ const AddLiquidation = () => {
     mode: "all",
   });
 
-  
   // Add product
   const { onRequest: onAddProduct } = useApi("/api/addProduct", "post");
 
   const onSubmit = async (e) => {
     setSubmitting(true);
-
+    
     // Base-info
     const body = {
       name: e?.name,

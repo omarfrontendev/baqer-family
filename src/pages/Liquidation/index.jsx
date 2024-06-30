@@ -78,9 +78,9 @@ const Liquidation = () => {
         ) : (
           ""
         )}
-        <Link to="/liquidation/add" className={styles.header__btn}>
+        {permission && <Link to="/liquidation/add" className={styles.header__btn}>
           {t("إضافة منتج")} <IoMdAdd />
-        </Link>
+        </Link>}
         {productsLoading ? (
           <div className={styles.list}>
             {Array(10)

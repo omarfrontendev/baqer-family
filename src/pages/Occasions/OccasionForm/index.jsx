@@ -100,6 +100,7 @@ const OccasionForm = ({
         name="date"
         error={errors?.date?.message}
         date={formData?.date}
+        defaultDate
         type="المناسبة"
       />
 

@@ -56,9 +56,9 @@ const SingleDiwaniya = () => {
       <div className={`container`}>
         <PageHeader title={state?.data || "Unknown"} backHref={"/diwaniyas"} />
         <div className={styles.page__header}>
-          <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
+          {permission && <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
             {t("AddNewDiwaniya")} <IoMdAdd />
-          </Link>
+          </Link>}
           <button
             onClick={handelSorting}
             className={`${styles.header__btn} ${
