@@ -1,3 +1,4 @@
+// import { toast } from "react-toastify";
 
 const uploadFile = async (body) => {
     const formdata = new FormData();
@@ -13,10 +14,14 @@ const uploadFile = async (body) => {
         body: formdata,
         redirect: "follow",
     };
+    // const timeout = setTimeout(() => {
+    //     toast.info("يرجى الانتظار حتى الانتهاء من تحميل صورتك");
+    // }, 200);
     await fetch(
       `https://fasterlink.me/api/uploadMultipleImage`,
       requestOptions
     );
+    // clearTimeout(timeout);
 };
 
 export default uploadFile;

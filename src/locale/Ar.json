@@ -69,6 +69,7 @@
   "reject": "رفض",
   "TechSupportTitle": "خدمات ودعم فني",
   "Notifications": "الإشعارات",
+  "recall": "استدعاء",
   "errors": {
     "required": "هذا الحقل مطلوب",
     "min__length__8": "كلمة المرور يجب أن تكون أكثر من 8 أحرف",

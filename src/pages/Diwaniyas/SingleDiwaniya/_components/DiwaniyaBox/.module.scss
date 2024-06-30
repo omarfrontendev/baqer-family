@@ -73,6 +73,9 @@
         }
         .cancel__btn {
             background-color: rgb(104, 17, 17);
+            &.cancelled {
+                background-color: #06a741;
+            }
         }
     }
 }

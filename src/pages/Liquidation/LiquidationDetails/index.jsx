@@ -22,8 +22,6 @@ const LiquidationDetails = () => {
   const { userPermission } = JSON.parse(Cookies.get("user"));
   const permission = userPermission.includes("product");
 
-  console.log(product?.user);
-
   useEffect(() => {
     if(!product) {
       navigate("/liquidation");

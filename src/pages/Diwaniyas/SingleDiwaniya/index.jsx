@@ -56,9 +56,11 @@ const SingleDiwaniya = () => {
       <div className={`container`}>
         <PageHeader title={state?.data || "Unknown"} backHref={"/diwaniyas"} />
         <div className={styles.page__header}>
-          {permission && <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
-            {t("AddNewDiwaniya")} <IoMdAdd />
-          </Link>}
+          {permission && (
+            <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>
+              {t("AddNewDiwaniya")} <IoMdAdd />
+            </Link>
+          )}
           <button
             onClick={handelSorting}
             className={`${styles.header__btn} ${
@@ -98,6 +100,7 @@ const SingleDiwaniya = () => {
                 diwaniya={diwaniya}
                 onGetList={onGetDiwaniyas}
                 permission={permission}
+                cancelled={diwaniya?.exist === "0" ? true : false}
               />
             ))}
           </div>

@@ -33,10 +33,9 @@ const AddNews = () => {
   });
 
   // send News
-  const { onRequest: onSendNews } = useApi("/api/addNews", "post");
+  const { onRequest: onSendNews } = useApi("/api/addNews", "post", "msg");
 
   const onSubmit = async (e) => {
-    console.log(e?.images)
     setSubmitting(true);
     const body = {
       title: e?.name,
@@ -44,8 +43,7 @@ const AddNews = () => {
       };
 
     try {
-      const res = await onSendNews(body);
-      console.log(res?.data?.id);
+      const res = await onSendNews(body, "IGNOREMaSSeGE");
       if(res?.success) {
         await uploadFile({
           images: e?.images,

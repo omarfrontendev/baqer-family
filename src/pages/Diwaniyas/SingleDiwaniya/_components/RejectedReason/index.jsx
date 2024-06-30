@@ -4,7 +4,7 @@ import { useApi } from "../../../../../hooks/useApi";
 import { MainButton, MainInput, Popup } from "../../../../../components";
 import styles from './.module.scss';
 
-const RejectedReason = ({  getList, id }) => {
+const RejectedReason = ({ getList, id, cancelled }) => {
   const { setIdModal } = useContext(ModalContext);
   const [reason, setReason] = useState("");
   const { loading, onRequest: onReject } = useApi(`/api/diwanNotExist`, "post");
@@ -13,7 +13,7 @@ const RejectedReason = ({  getList, id }) => {
     try {
       const res = await onReject({
         diwan_id: id,
-        status: true,
+        status: !cancelled,
         reason,
       });
       res?.success && setIdModal("");
@@ -23,28 +23,36 @@ const RejectedReason = ({  getList, id }) => {
     }
   };
 
-
   return (
     <Popup>
-      <h1 className={styles.title}>هل أنت متأكد أنك تريد إلغاء هذا الديوان</h1>
-      <MainInput
-        placeholder={"سبب الإلغاء"}
-        type="text"
-        name="reason"
-        label={"سبب الإلغاء"}
-        value={reason || ""}
-        normal
-        onChange={(e) => setReason(e.target.value)}
-      />
+      <h1 className={styles.title}>
+        {cancelled
+          ? "هل أنت متأكد أنك تريد استدعاء هذا الديوان"
+          : "هل أنت متأكد أنك تريد إلغاء هذا الديوان"}
+      </h1>
+      {!cancelled && (
+        <MainInput
+          placeholder={"سبب الإلغاء"}
+          type="text"
+          name="reason"
+          label={"سبب الإلغاء"}
+          value={reason || ""}
+          normal
+          onChange={(e) => setReason(e.target.value)}
+        />
+      )}
       <div className={styles.buttons}>
         <MainButton
           loading={loading}
           disabled={loading}
           className={styles.delete}
-          style={{ background: "#fb6e6e", color: "#FFF" }}
+          style={{
+            background: cancelled ? "#06a741" : "#fb6e6e",
+            color: "#FFF",
+          }}
           onClick={onSubmit}
         >
-          تأكيد الإلغاء
+          {cancelled ? "استدعاء" : "تأكيد الإلغاء"}
         </MainButton>
         <MainButton
           onClick={() => setIdModal("")}

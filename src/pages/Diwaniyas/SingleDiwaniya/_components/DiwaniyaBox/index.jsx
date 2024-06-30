@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import RejectedReason from '../RejectedReason';
 
-const DiwaniyaBox = ({ diwaniya, onGetList, permission }) => {
+const DiwaniyaBox = ({ diwaniya, onGetList, permission, cancelled }) => {
   const { idModal, setIdModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -31,31 +31,35 @@ const DiwaniyaBox = ({ diwaniya, onGetList, permission }) => {
           />
         </div>
         <h4 className={styles.title}>{diwaniya?.name}</h4>
-        {permission && <div className={styles.btns}>
-          <button
-            className={styles.cancel__btn}
-            onClick={() => setIdModal(`cancel-diwaniya-${diwaniya?.id}`)}
-          >
-            {t("cancel")}
-          </button>
-          <button
-            onClick={() => {
-              navigate(`/diwaniyas/edit/${diwaniya?.category_id}`, {
-                state: { data: diwaniya },
-              });
-            }}
-            className={styles.edit__btn}
-          >
-            <MdEdit />
-          </button>
-          <button
-            onClick={() => setIdModal(`delete-diwaniya-${diwaniya?.id}`)}
-            type="button"
-            className={styles.delete__btn}
-          >
-            <MdDeleteForever />
-          </button>
-        </div>}
+        {permission && (
+          <div className={styles.btns}>
+            <button
+              className={`${styles.cancel__btn} ${
+                cancelled ? styles.cancelled : ""
+              }`}
+              onClick={() => setIdModal(`cancel-diwaniya-${diwaniya?.id}`)}
+            >
+              {cancelled ? t("recall") : t("cancel")}
+            </button>
+            <button
+              onClick={() => {
+                navigate(`/diwaniyas/edit/${diwaniya?.category_id}`, {
+                  state: { data: diwaniya },
+                });
+              }}
+              className={styles.edit__btn}
+            >
+              <MdEdit />
+            </button>
+            <button
+              onClick={() => setIdModal(`delete-diwaniya-${diwaniya?.id}`)}
+              type="button"
+              className={styles.delete__btn}
+            >
+              <MdDeleteForever />
+            </button>
+          </div>
+        )}
       </div>
       {idModal === `delete-diwaniya-${diwaniya?.id}` && (
         <DeleteModal
@@ -68,7 +72,11 @@ const DiwaniyaBox = ({ diwaniya, onGetList, permission }) => {
         />
       )}
       {idModal === `cancel-diwaniya-${diwaniya?.id}` && (
-        <RejectedReason id={diwaniya?.id} getList={onGetList} />
+        <RejectedReason
+          id={diwaniya?.id}
+          getList={onGetList}
+          cancelled={cancelled}
+        />
       )}
     </>
   );
