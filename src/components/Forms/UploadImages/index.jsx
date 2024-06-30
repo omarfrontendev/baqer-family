@@ -8,7 +8,7 @@ import { useFieldArray } from 'react-hook-form';
 import Image from './Image';
 
 
-const UploadImages = ({ images, error, control, name }) => {
+const UploadImages = ({ images, error, control, name, single }) => {
   const { t } = useTranslation();
   // HANDEL IMAGES CHANGERS
   const { append, remove } = useFieldArray({
@@ -39,16 +39,14 @@ const UploadImages = ({ images, error, control, name }) => {
           imagesHandler(e?.target?.files[0], "ADD");
         }}
       />
-      <label htmlFor="images-diwaniya" className={styles.add__image__btn}>
+      <label
+        htmlFor="images-diwaniya"
+        className={`${styles.add__image__btn} ${single && images?.length === 1 ? styles.disabled : ""}`}
+      >
         <FaCamera />
       </label>
       {images?.map((img, i) => (
-        <Image
-          key={i}
-          imagesHandler={imagesHandler} 
-          i={i} 
-          img={img}
-        />
+        <Image key={i} imagesHandler={imagesHandler} i={i} img={img} />
       ))}
       {error && <ErrorMessage msg={"يجب إضافة صورة واحدة على الأقل"} />}
     </div>

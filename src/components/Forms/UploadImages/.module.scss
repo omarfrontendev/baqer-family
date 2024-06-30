@@ -15,6 +15,9 @@
         border-radius: 7px;
         font-size: 30px;
         cursor: pointer;
+        &.disabled {
+            display: none;
+        }
     }
     .image__box {
         position: relative;

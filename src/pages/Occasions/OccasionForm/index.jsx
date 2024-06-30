@@ -110,6 +110,7 @@ const OccasionForm = ({
         error={errors?.images?.message}
         control={control}
         name="images"
+        single
       />
 
       <MainButton loading={submitting} disabled={submitting} type="submit">

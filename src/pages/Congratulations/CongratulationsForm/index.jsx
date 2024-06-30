@@ -42,7 +42,6 @@ const CongratulationsForm = ({
         value={formData?.description || ""}
       />
 
-      {console.log(formData?.description)}
       {/* dates */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
         <div style={{ flex: 1 }}>
@@ -73,6 +72,7 @@ const CongratulationsForm = ({
         error={errors?.images?.message}
         control={control}
         name="images"
+        single
       />
 
       <MainButton loading={submitting} disabled={submitting} type="submit">
