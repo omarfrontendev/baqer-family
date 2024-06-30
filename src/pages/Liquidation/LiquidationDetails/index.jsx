@@ -22,7 +22,7 @@ const LiquidationDetails = () => {
   const { userPermission } = JSON.parse(Cookies.get("user"));
   const permission = userPermission.includes("product");
 
-  console.log(product?.images);
+  console.log(product?.user);
 
   useEffect(() => {
     if(!product) {
@@ -37,24 +37,26 @@ const LiquidationDetails = () => {
       <div className={`container`}>
         <div className={styles.page__header}>
           <PageHeader title={product?.name} />
-          {permission && <div className={styles.header__btns}>
-            <button
-              className={styles.header__btn}
-              onClick={() => setIdModal(`delete-modal`)}
-            >
-              <DeleteIcon />
-            </button>
-            <button
-              className={styles.header__btn}
-              onClick={() => {
-                navigate(`/liquidation/${product?.id}/edit`, {
-                  state: { data: product },
-                });
-              }}
-            >
-              <MdModeEdit />
-            </button>
-          </div>}
+          {permission && (
+            <div className={styles.header__btns}>
+              <button
+                className={styles.header__btn}
+                onClick={() => setIdModal(`delete-modal`)}
+              >
+                <DeleteIcon />
+              </button>
+              <button
+                className={styles.header__btn}
+                onClick={() => {
+                  navigate(`/liquidation/${product?.id}/edit`, {
+                    state: { data: product },
+                  });
+                }}
+              >
+                <MdModeEdit />
+              </button>
+            </div>
+          )}
         </div>
         <MainSlider
           images={product?.images}
@@ -97,7 +99,10 @@ const LiquidationDetails = () => {
               </MainLabel>
             </div>
           </section>
-          <UserNameAndImage name="احمد الخطيب" />
+          <UserNameAndImage
+            name={product?.user?.name}
+            img={product?.user?.profile_picture}
+          />
         </div>
         <div className={styles.footer__btn}>
           <button
@@ -135,7 +140,7 @@ const LiquidationDetails = () => {
           }}
           endpoint="deleteProduct"
           title="هل أنت متأكد أنك تريد حذف هذا المنتج؟"
-          getList={() => navigate('/liquidation')}
+          getList={() => navigate("/liquidation")}
         />
       )}
     </>

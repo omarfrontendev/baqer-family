@@ -7,7 +7,7 @@ const UserNameAndImage = ({ img, name }) => {
       <img
       className={styles.img}
         src={
-          img ||
+          img ? img :
           "https://www.pngitem.com/pimgs/m/551-5510463_default-user-image-png-transparent-png.png"
         }
         alt=""
