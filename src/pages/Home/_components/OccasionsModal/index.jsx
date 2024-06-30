@@ -8,13 +8,16 @@ import styles from './.module.scss';
 import { ModalContext } from '../../../../context/ModalContext';
 import parse from "html-react-parser";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const OccasionsModal = ({ occasions }) => {
   const { setIdModal } = useContext(ModalContext);
-
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <Popup>
+      <h3 className={styles.title}>{t("Occasions")}</h3>
       <Swiper
         slidesPerView={1}
         cssMode={false}
@@ -33,7 +36,9 @@ const OccasionsModal = ({ occasions }) => {
                 alt="occasions_image"
                 className={styles.occasion__image}
                 onClick={() => {
-                  navigate(`/occasions/${occasion?.id}`, { state: { data: occasion } })
+                  navigate(`/occasions/${occasion?.id}`, {
+                    state: { data: occasion },
+                  });
                   setIdModal("");
                 }}
               />
