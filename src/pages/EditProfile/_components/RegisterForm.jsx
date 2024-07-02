@@ -20,16 +20,12 @@ import WorkPlaceInfo from './WorkPlaceInfo';
 import styles from '../.module.scss';
 import dayjs from 'dayjs';
 
-
-
 const RegisterForm = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const userData = JSON.parse(Cookies.get("user"));
-
-  console.log(userData);
 
   const getPlatformRegex = (platform) => {
     const regexes = {
@@ -85,14 +81,6 @@ const RegisterForm = () => {
         .email(t("errors.email"))
         .required(t("errors.required")),
       birthDate: yup.string().required(t("errors.required")),
-      password: yup
-        .string()
-        .required(t("errors.required"))
-        .min(8, t("errors.min__length__8")),
-      confirmPassword: yup
-        .string()
-        .required(t("errors.required"))
-        .oneOf([yup.ref("password")], t("errors.mustPassword")),
       workPlace: yup.string("").required(t("errors.required")),
       work: yup.object({}).when(["workPlace"], {
         is: "yes",
@@ -156,11 +144,40 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      workPlace: "yes",
-      freelance: "yes",
-      gender: "male",
+      photo: userData?.profile_picture,
+      firstName: userData?.first_name,
+      secondName: userData?.second_name,
+      thirdName: userData?.third_name,
+      fourthName: userData?.fourth_name,
+      gender: userData?.gender,
+      civilNo: userData?.civil_number,
+      phone: userData?.phone_number,
+      address: userData?.residential_address,
+      email: userData?.email,
+      birthDate: userData?.date_of_birth,
+      workPlace: userData?.workplace_name ? "yes" : "no",
       work: {
-        workType: "main",
+        workPlaceName: userData?.workplace_name,
+        serviceType: userData?.workplace_service_type,
+        description: userData?.workplace_description,
+      },
+      freelance: userData?.freelance_company_name ? "yes" : "no",
+      company: {
+        company__image: userData?.company_picture,
+        companyName: userData?.freelance_company_name,
+        description: userData?.freelance_description,
+        managerName: userData?.freelance_employer_name,
+        email: userData?.freelance_email,
+        phone: userData?.freelance_contact_number,
+        whatsapp: userData?.whats_app_number,
+        instagram: userData?.instagram,
+        twitter: userData?.twitter,
+        facebook: userData?.facebook,
+        location: {
+          lat: userData?.lat,
+          lng: userData?.long,
+        },
+        address: userData?.company_address,
       },
     },
     resolver: yupResolver(registerSchema),
@@ -170,12 +187,8 @@ const RegisterForm = () => {
   const isFreelance = watch("freelance");
   const isWork = watch("workPlace") === "yes";
 
-
   // register
-  const {  onRequest: onRegister } = useApi(
-    "/api/register?",
-    "post"
-  );
+  const { onRequest: onRegister } = useApi("/api/updateProfile", "post");
   
   useEffect(() => {
     if (!isWork) setValue("work", {});
@@ -199,8 +212,8 @@ const RegisterForm = () => {
       civil_number: data?.civilNo.toString(),
       residential_address: data?.address,
       date_of_birth: dayjs(data?.birthDate).format("YYYY-MM-DD"),
-      password: data?.password,
-      confirm_password: data?.confirmPassword,
+      password: "",
+      confirm_password: "",
       workplace_name: data?.work?.workPlaceName,
       workplace_type: data?.work?.workType,
       workplace_service_type: data?.work?.serviceType,
@@ -218,42 +231,45 @@ const RegisterForm = () => {
       lat: data?.company?.location?.lat,
       long: data?.company?.location?.lng,
       role: "user",
+      user_id: userData?.id
     };
 
     try {
       const res = await onRegister(body, t("registerSuccessfully"));
+      console.log(res)
       if(res?.success) {
         const formdata = new FormData();
         formdata.append("image", data?.photo);
         formdata.append("type", "profile");
-        formdata.append("user_id", res?.data?.user?.id);
+        formdata.append("user_id", res?.data?.id);
         const requestOptions = {
           method: "POST",
           body: formdata,
           redirect: "follow",
         };
         const res2 = await fetch(
-          `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
+          `https://fasterlink.me/api/upload-image?user_id=${res?.data?.id}`,
           requestOptions
         );
         if(data?.company?.company__image) {
           const formdata2 = new FormData();
             formdata2.append("image", data?.company?.company__image);
             formdata2.append("type", "company");
-            formdata2.append("user_id", res?.data?.user?.id);
+            formdata2.append("user_id", res?.data?.id);
             const requestOptions2 = {
               method: "POST",
               body: formdata2,
               redirect: "follow",
             };
             await fetch(
-              `https://fasterlink.me/api/upload-image?user_id=${res?.data?.user?.id}`,
+              `https://fasterlink.me/api/upload-image?user_id=${res?.data?.id}`,
               requestOptions2
             );
         }
 
         setSubmitting(false);
-        res?.success && res2 && navigate("/login");
+        Cookies.set("user", JSON.stringify(res?.data));
+        res?.success && res2 && navigate("/profile");
       }
     } catch (err) {
       console.log(err)
@@ -295,12 +311,8 @@ const RegisterForm = () => {
 
       {/* submit button */}
       <div className={styles.submit__btn}>
-        <MainButton
-          type={"submit"}
-          loading={submitting}
-          disabled={submitting}
-        >
-          {t("new__account")}
+        <MainButton type={"submit"} loading={submitting} disabled={submitting}>
+          حفظ البيانات
         </MainButton>
       </div>
     </form>

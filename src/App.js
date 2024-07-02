@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
 import { PagesGuard } from './components/AuthGuard';
 import "react-loading-skeleton/dist/skeleton.css";
@@ -18,7 +18,14 @@ const App = () => {
     }
     Cookies.set("visitHome", false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
+
+  const { pathname } = useLocation();
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
 
   return (

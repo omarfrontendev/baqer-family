@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 const UploadImage = ({ onChange, value, error, id, label }) => {
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div style={{ position: "relative" }}>
@@ -32,7 +32,7 @@ const UploadImage = ({ onChange, value, error, id, label }) => {
         {value && (
           <img
             className={styles.user__image}
-            src={value ? window.URL.createObjectURL(value || "") : ""}
+            src={typeof(value) === "string" ? value : window.URL.createObjectURL(value || "") || ""}
             alt=""
           />
         )}

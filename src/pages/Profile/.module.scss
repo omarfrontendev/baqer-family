@@ -43,6 +43,8 @@
         border-radius: 40px 40px 0 0;
         width: 800px;
         max-width: 100%;
+        z-index: 10;
+        position: relative;
         .list {
             list-style: none;
             display: flex;

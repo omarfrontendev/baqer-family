@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 // external
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // internal
 import UploadImage from './UploadImage';
@@ -12,7 +11,6 @@ import Radio from "./Radio";
 import styles from '../.module.scss';
 
 import { Calendar } from "react-date-range";
-import { addDays } from "date-fns";
 import { ar } from "date-fns/locale";
 
 import 'react-date-range/dist/styles.css'; // main style file
