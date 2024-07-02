@@ -81,17 +81,19 @@ const AddOccasion = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={t("AddNewOccasions")} />
-      <OccasionForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <OccasionForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+        />
+      </div>
+    </>
   );
 };
 

@@ -89,17 +89,19 @@ const AddLiquidation = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={t("AddNewLiquidation")} />
-      <LiquidationForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <LiquidationForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+        />
+      </div>
+    </>
   );
 };
 

@@ -102,18 +102,20 @@ const EditOccasion = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={`${t("edit")} ${state?.data?.title}`} />
-      <OccasionForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-        edit
-      />
-    </div>
+      <div className="container">
+        <OccasionForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+          edit
+          />
+      </div>
+    </>
   );
 };
 

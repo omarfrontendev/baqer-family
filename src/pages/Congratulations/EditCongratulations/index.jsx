@@ -83,18 +83,20 @@ const EditCongratulations = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={`${t("edit")} ${state?.data?.title}`} />
-      <CongratulationsForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        edit
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <CongratulationsForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          edit
+          submitting={submitting}
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,38 @@
+@import '../../../styles/variables.scss';
+
+.box {
+    background-color: #F6F6F6;
+    position: relative;
+    .box__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #26C0FF3B;
+        color: $main__blue__color;
+        padding: 4px 10px;
+        .title {
+            color: #000;
+            font-size: 15px;
+        }
+    }
+    .text {
+        padding: 10px;
+        color: 13px;
+        color: #000;
+        display: flex;
+        align-items: center;
+        > span {
+            display: block;
+            padding-left: 10px;
+            color: $gray__light__text__color;
+            font-weight: 600;
+        }
+    }
+    .date {
+        text-align: left;
+        display: block;
+        padding: 0 10px 4px;
+        color: #929292;
+        font-size: 12px;
+    }
+}

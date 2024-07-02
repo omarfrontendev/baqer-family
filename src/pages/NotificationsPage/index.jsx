@@ -19,31 +19,31 @@ const Notifications = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data);
-
   return (
-    <div className={`${styles.page} container`}>
+    <>
       <PageHeader title={t("Notifications")} />
-      <div className={styles.list}>
-        {loading ? (
-          Array(8).fill("").map((_,i) => (
-            <Skeleton width="100%" height="114px" key={i} />
-          ))
-        ) : (
-          data?.data?.map((notification) => (
-            <NotificationBox
-              type={notification?.type}
-              key={notification?.id}
-              title={notification?.title}
-              content={notification?.content}
-              date={dayjs(notification?.created_at)
-                .locale("ar")
-                .format("DD  MMMM  YYYY")}
-            />
-          ))
-        )}
+      <div className={`${styles.page} container`}>
+        <div className={styles.list}>
+          {loading ? (
+            Array(8).fill("").map((_,i) => (
+              <Skeleton width="100%" height="114px" key={i} />
+            ))
+          ) : (
+            data?.data?.map((notification) => (
+              <NotificationBox
+                type={notification?.type}
+                key={notification?.id}
+                title={notification?.title}
+                content={notification?.content}
+                date={dayjs(notification?.created_at)
+                  .locale("ar")
+                  .format("DD  MMMM  YYYY")}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

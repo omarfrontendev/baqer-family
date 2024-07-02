@@ -37,56 +37,61 @@ const Congratulations = () => {
   }, []);
 
   return (
-    <div className={`${styles.page} container`}>
+    <>
       <PageHeader title={t("التهاني")} backHref="/" />
-      {SliderError ? (
-        <Error msg={SliderError?.message} />
-      ) : (
-        <MainSlider
-          loading={sliderLoading}
-          images={slider?.data?.filter((item) => {
-            if (item?.image) {
-              return {
-                image: item?.image,
-                ...item,
-              };
-            }
-          })}
-          type="congratulations"
-        />
-      )}
-      {permission && <Link to={`/congratulations/add`} className={styles.add__btn}>
-        {t("AddNewCongratulation")} <IoMdAdd />
-      </Link>}
-      {/* List */}
-      {congratulationsLoading ? (
-        <div className={styles.list}>
-          {Array(4)
-            ?.fill("")
-            ?.map((_, i) => (
-              <Skeleton
-                key={i}
-                width="100%"
-                height="213px"
-                borderRadius="4px"
+      <div className={`${styles.page} container`}>
+        {SliderError ? (
+          <Error msg={SliderError?.message} />
+        ) : (
+          <MainSlider
+            loading={sliderLoading}
+            images={slider?.data?.filter((item) => {
+              if (item?.image) {
+                return {
+                  image: item?.image,
+                  ...item,
+                };
+              }
+            })}
+            type="congratulations"
+          />
+        )}
+        {permission && <Link to={`/congratulations/add`} className={styles.add__btn}>
+          {t("AddNewCongratulation")} <IoMdAdd />
+        </Link>}
+        {/* List */}
+        {congratulationsLoading ? (
+          <div className={styles.list}>
+            {Array(4)
+              ?.fill("")
+              ?.map((_, i) => (
+                <Skeleton
+                  key={i}
+                  width="100%"
+                  height="213px"
+                  borderRadius="4px"
+                />
+              ))}
+          </div>
+        ) : congratulations?.data?.length ? (
+          <div className={styles.list}>
+            {congratulations?.data?.map((diwaniya) => (
+              <Box
+                key={diwaniya?.id}
+                diwaniya={diwaniya}
+                onGetList={() => {
+                  onGetCongratulations();
+                  onGetSlider();
+                }}
+                permission={permission}
               />
             ))}
-        </div>
-      ) : congratulations?.data?.length ? (
-        <div className={styles.list}>
-          {congratulations?.data?.map((diwaniya) => (
-            <Box
-              key={diwaniya?.id}
-              diwaniya={diwaniya}
-              onGetList={onGetCongratulations}
-              permission={permission}
-            />
-          ))}
-        </div>
-      ) : (
-        <EmptyList text="لا يوجد أي تهنئة، الآن يمكنك إضافة تهنئتك" />
-      )}
-    </div>
+          </div>
+        ) : (
+          <EmptyList text="لا يوجد أي تهنئة، الآن يمكنك إضافة تهنئتك" />
+        )}
+      </div>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { PageHeader } from '../../layout';
 import { useTranslation } from 'react-i18next';
-import { Error, MainSlider } from '../../components';
+import { EmptyList, Error, MainSlider } from '../../components';
 import styles from './.module.scss';
 import { useApi } from '../../hooks/useApi';
 import Skeleton from 'react-loading-skeleton';
@@ -38,8 +38,8 @@ const Diwaniyas = () => {
 
   return (
     <>
+      <PageHeader title={t("Diwaniyas")} backHref="/" />
       <div className={`${styles.page} container`}>
-        <PageHeader title={t("Diwaniyas")} backHref="/" />
         {SliderError ? (
           <Error msg={SliderError?.message} />
         ) : (
@@ -56,12 +56,14 @@ const Diwaniyas = () => {
             type="diwaniyas"
           />
         )}
-        {permission && <button
-          className={styles.add__btn}
-          onClick={() => setIdModal("add-new-category")}
-        >
-          إضافة فئة جديدة <IoMdAdd />
-        </button>}
+        {permission && (
+          <button
+            className={styles.add__btn}
+            onClick={() => setIdModal("add-new-category")}
+          >
+            إضافة فئة جديدة <IoMdAdd />
+          </button>
+        )}
         <div className={styles.list}>
           {categoriesLoading ? (
             Array(4)
@@ -76,14 +78,19 @@ const Diwaniyas = () => {
               ))
           ) : categoryError ? (
             <Error msg={categoryError?.message} />
-          ) : (
+          ) : categories?.data?.length ? (
             categories?.data?.map((diwaniya, i) => (
               <CategoryBox
                 key={i}
                 diwaniya={diwaniya}
-                onGetCategories={onGetCategories}
+                onGetCategories={() => {
+                  onGetCategories();
+                  onGetSlider();
+                }}
               />
             ))
+          ) : (
+            <EmptyList text="لا توجد فئات للديوانيات الآن، يمكنك إضافة فئة جديدة" />
           )}
         </div>
       </div>

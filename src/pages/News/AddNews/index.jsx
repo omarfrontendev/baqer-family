@@ -63,17 +63,19 @@ const AddNews = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={t("AddNews")} />
-      <NewsForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <NewsForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+          />
+      </div>
+    </>
   );
 };
 

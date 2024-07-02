@@ -12,6 +12,7 @@ import { ModalContext } from '../../context/ModalContext';
 import { useApi } from '../../hooks/useApi';
 import OccasionsModal from './_components/OccasionsModal';
 import Skeleton from 'react-loading-skeleton';
+import Cookies from "js-cookie";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -90,14 +91,16 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (occasionsRes?.success) {
+    if (occasionsRes?.success && !JSON.parse(Cookies.get("visitHome"))) {
       setIdModal("occasions-modal");
+      Cookies.set("visitHome", true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [occasionsRes?.success]);
 
   return (
     <>
+    <div style={{ height: "40px" }}></div>
       <div className={styles.page}>
         <div className={`${styles.content} container`}>
           {/* Slider */}

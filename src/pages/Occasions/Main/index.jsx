@@ -70,8 +70,8 @@ const Occasions = () => {
 
   return (
     <>
+      <PageHeader title={t("Occasions")} backHref="/" />
       <div className={`${styles.page} container`}>
-        <PageHeader title={t("Occasions")} backHref="/" />
         {SliderError ? (
           <Error msg={SliderError?.message} />
         ) : (
@@ -137,7 +137,10 @@ const Occasions = () => {
                 {idModal === `edit-${category?.id}-category` && (
                   <CategoryForm
                     categoryId={category?.id}
-                    onGetList={onGetCategories}
+                    onGetList={() => {
+                      onGetCategories();
+                      onGetSlider();
+                    }}
                     defaultData={category}
                   />
                 )}
@@ -255,7 +258,10 @@ const Occasions = () => {
         )}
       </div>
       {idModal === "add-new-category" && (
-        <CategoryForm onGetList={onGetCategories} />
+        <CategoryForm onGetList={() => {
+          onGetCategories();
+          onGetSlider();
+        }} />
       )}
     </>
   );

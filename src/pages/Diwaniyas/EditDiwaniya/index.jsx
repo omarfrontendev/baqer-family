@@ -104,18 +104,20 @@ const EditDiwaniya = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={`${t("edit")} ${diwaniya?.name}`} />
-      <DiwaniyaForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-        edit
-      />
-    </div>
+      <div className="container">
+        <DiwaniyaForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+          edit
+        />
+      </div>
+    </>
   );
 };
 

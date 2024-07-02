@@ -75,18 +75,20 @@ const EditNews = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={`${t("edit")} ${state?.data?.title}`} />
-      <NewsForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-        edit
-      />
-    </div>
+      <div className="container">
+        <NewsForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+          edit
+        />
+      </div>
+    </>
   );
 };
 

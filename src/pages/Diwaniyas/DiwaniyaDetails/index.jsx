@@ -32,7 +32,7 @@ const DiwaniyaDetails = () => {
     <>
       <div className={`container`}>
         <div className={styles.page__header}>
-          <PageHeader title={diwaniya?.name} />
+          <PageHeader title={diwaniya?.name} backBtnStyle={{ right: 0 }} />
           {permission && <div className={styles.header__btns}>
             <button
               className={styles.header__btn}

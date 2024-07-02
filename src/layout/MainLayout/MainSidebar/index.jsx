@@ -24,13 +24,13 @@ const MainSidebar = ({ onClose }) => {
             <Link to="/">{t("mainPage")}</Link>
           </li>
           <li onClick={onClose}>
-            <Link to="/profile/sadsadsda">{t("profile")}</Link>
+            <Link to="/profile">{t("profile")}</Link>
           </li>
           <li onClick={onClose}>
             <Link to="/">{t("familyArchive")}</Link>
           </li>
           <li onClick={onClose}>
-            <Link to="/">{t("Inquiries")}</Link>
+            <Link to="/inquiries">{t("Inquiries")}</Link>
           </li>
           <li onClick={onClose}>
             <button

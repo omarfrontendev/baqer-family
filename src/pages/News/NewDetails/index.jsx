@@ -27,8 +27,11 @@ const SingleCongratulation = () => {
     <>
       <div className={`container`}>
         <div className={styles.page__header}>
-          <PageHeader title={location?.state?.data?.title} />
-          {permission && 
+          <PageHeader
+            title={location?.state?.data?.title}
+            backBtnStyle={{ right: 0 }}
+          />
+          {permission && (
             <div className={styles.header__btns}>
               <button
                 className={styles.header__btn}
@@ -49,7 +52,7 @@ const SingleCongratulation = () => {
                 <MdModeEdit />
               </button>
             </div>
-          }
+          )}
         </div>
         <MainSlider
           // images={location?.state?.data?.images?.map(item => item?.image) || []}

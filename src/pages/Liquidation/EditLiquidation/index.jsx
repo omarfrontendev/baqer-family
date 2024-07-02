@@ -99,18 +99,20 @@ const EditLiquidation = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={`${t("edit")} ${state?.data?.name}`} />
-      <LiquidationForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-        edit
-      />
-    </div>
+      <div className="container">
+        <LiquidationForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+          edit
+        />
+      </div>
+    </>
   );
 };
 

@@ -34,7 +34,7 @@ const LiquidationDetails = () => {
     <>
       <div className={`container`}>
         <div className={styles.page__header}>
-          <PageHeader title={product?.name} />
+          <PageHeader title={product?.name} backBtnStyle={{ right: "0" }} />
           {permission && (
             <div className={styles.header__btns}>
               <button

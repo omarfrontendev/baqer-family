@@ -20,6 +20,7 @@
         font-size: 34px;
         display: flex;
         align-items: center;
+        z-index: 10;
         .header__btn {
             width: 24px;
             height: 24px;
@@ -32,9 +33,6 @@
     }
 }
 .details__section {
-    // flex: 1;
-    width: 800px;
-    max-width: 100%;
     .title {
         font-weight: bold;
         font-size: 24px;
@@ -62,7 +60,6 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    > button,
     > a {
         padding: 12px 24px;
         border-radius: 7px;
@@ -77,8 +74,5 @@
         &.contact__box {
             background-color: #33CC6B;
         }
-    }
-    .book__btn {
-        background-color: $main__blue__color;
     }
 }

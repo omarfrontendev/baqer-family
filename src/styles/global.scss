@@ -10,6 +10,7 @@ body {
     font-family: "Cairo", sans-serif;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    min-height: 200vh;
 }
 a,button {
     all: unset;

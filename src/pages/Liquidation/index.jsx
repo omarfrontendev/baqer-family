@@ -101,7 +101,10 @@ const Liquidation = () => {
             {products?.data?.map((product) => (
               <ProductBox
                 key={product?.id}
-                onGetProducts={onGetProducts}
+                onGetProducts={() => {
+                  onGetProducts();
+                  onGetSlider();
+                }}
                 product={product}
                 permission={permission}
               />

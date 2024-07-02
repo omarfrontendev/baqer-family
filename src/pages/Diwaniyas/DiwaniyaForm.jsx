@@ -155,11 +155,15 @@ const DiwaniyaForm = ({
         defaultDate
       />
 
+      {console.log(options)}
+
       <div className={styles.days__container}>
         <h5 className={styles.days__title}>أضف يوم و وقت الديوان</h5>
         <div style={{ position: "relative" }}>
           <Select
-            value={diwaniyaTime?.day || null}
+            value={
+              options?.find((item) => item?.value === diwaniyaTime?.day) || null
+            }
             styles={{
               control: (styles) => ({
                 ...styles,
@@ -175,12 +179,13 @@ const DiwaniyaForm = ({
               }),
             }}
             options={options}
-            onChange={(e) =>
+            onChange={(e) => {
+              console.log(e);
               setDiwaniyaTime({
                 ...diwaniyaTime,
                 day: e?.value,
-              })
-            }
+              });
+            }}
             placeholder={t("اختر اليوم")}
           />
         </div>

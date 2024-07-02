@@ -32,7 +32,7 @@ const SingleCongratulation = () => {
       <>
         <div className={`container`}>
           <div className={styles.page__header}>
-            <PageHeader title={location?.state?.data?.title} />
+            <PageHeader title={location?.state?.data?.title} backBtnStyle={{ right: 0 }} />
             {permission && (
               <div className={styles.header__btns}>
                 <button

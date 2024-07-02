@@ -40,38 +40,40 @@ const TechSupport = () => {
   };
 
   return (
-    <div className={`container`}>
+    <>
       <PageHeader title={t("TechSupportTitle")} backHref="/" />
-      <p className={styles.text}>يرجى إضافة عنوان ووصف للرسالة</p>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form__content}>
-        {/* Name */}
-        <MainInput
-          register={register}
-          placeholder={"العنوان"}
-          label="العنوان"
-          type="text"
-          name="title"
-          value={formData?.title}
-          error={errors?.title?.message}
-          required
-        />
-
-        {/* overview */}
-        <MainInput
-          register={register}
-          placeholder={t("inputs.description")}
-          type="textarea"
-          name="content"
-          value={formData?.content}
-          error={errors?.content?.message}
+      <div className={`container`}>
+        <p className={styles.text}>يرجى إضافة عنوان ووصف للرسالة</p>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form__content}>
+          {/* Name */}
+          <MainInput
+            register={register}
+            placeholder={"العنوان"}
+            label="العنوان"
+            type="text"
+            name="title"
+            value={formData?.title}
+            error={errors?.title?.message}
             required
-        />
+          />
 
-        <MainButton loading={loading} disabled={loading} type="submit">
-          إرسال
-        </MainButton>
-      </form>
-    </div>
+          {/* overview */}
+          <MainInput
+            register={register}
+            placeholder={t("inputs.description")}
+            type="textarea"
+            name="content"
+            value={formData?.content}
+            error={errors?.content?.message}
+              required
+          />
+
+          <MainButton loading={loading} disabled={loading} type="submit">
+            إرسال
+          </MainButton>
+        </form>
+      </div>
+    </>
   );
 }
 

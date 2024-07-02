@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, ForgetPassword, FreeBusiness, Home, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
+import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
 import { PagesGuard } from './components/AuthGuard';
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-quill/dist/quill.snow.css";
@@ -16,6 +16,7 @@ const App = () => {
     if(default_page === 0) {
       navigate("/welcome")
     }
+    Cookies.set("visitHome", false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -25,8 +26,9 @@ const App = () => {
       <Routes>
         <Route path="" element={<PagesGuard />}>
           <Route path="" element={<MainLayout />}>
-            <Route path="/welcome" element={<WelcomePage />} />
             <Route path="/" element={<Home />} />
+            <Route path="/welcome" element={<WelcomePage />} />
+            <Route path="/inquiries" element={<Inquiries />} />
             <Route path="/free-business" element={<FreeBusiness />} />
             <Route
               path="/free-business/:slug"
@@ -36,7 +38,8 @@ const App = () => {
               path="/free-business/:slug/request"
               element={<UserFreelanceRequest />}
             />
-            <Route path="/profile/:slug" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
             {/* ========== diwaniyas ========== */}
             <Route path="/diwaniyas" element={<Diwaniyas />} />
             <Route path="/diwaniyas/:slug" element={<SingleDiwaniya />} />

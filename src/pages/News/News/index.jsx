@@ -38,57 +38,62 @@ const News = () => {
   }, []);
 
   return (
-    <div className={`${styles.page} container`}>
+    <>
       <PageHeader title={t("news")} backHref="/" />
-      {SliderError ? (
-        <Error msg={SliderError?.message} />
-      ) : (
-        <MainSlider
-          loading={sliderLoading}
-          images={slider?.data?.filter((item) => {
-            if (item?.image) {
-              return {
-                image: item?.image,
-                ...item,
-              };
-            }
-          })}
-          type="news"
-        />
-      )}
-      {permission && <Link to={`/news/add`} className={styles.add__btn}>
-        {t("AddNewNews")} <IoMdAdd />
-      </Link>}
-      {newsLoading ? (
-        <div className={styles.list}>
-          {Array(5)
-            ?.fill("")
-            ?.map((_, i) => (
-              <Skeleton
-                key={i}
-                width="100%"
-                height="213px"
-                borderRadius="4px"
+      <div className={`${styles.page} container`}>
+        {SliderError ? (
+          <Error msg={SliderError?.message} />
+        ) : (
+          <MainSlider
+            loading={sliderLoading}
+            images={slider?.data?.filter((item) => {
+              if (item?.image) {
+                return {
+                  image: item?.image,
+                  ...item,
+                };
+              }
+            })}
+            type="news"
+          />
+        )}
+        {permission && <Link to={`/news/add`} className={styles.add__btn}>
+          {t("AddNewNews")} <IoMdAdd />
+        </Link>}
+        {newsLoading ? (
+          <div className={styles.list}>
+            {Array(5)
+              ?.fill("")
+              ?.map((_, i) => (
+                <Skeleton
+                  key={i}
+                  width="100%"
+                  height="213px"
+                  borderRadius="4px"
+                />
+              ))}
+          </div>
+        ) : newsError ? (
+          <Error msg={newsLoading?.message} />
+        ) : news?.data?.length ? (
+          <div className={styles.list}>
+            {news?.data?.map((singleNew) => (
+              <Box
+                permission={permission}
+                key={singleNew?.id}
+                diwaniya={singleNew}
+                onGetList={() => {
+                  onGetNews();
+                  onGetSlider();
+                }}
               />
             ))}
-        </div>
-      ) : newsError ? (
-        <Error msg={newsLoading?.message} />
-      ) : news?.data?.length ? (
-        <div className={styles.list}>
-          {news?.data?.map((singleNew) => (
-            <Box
-              permission={permission}
-              key={singleNew?.id}
-              diwaniya={singleNew}
-              onGetList={onGetNews}
-            />
-          ))}
-        </div>
-      ) : (
-        <EmptyList text="لا يوجد أي أخبار في الوقت الراهن، الآن يمكنك إضافة الأخبار" />
-      )}
-    </div>
+          </div>
+        ) : (
+          <EmptyList text="لا يوجد أي أخبار في الوقت الراهن، الآن يمكنك إضافة الأخبار" />
+        )}
+      </div>
+    </>
   );
 }
 

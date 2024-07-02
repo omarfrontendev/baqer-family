@@ -95,17 +95,19 @@ const AddNewDiwaniya = () => {
   }
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={t("addNewDiwaniya")} />
-      <DiwaniyaForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <DiwaniyaForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+        />
+      </div>
+    </>
   );
 }
 

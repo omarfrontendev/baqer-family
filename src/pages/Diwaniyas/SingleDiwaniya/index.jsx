@@ -53,8 +53,8 @@ const SingleDiwaniya = () => {
 
   return (
     <>
+      <PageHeader title={state?.data || "Unknown"} backHref={"/diwaniyas"} />
       <div className={`container`}>
-        <PageHeader title={state?.data || "Unknown"} backHref={"/diwaniyas"} />
         <div className={styles.page__header}>
           {permission && (
             <Link to={`/diwaniyas/add/${slug}`} className={styles.header__btn}>

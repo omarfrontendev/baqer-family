@@ -71,17 +71,19 @@ const AddCongratulations = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <PageHeader title={t("AddNewCongratulation")} />
-      <CongratulationsForm
-        onSubmit={handleSubmit((e) => onSubmit(e))}
-        control={control}
-        register={register}
-        formData={watch()}
-        errors={errors}
-        submitting={submitting}
-      />
-    </div>
+      <div className="container">
+        <CongratulationsForm
+          onSubmit={handleSubmit((e) => onSubmit(e))}
+          control={control}
+          register={register}
+          formData={watch()}
+          errors={errors}
+          submitting={submitting}
+        />
+      </div>
+    </>
   );
 };
 
