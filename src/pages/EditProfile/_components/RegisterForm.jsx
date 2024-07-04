@@ -198,8 +198,10 @@ const RegisterForm = () => {
     if (isFreelance === "no") setValue("company", {});
   }, [isFreelance, setValue]);
 
-
   const onSubmit = async (data) => {
+    // console.log(data)
+    // console.log(data?.company?.companyName);
+    // return;
     setSubmitting(true);
     const body = {
       first_name: data?.firstName,
@@ -235,42 +237,40 @@ const RegisterForm = () => {
     };
 
     try {
-      const res = await onRegister(body, t("registerSuccessfully"));
-      console.log(res)
-      if(res?.success) {
+      if(typeof(data?.photo) !== "string") {
         const formdata = new FormData();
         formdata.append("image", data?.photo);
         formdata.append("type", "profile");
-        formdata.append("user_id", res?.data?.id);
+        formdata.append("user_id", userData?.id);
         const requestOptions = {
           method: "POST",
           body: formdata,
           redirect: "follow",
         };
-        const res2 = await fetch(
-          `https://fasterlink.me/api/upload-image?user_id=${res?.data?.id}`,
+        await fetch(
+          `https://fasterlink.me/api/upload-image?user_id=${userData?.id}`,
           requestOptions
         );
-        if(data?.company?.company__image) {
+        if (data?.company?.company__image && typeof data?.company?.company__image !== "string") {
           const formdata2 = new FormData();
-            formdata2.append("image", data?.company?.company__image);
-            formdata2.append("type", "company");
-            formdata2.append("user_id", res?.data?.id);
-            const requestOptions2 = {
-              method: "POST",
-              body: formdata2,
-              redirect: "follow",
-            };
-            await fetch(
-              `https://fasterlink.me/api/upload-image?user_id=${res?.data?.id}`,
-              requestOptions2
-            );
+          formdata2.append("image", data?.company?.company__image);
+          formdata2.append("type", "company");
+          formdata2.append("user_id", userData?.id);
+          const requestOptions2 = {
+            method: "POST",
+            body: formdata2,
+            redirect: "follow",
+          };
+          await fetch(
+            `https://fasterlink.me/api/upload-image?user_id=${userData?.id}`,
+            requestOptions2
+          );
         }
-
-        setSubmitting(false);
-        Cookies.set("user", JSON.stringify(res?.data));
-        res?.success && res2 && navigate("/profile");
       }
+      const res = await onRegister(body, t("registerSuccessfully"));
+      setSubmitting(false);
+      res?.success && Cookies.set("user", JSON.stringify(res?.data));
+      res?.success && navigate("/profile");
     } catch (err) {
       console.log(err)
       setSubmitting(false);

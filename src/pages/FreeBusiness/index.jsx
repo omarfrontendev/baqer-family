@@ -1,32 +1,48 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import slideImage from '../../assets/business@2x.png';
 import MainSlider from '../../components/UI/MainSlider';
-import { Loading, MainBox } from '../../components';
+import { Error, Loading, MainBox } from '../../components';
 import { useApi } from '../../hooks/useApi';
 import { PageHeader } from '../../layout';
 import styles from './.module.scss';
 
 const FreeBusiness = () => {
-
   const { t } = useTranslation();
 
   // get freeBusiness
-  const { data, loading, onRequest } = useApi(
-    "/api/freelanceJob",
-    "get"
-  );
+  const { data, loading, onRequest } = useApi("/api/freelanceJob", "get");
+
+  // get Occasion slider:=
+  const {
+    data: slider,
+    loading: sliderLoading,
+    onRequest: onGetSlider,
+    error: SliderError,
+  } = useApi("/api/viewSlider", "get");
 
   useEffect(() => {
-      onRequest();
+    onRequest();
+    onGetSlider();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onGetSliderImages = (data) => {
+    return data?.map((item) => item?.images[0]);
+  };
 
   return (
     <div className={`${styles.page} container`}>
       <PageHeader title={t("FreeBusiness")} backHref="/" />
-      <MainSlider images={[slideImage]} />
+      {SliderError ? (
+        <Error msg={SliderError?.message} />
+      ) : (
+        <MainSlider
+          loading={sliderLoading}
+          images={onGetSliderImages(slider?.data)}
+          type="occasions"
+        />
+      )}
+
       {loading ? (
         <Loading />
       ) : (

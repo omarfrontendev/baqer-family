@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import DefaultCover from '../../../assets/DefaultCover.png';
@@ -22,7 +22,7 @@ const MainSlider = ({ images, height, breakpoints, loading, type }) => {
         navigate(`/${type}/${img?.id}`, { state: { data: img } });
         return;
       }
-  }
+  };
 
   return (
     <Swiper

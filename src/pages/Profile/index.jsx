@@ -25,7 +25,7 @@ const Profile = () => {
         </div>
         <img
           src={
-            //   userData?.profile_picture ||
+              userData?.profile_picture ||
             "https://www.pngitem.com/pimgs/m/551-5510463_default-user-image-png-transparent-png.png"
           }
           alt="user__image"

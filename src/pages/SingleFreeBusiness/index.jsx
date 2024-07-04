@@ -34,7 +34,6 @@ const SingleFreeBusiness = () => {
       return (
         <div className={`${styles.page} container`}>
           <PageHeader />
-          {/* {loading ? <Loading /> : ""} */}
           <img
             className={styles.company__image}
             src={
@@ -46,6 +45,7 @@ const SingleFreeBusiness = () => {
           <h4 className={styles.title}>
             {data?.data?.company_name || data?.data}
           </h4>
+          <p className={styles.points}>النقاط: {data?.data?.satisfied} </p>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
@@ -104,11 +104,13 @@ const SingleFreeBusiness = () => {
             </a>
           </div>
           <div className={styles.footer__btn}>
-            <button 
+            <button
               onClick={() => {
                 navigate("request", { state: { data: data?.data } });
               }}
-               to="request" className={styles.btn__orange}>
+              to="request"
+              className={styles.btn__orange}
+            >
               استفسار
             </button>
             <a

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -6,21 +6,23 @@ import * as yup from "yup";
 import styles from './.module.scss';
 import { useApi } from '../../hooks/useApi';
 import { PageHeader } from '../../layout';
-import { MainButton, MainInput } from '../../components';
+import { MainButton, MainInput, Popup } from '../../components';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ModalContext } from '../../context/ModalContext';
 
 const UserFreelanceRequest = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
   const freelance = state?.data;
   const navigate = useNavigate();
+  const { idModal, setIdModal } = useContext(ModalContext);
   
   useEffect(() => {
     if(!freelance) {
         navigate("/free-business");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [freelance])
+  }, [freelance]);
 
   // ADD SCHEMA
   const schema = yup.object({
@@ -62,12 +64,25 @@ const UserFreelanceRequest = () => {
   const { onRequest, loading } = useApi("/api/user_freelance_request", "post");
 
   const onSubmit = async (e) => {
+    setIdModal("service-inquiry");
+    // const res = await onRequest({
+    //   ...e,
+    //   freelance_id: freelance?.id,
+    // });
+    // res?.success && reset(); 
+  };
+
+  const onSendInquiry = async (data) => {
+    setIdModal("")
     const res = await onRequest({
-      ...e,
+      ...data,
       freelance_id: freelance?.id,
     });
-    res?.success && reset(); 
-  };
+    if(res?.success) {
+      reset();
+      navigate(`/free-business/${freelance?.id}`);
+    }
+  }
 
   return (
     <div className={`container`}>
@@ -120,6 +135,34 @@ const UserFreelanceRequest = () => {
           إرسال
         </MainButton>
       </form>
+      {idModal === "service-inquiry" && (
+        <Popup>
+          <h5 className={styles.popup__title}>هل أنت راض عن الخدمة؟</h5>
+          <div className={styles.btn}>
+            <MainButton
+              onClick={() =>
+                onSendInquiry({
+                  ...formData,
+                  satisfied: 1,
+                })
+              }
+            >
+              راضي
+            </MainButton>
+            <MainButton
+              style={{ background: "#E92121" }}
+              onClick={() =>
+                onSendInquiry({
+                  ...formData,
+                  satisfied: 0,
+                })
+              }
+            >
+              غير راضى
+            </MainButton>
+          </div>
+        </Popup>
+      )}
     </div>
   );
 }

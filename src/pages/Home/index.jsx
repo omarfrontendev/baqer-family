@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BlogBox, EmptyList, Error, MainBox, MainSlider } from '../../components';
 import { useTranslation } from 'react-i18next';
 import { images } from './_components/images';
-import imageSlider from '../../assets/slide@2x.png'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -100,7 +99,7 @@ const Home = () => {
 
   return (
     <>
-    <div style={{ height: "40px" }}></div>
+      <div style={{ height: "40px" }}></div>
       <div className={styles.page}>
         <div className={`${styles.content} container`}>
           {/* Slider */}
