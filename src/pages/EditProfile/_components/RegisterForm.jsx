@@ -192,53 +192,50 @@ const RegisterForm = () => {
   const { onRequest: onRegister } = useApi("/api/updateProfile", "post");
   
   useEffect(() => {
-    if (!isWork) setValue("work", {});
+    if (!isWork) {
+      setValue("work", {
+        workPlaceName: ""
+      });
+    } else if(isWork) {
+      setValue("work", {
+        workType: userData?.workplace_type,
+        workPlaceName: userData?.workplace_name,
+        serviceType: userData?.workplace_service_type,
+        description: userData?.workplace_description,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWork, setValue]);
 
   useEffect(() => {
-    if (isFreelance === "no") setValue("company", {});
+    if (isFreelance === "no"){
+       setValue("company", {
+         companyName: "",
+       });
+    } else if(isFreelance === "yes") {
+        setValue("company", {
+          company__image: userData?.company_picture,
+          companyName: userData?.freelance_company_name,
+          description: userData?.freelance_description,
+          managerName: userData?.freelance_employer_name,
+          email: userData?.freelance_email,
+          phone: userData?.freelance_contact_number,
+          whatsapp: userData?.whats_app_number,
+          instagram: userData?.instagram,
+          twitter: userData?.twitter,
+          facebook: userData?.facebook,
+          location: {
+            lat: userData?.lat,
+            lng: userData?.long,
+          },
+          address: userData?.company_address,
+        });
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFreelance, setValue]);
-
-  console.log(watch().work);
 
   const onSubmit = async (data) => {
     setSubmitting(true);
-    {
-    //   "user_id":25,
-    // "first_name" : "first_name1",
-    // "second_name" : "second_name2",
-    // "third_name" : "third_name3",
-    // "fourth_name" : "fourth_name",
-    // "gender": "male", // required
-    // "phone_number": "22222", // required
-    // "email": "omar@gmail.com", // required | unique
-    // "civil_number": "1231191", // required | unique
-    // "residential_address": "1234 Main St",
-    // "date_of_birth": "1990-01-01", // required | unique
-    // "password": "", // required | unique
-   
-    // "workplace_name": "Company Inc.",
-    // "workplace_type": "sub",
-    // "workplace_service_type": "serviceType",
-    // "workplace_description": "A great place to work",
-    // "freelance_company_name": "Freelance Inc.",
-    // "freelance_description": "Freelance services",
-    // "freelance_employer_name": "Self",
-    // "freelance_contact_number": "0987654321",
-    // "company_address": "5678 Secondary St",
-    // "show_workspace_name" : "true", // 
-    // "freelance_contact_type" : "رقم هاتف", // إمكانية تحديد اتصال هاتف او واتس اب او كلاهم
-    // "whats_app_number": "1235355998",
-    // "show_data" : true , // ظهار البيانات الشخصية لصاحب العمل
-    // "role": "user",
-
-    // "whats_app_number":"1",
-    // "instagram":"2",
-    //  "twitter":"3",
-    // "facebook":"4",
-    // "lat":"33",
-    // "long":"55"
-}
     const body = {
       first_name: data?.firstName,
       second_name: data?.secondName,
@@ -260,7 +257,7 @@ const RegisterForm = () => {
       freelance_description: data?.company?.description,
       freelance_employer_name: data?.company?.managerName,
       freelance_contact_number: data?.company?.phone,
-      free_lance_email: data?.company?.email,
+      freelance_email: data?.company?.email,
       company_address: data?.company?.address,
       whats_app_number: data?.company?.whatsapp,
       instagram: data?.company?.instagram,
