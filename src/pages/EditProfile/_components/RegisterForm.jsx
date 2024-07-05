@@ -157,6 +157,7 @@ const RegisterForm = () => {
       birthDate: userData?.date_of_birth,
       workPlace: userData?.workplace_name ? "yes" : "no",
       work: {
+        workType: userData?.workplace_type,
         workPlaceName: userData?.workplace_name,
         serviceType: userData?.workplace_service_type,
         description: userData?.workplace_description,
@@ -198,11 +199,46 @@ const RegisterForm = () => {
     if (isFreelance === "no") setValue("company", {});
   }, [isFreelance, setValue]);
 
+  console.log(watch().work);
+
   const onSubmit = async (data) => {
-    // console.log(data)
-    // console.log(data?.company?.companyName);
-    // return;
     setSubmitting(true);
+    {
+    //   "user_id":25,
+    // "first_name" : "first_name1",
+    // "second_name" : "second_name2",
+    // "third_name" : "third_name3",
+    // "fourth_name" : "fourth_name",
+    // "gender": "male", // required
+    // "phone_number": "22222", // required
+    // "email": "omar@gmail.com", // required | unique
+    // "civil_number": "1231191", // required | unique
+    // "residential_address": "1234 Main St",
+    // "date_of_birth": "1990-01-01", // required | unique
+    // "password": "", // required | unique
+   
+    // "workplace_name": "Company Inc.",
+    // "workplace_type": "sub",
+    // "workplace_service_type": "serviceType",
+    // "workplace_description": "A great place to work",
+    // "freelance_company_name": "Freelance Inc.",
+    // "freelance_description": "Freelance services",
+    // "freelance_employer_name": "Self",
+    // "freelance_contact_number": "0987654321",
+    // "company_address": "5678 Secondary St",
+    // "show_workspace_name" : "true", // 
+    // "freelance_contact_type" : "رقم هاتف", // إمكانية تحديد اتصال هاتف او واتس اب او كلاهم
+    // "whats_app_number": "1235355998",
+    // "show_data" : true , // ظهار البيانات الشخصية لصاحب العمل
+    // "role": "user",
+
+    // "whats_app_number":"1",
+    // "instagram":"2",
+    //  "twitter":"3",
+    // "facebook":"4",
+    // "lat":"33",
+    // "long":"55"
+}
     const body = {
       first_name: data?.firstName,
       second_name: data?.secondName,
@@ -251,21 +287,21 @@ const RegisterForm = () => {
           `https://fasterlink.me/api/upload-image?user_id=${userData?.id}`,
           requestOptions
         );
-        if (data?.company?.company__image && typeof data?.company?.company__image !== "string") {
-          const formdata2 = new FormData();
-          formdata2.append("image", data?.company?.company__image);
-          formdata2.append("type", "company");
-          formdata2.append("user_id", userData?.id);
-          const requestOptions2 = {
-            method: "POST",
-            body: formdata2,
-            redirect: "follow",
-          };
-          await fetch(
-            `https://fasterlink.me/api/upload-image?user_id=${userData?.id}`,
-            requestOptions2
-          );
-        }
+      }
+      if (data?.company?.company__image && typeof data?.company?.company__image !== "string") {
+        const formdata2 = new FormData();
+        formdata2.append("image", data?.company?.company__image);
+        formdata2.append("type", "company");
+        formdata2.append("user_id", userData?.id);
+        const requestOptions2 = {
+          method: "POST",
+          body: formdata2,
+          redirect: "follow",
+        };
+        await fetch(
+          `https://fasterlink.me/api/upload-image?user_id=${userData?.id}`,
+          requestOptions2
+        );
       }
       const res = await onRegister(body, t("registerSuccessfully"));
       setSubmitting(false);
