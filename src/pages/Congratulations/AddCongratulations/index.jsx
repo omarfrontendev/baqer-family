@@ -21,8 +21,27 @@ const AddCongratulations = () => {
     name: yup.string("").required(t("errors.required")),
     description: yup.string("").required(t("errors.required")),
     images: yup.array().min(1, "at least 1 item").required("image is required"),
-    start_date: yup.string().required(t("errors.required")),
-    end_date: yup.string().required(t("errors.required")),
+    start_date: yup.string().required(t("errors.required")).test(
+        "is-smaller",
+        "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء",
+        function (value) {
+          const { end_date } = this.parent;
+          return !end_date || !value || new Date(value) < new Date(end_date);
+        }
+      ),
+    end_date: yup
+      .string()
+      .required(t("errors.required"))
+      .test(
+        "is-greater",
+        "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء",
+        function (value) {
+          const { start_date } = this.parent;
+          return (
+            !start_date || !value || new Date(value) > new Date(start_date)
+          );
+        }
+      ),
   });
 
   const {

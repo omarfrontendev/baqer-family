@@ -5,6 +5,7 @@ import ErrorMessage from '../../UI/ErrorMessage';
 import { Calendar } from 'react-date-range';
 import dayjs from 'dayjs';
 import { ar } from 'date-fns/locale';
+import { useLocation } from 'react-router-dom';
 
 const DatePicker = ({
   control,
@@ -12,9 +13,12 @@ const DatePicker = ({
   error,
   date,
   type = "الديوان",
-  defaultDate,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
+
+  const { pathname } = useLocation();
+
+  const addPage = pathname.includes('add');
 
   // CLOSE DATE PICKER
   useEffect(() => {
@@ -72,14 +76,13 @@ const DatePicker = ({
             >
               <Calendar
                 onBlur={onBlur}
-                date={
-                  date || defaultDate
-                    ? new Date()
-                    : new Date(1995, 0, 1)
-                }
+                date={date || new Date() || new Date(1995, 0, 1)}
                 onChange={(e) => onChange(e)}
                 locale={ar}
                 color="#26C0FF" // Custom color
+                disabledDay={(date) =>
+                  addPage && date < new Date().setDate(new Date().getDate() - 1)
+                }
               />
             </div>
           )}
