@@ -27,8 +27,15 @@ const FreeBusiness = () => {
   }, []);
 
   const onGetSliderImages = (data) => {
-    return data?.map((item) => item?.images[0]);
+    return data?.map((item) => {
+      return {
+        image: item?.company_image,
+        id: item?.id,
+      };
+    });
   };
+
+  // console.log(slider?.data?.map(item => item?.images));
 
   return (
     <div className={`${styles.page} container`}>
@@ -39,7 +46,7 @@ const FreeBusiness = () => {
         <MainSlider
           loading={sliderLoading}
           images={onGetSliderImages(slider?.data)}
-          type="occasions"
+          type="free-business"
         />
       )}
 

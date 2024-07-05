@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import DefaultCover from '../../../assets/DefaultCover.png';
@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 const MainSlider = ({ images, height, breakpoints, loading, type }) => {
 
   const navigate = useNavigate();
+
+  console.log(images);
 
   const NavigateToPage = (img) => {
     if (!type) return;
@@ -67,7 +69,9 @@ const MainSlider = ({ images, height, breakpoints, loading, type }) => {
               >
                 <img
                   className={styles.slider__img}
-                  src={img?.image || img || DefaultCover}
+                  src={
+                    typeof img === "string" ? img : img?.image || DefaultCover
+                  }
                   alt="slider_image"
                 />
               </div>
