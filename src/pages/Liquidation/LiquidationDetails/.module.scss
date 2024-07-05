@@ -60,6 +60,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    .book__btn,
     > a {
         padding: 12px 24px;
         border-radius: 7px;
@@ -73,6 +74,9 @@
         font-size: 14px;
         &.contact__box {
             background-color: #33CC6B;
+        }
+        &.book__btn {
+            background-color: $main__blue__color;
         }
     }
 }
