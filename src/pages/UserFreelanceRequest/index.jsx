@@ -65,11 +65,6 @@ const UserFreelanceRequest = () => {
 
   const onSubmit = async (e) => {
     setIdModal("service-inquiry");
-    // const res = await onRequest({
-    //   ...e,
-    //   freelance_id: freelance?.id,
-    // });
-    // res?.success && reset(); 
   };
 
   const onSendInquiry = async (data) => {
@@ -86,7 +81,7 @@ const UserFreelanceRequest = () => {
 
   return (
     <div className={`container`}>
-      <PageHeader />
+      <PageHeader title="إرسال إستفسار" />
       <img
         className={styles.company__image}
         src={

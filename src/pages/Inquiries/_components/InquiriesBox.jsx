@@ -10,10 +10,6 @@ const InquiriesBox = ({ content, date, name, phoneNumber, newPhoneNumber }) => {
         <h4 className={styles.title}>استفسار جديد</h4>
       </div>
       <p className={styles.text}>
-        <span>اسم المنتج:</span>
-        {content}
-      </p>
-      <p className={styles.text}>
         <span>اسم المستخدم:</span>
         {name}
       </p>
@@ -24,6 +20,10 @@ const InquiriesBox = ({ content, date, name, phoneNumber, newPhoneNumber }) => {
       <p className={styles.text}>
         <span>رقم الهاتف الإضافي:</span>
         {newPhoneNumber}
+      </p>
+      <p className={styles.text}>
+        <span>:الاستفسار:</span>
+        {content}
       </p>
       <span className={styles.date}>{date}</span>
     </div>

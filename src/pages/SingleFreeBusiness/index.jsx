@@ -33,7 +33,7 @@ const SingleFreeBusiness = () => {
     );
       return (
         <div className={`${styles.page} container`}>
-          <PageHeader />
+          <PageHeader backHref="/free-business" />
           <img
             className={styles.company__image}
             src={
