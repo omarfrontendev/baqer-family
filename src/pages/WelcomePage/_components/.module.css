@@ -1,0 +1,30 @@
+.title {
+  margin-bottom: 32px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+}
+
+.checkbox {
+  color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.input:checked + .checkbox {
+  color: #26C0FF;
+  border-color: transparent;
+  width: 24px;
+  height: 24px;
+}/*# sourceMappingURL=.module.css.map */

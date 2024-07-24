@@ -12,8 +12,6 @@ const MainSlider = ({ images, height, breakpoints, loading, type }) => {
 
   const navigate = useNavigate();
 
-  console.log(images);
-
   const NavigateToPage = (img) => {
     if (!type) return;
       if (type === "diwaniyas") {

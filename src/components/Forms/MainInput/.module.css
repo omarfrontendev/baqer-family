@@ -1,0 +1,147 @@
+.input__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.input__container .label {
+  color: #474747;
+  font-size: 16px;
+  text-transform: capitalize;
+  margin-bottom: 0;
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  opacity: 0;
+  scale: 0;
+  transition: 0.3s ease-in-out;
+}
+.input__container .label.focus {
+  opacity: 1;
+  scale: 1;
+  font-size: 14px;
+  top: 0;
+  background: #FFF;
+  z-index: 0;
+  padding: 0 5px;
+  right: 19px;
+  color: #26C0FF;
+  font-weight: 600;
+}
+.input__container .input__box {
+  position: relative;
+  width: 100%;
+}
+.input__container .input__box .input {
+  height: 64px;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
+  padding-right: 57px;
+  padding-left: 20px;
+  box-sizing: inherit;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+}
+.input__container .input__box .input[type=password] {
+  padding-left: 40px;
+}
+.input__container .input__box .input:focus {
+  border-color: #26C0FF;
+}
+.input__container .input__box .input:focus::-moz-placeholder {
+  opacity: 0 !important;
+}
+.input__container .input__box .input:focus::placeholder {
+  opacity: 0 !important;
+}
+.input__container .input__box .input:focus + .icon {
+  color: #26C0FF;
+}
+.input__container .input__box .input:focus + .label {
+  opacity: 1;
+  scale: 1;
+  font-size: 14px;
+  top: 0;
+  background: #FFF;
+  z-index: 1;
+  padding: 0 5px;
+  right: 19px;
+  color: #26C0FF;
+  font-weight: 600;
+}
+.input__container .input__box .input.input__invalid {
+  border-color: #E92121;
+}
+.input__container .input__box .input.input__invalid + .label, .input__container .input__box .input.input__invalid + .icon {
+  color: #E92121;
+}
+.input__container .input__box .input.input__invalid::-moz-placeholder {
+  color: #E92121;
+  opacity: 1;
+}
+.input__container .input__box .input.input__invalid::placeholder {
+  color: #E92121;
+  opacity: 1;
+}
+.input__container .input__box .input::-moz-placeholder {
+  color: #000000;
+  opacity: 0.3;
+  font-size: 16px;
+  text-transform: capitalize;
+  -moz-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.input__container .input__box .input::placeholder {
+  color: #000000;
+  opacity: 0.3;
+  font-size: 16px;
+  text-transform: capitalize;
+  transition: 0.3s ease-in-out;
+}
+.input__container .input__box .input.textarea {
+  padding: 22px 17px;
+  min-height: 118px;
+}
+.input__container .input__box .input.no__icon {
+  padding-right: 22px;
+}
+.input__container .input__box .icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 10px;
+  color: #b2b2b2;
+  font-size: 27px;
+  display: flex;
+}
+.input__container .input__box .eyeIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 13px;
+  color: #b2b2b2;
+  font-size: 22px;
+}
+.input__container .err__msg {
+  position: absolute;
+  left: 10px;
+  bottom: -25px;
+  font-size: 14px;
+  color: #E92121;
+}
+
+@media (max-width: 575px) {
+  .input__container .input__box .input {
+    height: 50px;
+  }
+  .input__container .err__msg {
+    font-size: 12px;
+  }
+}/*# sourceMappingURL=.module.css.map */

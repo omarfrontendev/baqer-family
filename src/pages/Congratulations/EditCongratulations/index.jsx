@@ -74,8 +74,6 @@ const EditCongratulations = () => {
     mode: "all",
   });
 
-  console.log(watch())
-
   // send congratulations
   const { onRequest: onUpdateCongratulations } = useApi(
     "/api/editCongratulate",

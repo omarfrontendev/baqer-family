@@ -14,9 +14,6 @@ const uploadFile = async (body) => {
         body: formdata,
         redirect: "follow",
     };
-    // const timeout = setTimeout(() => {
-    //     toast.info("يرجى الانتظار حتى الانتهاء من تحميل صورتك");
-    // }, 200);
     await fetch(
       `https://fasterlink.me/api/uploadMultipleImage`,
       requestOptions

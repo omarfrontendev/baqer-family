@@ -1,0 +1,41 @@
+.page {
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.page .login__form {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.page .login__form .submit__btn {
+  display: flex;
+  width: 100%;
+  margin: 40px auto 24px;
+}
+.page .login__form .submit__btn > button {
+  width: 100%;
+}
+.page .login__form .forget__pass {
+  text-align: center;
+  color: #0D49C3;
+  font-weight: 500;
+  display: block;
+}
+.page .register__btn {
+  margin-top: 40px;
+  text-align: center;
+  color: #9A9A9A;
+}
+.page .register__btn a {
+  font-weight: 600;
+  color: #26C0FF;
+}
+
+@media (max-width: 575px) {
+  .page {
+    padding: 40px 14px;
+  }
+}/*# sourceMappingURL=.module.css.map */

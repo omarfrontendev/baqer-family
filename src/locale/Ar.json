@@ -70,6 +70,13 @@
   "TechSupportTitle": "خدمات ودعم فني",
   "Notifications": "الإشعارات",
   "recall": "استدعاء",
+  "name": "الاسم",
+  "chooseParent": "اختر الأب",
+  "maritalStatus": "الحالة الاجتماعية",
+  "WifesSection": "قسم الزوجة",
+  "HusbandSection": "قسم الزوج",
+  "yes": "نعم",
+  "no": "لا",
   "errors": {
     "required": "هذا الحقل مطلوب",
     "min__length__8": "كلمة المرور يجب أن تكون أكثر من 8 أحرف",

@@ -12,10 +12,12 @@ import { useApi } from '../../hooks/useApi';
 import OccasionsModal from './_components/OccasionsModal';
 import Skeleton from 'react-loading-skeleton';
 import Cookies from "js-cookie";
+import TreeView from './_components/TreeView';
 
 const Home = () => {
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
+  const { default_page } = JSON.parse(Cookies.get("user"));
 
   const sections = [
     {
@@ -97,105 +99,108 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [occasionsRes?.success]);
 
-  return (
-    <>
-      <div style={{ height: "40px" }}></div>
-      <div className={styles.page}>
-        <div className={`${styles.content} container`}>
-          {/* Slider */}
-          {SliderError ? (
-            <Error msg={SliderError?.message} />
-          ) : (
-            <MainSlider
-              loading={sliderLoading}
-              images={slider?.data?.filter((item) => {
-                if (item?.image) {
-                  return {
-                    image: item?.image,
-                    ...item,
-                  };
-                }
-              })}
-              type="congratulations"
-            />
-          )}
-          {/* Sections */}
-          <section className={styles.section}>
-            <h3 className={styles.title}>{t("sections")}</h3>
-            <div className={`${styles.list} list`}>
-              {sections?.map((section, i) => (
-                <MainBox
-                  key={i}
-                  title={section?.title}
-                  image={images[i]}
-                  href={section.href}
-                />
-              ))}
-            </div>
-          </section>
+  return <TreeView />
+  
+  // if (default_page === 1) return <TreeView />
+    return (
+      <>
+        <div style={{ height: "40px" }}></div>
+        <div className={styles.page}>
+          <div className={`${styles.content} container`}>
+            {/* Slider */}
+            {SliderError ? (
+              <Error msg={SliderError?.message} />
+            ) : (
+              <MainSlider
+                loading={sliderLoading}
+                images={slider?.data?.filter((item) => {
+                  if (item?.image) {
+                    return {
+                      image: item?.image,
+                      ...item,
+                    };
+                  }
+                })}
+                type="congratulations"
+              />
+            )}
+            {/* Sections */}
+            <section className={styles.section}>
+              <h3 className={styles.title}>{t("sections")}</h3>
+              <div className={`${styles.list} list`}>
+                {sections?.map((section, i) => (
+                  <MainBox
+                    key={i}
+                    title={section?.title}
+                    image={images[i]}
+                    href={section.href}
+                  />
+                ))}
+              </div>
+            </section>
 
-          {/* News */}
-          <section className={styles.section}>
-            <h3 className={styles.title}>آخر أخبار العائلة</h3>
-            <Swiper
-              slidesPerView={1.5}
-              cssMode={false} // Enable Swiper native transitions for better control
-              spaceBetween={10}
-              pagination={{
-                clickable: true,
-              }}
-              breakpoints={{
-                400: {
-                  slidesPerView: 2.5,
-                },
-                768: {
-                  slidesPerView: 4,
-                },
-                1024: {
-                  slidesPerView: 6,
-                },
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-            >
-              {newsLoading ? (
-                <div className={styles.list}>
-                  {Array(10)
-                    ?.fill("")
-                    ?.map((_, i) => (
+            {/* News */}
+            <section className={styles.section}>
+              <h3 className={styles.title}>آخر أخبار العائلة</h3>
+              <Swiper
+                slidesPerView={1.5}
+                cssMode={false} // Enable Swiper native transitions for better control
+                spaceBetween={10}
+                pagination={{
+                  clickable: true,
+                }}
+                breakpoints={{
+                  400: {
+                    slidesPerView: 2.5,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                  },
+                  1024: {
+                    slidesPerView: 6,
+                  },
+                }}
+                modules={[Pagination]}
+                className="mySwiper"
+              >
+                {newsLoading ? (
+                  <div className={styles.list}>
+                    {Array(10)
+                      ?.fill("")
+                      ?.map((_, i) => (
+                        <SwiperSlide key={i}>
+                          <Skeleton
+                            width="100%"
+                            height="348px"
+                            borderRadius="4px"
+                          />
+                        </SwiperSlide>
+                      ))}
+                  </div>
+                ) : newsError ? (
+                  <Error msg={newsLoading?.message} />
+                ) : news?.data?.length ? (
+                  <div className={styles.list}>
+                    {news?.data?.map((singleNew, i) => (
                       <SwiperSlide key={i}>
-                        <Skeleton
-                          width="100%"
-                          height="348px"
-                          borderRadius="4px"
-                        />
+                        <BlogBox singleNew={singleNew} />
                       </SwiperSlide>
                     ))}
-                </div>
-              ) : newsError ? (
-                <Error msg={newsLoading?.message} />
-              ) : news?.data?.length ? (
-                <div className={styles.list}>
-                  {news?.data?.map((singleNew, i) => (
-                    <SwiperSlide key={i}>
-                      <BlogBox singleNew={singleNew} />
-                    </SwiperSlide>
-                  ))}
-                </div>
-              ) : (
-                <EmptyList text="لا يوجد أي أخبار في الوقت الراهن، الآن يمكنك إضافة الأخبار" />
-              )}
-            </Swiper>
-          </section>
+                  </div>
+                ) : (
+                  <EmptyList text="لا يوجد أي أخبار في الوقت الراهن، الآن يمكنك إضافة الأخبار" />
+                )}
+              </Swiper>
+            </section>
+          </div>
         </div>
-      </div>
-      {idModal === "occasions-modal" && occasionsRes?.data?.length ? (
-        <OccasionsModal occasions={occasionsRes?.data} />
-      ) : (
-        ""
-      )}
-    </>
-  );
+        {idModal === "occasions-modal" && occasionsRes?.data?.length ? (
+          <OccasionsModal occasions={occasionsRes?.data} />
+        ) : (
+          ""
+        )}
+      </>
+    );
 }
 
 export default Home

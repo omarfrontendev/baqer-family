@@ -1,0 +1,21 @@
+.custom-node {
+  cursor: pointer;
+}
+
+.custom-node rect {
+  fill: lightblue;
+  stroke: blue;
+  stroke-width: 1;
+}
+
+.custom-node text {
+  fill: black;
+  text-anchor: middle;
+  alignment-baseline: central;
+}
+
+.custom-node image {
+    width: 60px;
+    height: 60px;
+    r: 30;
+}

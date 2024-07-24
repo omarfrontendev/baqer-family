@@ -43,6 +43,8 @@ export { default as Activities } from "./Activities";
 export { default as AddActivities } from "./Activities/AddActivities";
 export { default as EditActivities } from "./Activities/EditActivities";
 
+// ================ Family Tree ================
+export { default as AddToFamilyTree } from './FamilyTree/Add'
 
 export { default as TechSupport } from "./TechSupport";
 export { default as Notifications } from "./NotificationsPage";

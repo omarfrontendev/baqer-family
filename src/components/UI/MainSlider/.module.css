@@ -1,0 +1,14 @@
+.slider__content {
+  height: 250px;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.slider__content .slider__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}/*# sourceMappingURL=.module.css.map */

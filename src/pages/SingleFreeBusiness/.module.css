@@ -1,0 +1,90 @@
+.company__image {
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 auto 4px;
+}
+
+.points {
+  background-color: #26C0FF;
+  color: #FFF;
+  font-size: 16px;
+  border-radius: 50px;
+  margin: 0 auto 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4px 32px;
+}
+
+.contact__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 32px 0 14px;
+}
+.contact__section .contact__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(38, 192, 255, 0.1490196078);
+  font-size: 14px;
+  padding: 4px 20px;
+  width: 200px;
+  max-width: 100%;
+}
+.contact__section .contact__box > span {
+  color: #26C0FF;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.social__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.social__section > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+}
+
+.footer__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 80px auto 0;
+  max-width: 400px;
+}
+.footer__btn > button,
+.footer__btn > a {
+  color: #FFF;
+  font-size: 16px;
+  background-color: #FF8426;
+  height: 50px;
+  border-radius: 7px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer__btn > button.btn__blue,
+.footer__btn > a.btn__blue {
+  background-color: #0D49C3;
+}/*# sourceMappingURL=.module.css.map */

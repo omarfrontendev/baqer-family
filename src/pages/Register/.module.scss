@@ -359,6 +359,76 @@
     }
 }
 
+// ==============================
+
+.upload__input {
+    display: none !important;
+}
+.upload__file {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        font-size: 39px;
+        background-color: $main__blue__color;
+        color: $white__color;
+        margin: 0 auto 70px;
+        cursor: pointer;
+        position: relative;
+        .user__image {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        &.uploaded {
+            svg {
+                position: absolute;
+                top: 14px;
+                right: -10px;
+                font-size: 23px;
+                color: #FFF;
+                background: $main__blue__color;
+                padding: 4px;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+            }
+        }
+}
+.radio__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #26c0ff14;
+    font-weight: 600;
+    margin: 36px 0;
+    position: relative;
+    &.invalid {
+        background-color: #e9212114;
+    }
+    .gender__labels {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        >div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            input,
+            label {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 @media (max-width: 575px) {
     .page {
         padding: 40px 14px;

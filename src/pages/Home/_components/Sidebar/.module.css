@@ -1,0 +1,27 @@
+.sidebar__content {
+  position: relative;
+}
+.sidebar__content .logo {
+  background-color: #FFF;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar__content .close__btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 12px;
+  left: 16px;
+  color: #26C0FF;
+  font-size: 28px;
+}
+.sidebar__content .list {
+  list-style: none;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  font-size: 16px;
+}/*# sourceMappingURL=.module.css.map */

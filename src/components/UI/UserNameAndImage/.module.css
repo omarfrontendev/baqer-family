@@ -1,0 +1,18 @@
+.user__box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  text-wrap: nowrap;
+}
+.user__box .img {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #DDD;
+}
+.user__box .name {
+  font-size: 22px;
+  text-align: center;
+}/*# sourceMappingURL=.module.css.map */

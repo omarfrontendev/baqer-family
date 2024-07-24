@@ -1,0 +1,36 @@
+.form__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  width: 700px;
+  max-width: 100%;
+  margin: 47px auto 0;
+}
+
+.company__image {
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 auto 20px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.popup__title {
+  font-size: 24px;
+}/*# sourceMappingURL=.module.css.map */

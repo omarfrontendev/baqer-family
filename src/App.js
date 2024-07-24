@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
+import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, AddToFamilyTree, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
 import { PagesGuard } from './components/AuthGuard';
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-quill/dist/quill.snow.css";
@@ -92,6 +92,8 @@ const App = () => {
             <Route path="/activities" element={<Activities />} />
             <Route path="/activities/add" element={<AddActivities />} />
             <Route path="/activities/edit" element={<EditActivities />} />
+            {/* ================ Family Tree ===================== */}
+            <Route path="/family-tree/add" element={<AddToFamilyTree />} />
             {/* ================================================== */}
             <Route path="/tech-support" element={<TechSupport />} />
             <Route path="/notification" element={<Notifications />} />

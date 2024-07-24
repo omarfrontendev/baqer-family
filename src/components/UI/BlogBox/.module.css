@@ -1,0 +1,32 @@
+.box {
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.box .image {
+  max-width: 100%;
+}
+.box .image img {
+  width: 100%;
+}
+.box .title {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.box .button {
+  margin: 0 auto 20px;
+  padding: 4px;
+  flex: 1 1;
+  max-width: 90%;
+  width: 150px;
+  border-radius: 50px;
+  background-color: #26C0FF;
+  color: #FFF;
+  cursor: pointer;
+  text-align: center;
+}/*# sourceMappingURL=.module.css.map */

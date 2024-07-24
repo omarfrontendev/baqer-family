@@ -1,0 +1,77 @@
+.image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.box {
+    padding: 4px 10px;
+    background-color: #FFF;
+    border: 1px solid #E9E9E9;
+    border-radius: 8px;
+    position: relative;
+    &.male {
+        border: 1px solid #0d49c2;
+        background-color: rgb(244 246 252);
+        .name {
+            background-color: #0d49c2;
+        }
+    }
+    &.female {
+        border: 1px solid #f236a4;
+        background-color: #fff8fc;
+        .name {
+            background-color: #f236a4;
+        }
+    }
+    .name {
+        font-size: 10px;
+        text-align: center;
+        border-radius: 10px;
+        margin-top: 8px;
+        padding: 2px 4px;
+        color: #FFF;
+    }
+    .badge {
+        position: absolute;
+        background-color: #000;
+        width: 80px;
+        height: 10px;
+        top: 0;
+        left: -20px;
+        transform: rotate(135deg);
+        &.is_divorced {
+            background-color: brown;
+            right: -20px;
+            transform: rotate(45deg);
+        }
+    }
+    .btns{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 4px auto 0;
+        color: #E92121;
+        gap: 4px;
+        font-size: 14px;
+        height: 22px;
+        justify-content: space-between;
+        .edit__btn {
+            color: green;
+            font-size: 16px;
+        }
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background-color: #DDD; */
+        border-radius: 8px;
+        z-index: 1;
+        backdrop-filter: blur(5px);
+    }
+    &.is_relict {
+        background-color: #DDD;
+    }
+}

@@ -1,0 +1,25 @@
+.loading__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+.loading__container .spinner {
+  width: 120px;
+  height: 120px;
+  border: 12px solid #DDD;
+  border-bottom-color: #26C0FF;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=.module.css.map */

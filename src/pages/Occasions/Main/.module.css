@@ -1,0 +1,166 @@
+.categories__box {
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+  height: 64px;
+  background-color: #F8F8F8;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  /* Track */
+  /* Handle */
+}
+.categories__box::-webkit-scrollbar {
+  height: 8px;
+  border-radius: 50px;
+}
+.categories__box::-webkit-scrollbar-track {
+  background: #fff;
+}
+.categories__box::-webkit-scrollbar-thumb {
+  background: #26C0FF;
+  border-radius: 2px;
+}
+.categories__box > button {
+  text-align: center;
+  min-width: 200px;
+  height: 61px;
+  color: #BEBEBE;
+  font-size: 18px;
+  position: relative;
+  transition: 0.2s ease-in-out;
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.categories__box > button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #BEBEBE;
+  transition: 0.2s ease-in-out;
+}
+.categories__box > button.active {
+  color: #26C0FF;
+}
+.categories__box > button.active::after {
+  background-color: #26C0FF;
+  height: 2px;
+  transform: translateY(25%);
+}
+.categories__box > button.active .delete {
+  color: red;
+}
+.categories__box > button.active .edit {
+  color: #26C0FF;
+}
+.categories__box > button .category__btns {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+}
+.categories__box > button .category__btns > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add__btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #26C0FF;
+  font-size: 20px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+.list .box {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #E9E9E9;
+}
+.list .box .title {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 16px;
+}
+.list .box .date {
+  background-color: #26C0FF;
+  color: #FFF;
+  border-radius: 50px;
+  padding: 4px 26px;
+  text-align: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto 16px;
+  font-size: 14px;
+}
+.list .box .image__box {
+  height: 147px;
+  position: relative;
+  overflow: hidden;
+}
+.list .box .image__box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.2;
+  transition: 0.3s ease-in-out;
+}
+.list .box .image__box:hover::after {
+  opacity: 0;
+}
+.list .box .image__box .img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.list .box .btns {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.list .box .btns a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list .box .btns > button {
+  display: flex;
+}
+.list .box .btns .delete__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+}
+.list .box .btns .delete__btn svg {
+  height: 18px;
+}
+.list .box .btns .delete__btn svg path {
+  fill: #FFF;
+}/*# sourceMappingURL=.module.css.map */

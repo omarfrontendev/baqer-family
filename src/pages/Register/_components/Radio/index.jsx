@@ -13,10 +13,47 @@ const Radio = ({
   label_2,
   val_2,
   id_1,
-  id_2
+  id_2,
+  normal,
+  onChange,
 }) => {
+  if (normal)
+    return (
+      <div
+        className={`${styles.radio__box} ${error ? styles.invalid : ""}`}
+        style={{ ...style }}
+      >
+        <div>{label}</div>
+        <div className={styles.gender__labels}>
+          <div>
+            <label htmlFor={id_1 || val_1}>{label_1}</label>
+            <input
+              type="radio"
+              id={id_1 || val_1}
+              name={name}
+              value={val_1}
+              onChange={(e) => onChange(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor={id_2 || val_2}>{label_2}</label>
+            <input
+              type="radio"
+              id={id_2 || val_2}
+              name={name}
+              value={val_2}
+              onChange={(e) => onChange(e.target.value)}
+            />
+          </div>
+        </div>
+        {error && <ErrorMessage msg={error} />}
+      </div>
+    );
   return (
-    <div className={`${styles.radio__box} ${error ? styles.invalid : ""}`} style={{ ...style }}>
+    <div
+      className={`${styles.radio__box} ${error ? styles.invalid : ""}`}
+      style={{ ...style }}
+    >
       <div>{label}</div>
       <div className={styles.gender__labels}>
         <div>

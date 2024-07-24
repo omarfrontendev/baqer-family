@@ -1,0 +1,13 @@
+.label {
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 190px;
+  border-radius: 4px;
+  background-color: #DBDBDB;
+  padding: 4px 20px;
+  text-align: center;
+}
+.label .text {
+  color: #7B7B7B;
+  font-size: 14px;
+}/*# sourceMappingURL=.module.css.map */

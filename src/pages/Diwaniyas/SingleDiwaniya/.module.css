@@ -1,0 +1,28 @@
+.page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page__header .header__btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 20px;
+  color: #26C0FF;
+}
+.page__header .header__btn.off {
+  color: #9A9A9A;
+}
+.page__header .header__btn.decrease, .page__header .header__btn.increase {
+  color: #26C0FF;
+}
+.page__header .header__btn.decrease > svg {
+  transform: rotate(180deg);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}/*# sourceMappingURL=.module.css.map */

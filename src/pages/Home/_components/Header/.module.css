@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+}
+.header .content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.header .notification__link,
+.header .menu__btn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #26C0FF;
+  font-size: 28px;
+}/*# sourceMappingURL=.module.css.map */

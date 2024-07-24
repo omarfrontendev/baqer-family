@@ -1,0 +1,62 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dddddd50;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+.wife__box {
+    padding: 12px 20px;
+    border-radius: 5px;
+    background-color: rgba(221, 221, 221, 0.09);
+    border: 1px solid #DDDD;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    flex-grow: 1;
+    position: relative;
+    .details__box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        >span:not(.name){
+            &:first-of-type {
+                min-width: 100px;
+                padding: 4px 10px;
+                box-sizing: content-box;
+                background: #eefaff;
+                color: #333;
+                font-weight: 500;
+                text-align: center;
+            }
+            &:last-of-type {
+                font-weight: 600;
+                font-size: 14px;
+                padding: 1px 10px;
+                background: #3cab40;
+                color: #FFF;
+                height: 38px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                width: 45px;
+                &.error {
+                    background-color: #E92121;
+                }
+            }
+        }
+    }
+    .delete__btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #E92121;
+    }
+}

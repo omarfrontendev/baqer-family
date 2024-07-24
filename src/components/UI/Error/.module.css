@@ -1,0 +1,10 @@
+.error {
+  background: rgba(255, 0, 0, 0.7411764706);
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+}/*# sourceMappingURL=.module.css.map */

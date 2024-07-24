@@ -1,0 +1,79 @@
+.images__container {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.images__container .add__image__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #26C0FF;
+  color: #FFF;
+  height: 85px;
+  border-radius: 7px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.images__container .add__image__btn.disabled {
+  display: none;
+}
+.images__container .image__box {
+  position: relative;
+  height: 85px;
+  width: 100%;
+  border-radius: 7px;
+}
+.images__container .image__box .img {
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.images__container .image__box .delete__img__btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -10px;
+  left: -10px;
+  width: 30px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+}
+.images__container .image__box .delete__img__btn > svg {
+  height: 15px;
+}
+.images__container .image__box .delete__img__btn > svg path {
+  fill: #FFF;
+}
+.images__container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  border-radius: 7px;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.images__container .overlay > .spinner {
+  color: red;
+  font-size: 30px;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=.module.css.map */
