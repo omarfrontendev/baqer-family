@@ -20,7 +20,7 @@ const AddWifeForm = ({ register, errors, control, gender }) => {
       append({
         ...body,
         type: gender === "male" ? 2 : 1,
-        marry_type: 0,
+        marry_type: 1,
       });
     } else if (type === "DELETE") {
       remove(body);

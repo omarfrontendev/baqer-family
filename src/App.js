@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { Activities, AddActivities, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, AddToFamilyTree, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, WelcomePage } from './pages'
+import { Activities, AddActivities, AddArchive, AddCongratulations, AddLiquidation, AddNewDiwaniya, AddNews, AddOccasion, AddToFamilyTree, Archives, ArchivesCategories, Congratulations, DiwaniyaDetails, Diwaniyas, EditActivities, EditCongratulations, EditDiwaniya, EditLiquidation, EditNews, EditOccasion, EditProfile, ForgetPassword, FreeBusiness, Home, Inquiries, Liquidation, LiquidationDetails, Login, NewDetails, News, Notifications, OccasionDetails, Occasions, Profile, Register, SingleCongratulation, SingleDiwaniya, SingleFreeBusiness, TechSupport, UserFreelanceRequest, VotesCategories, WelcomePage } from './pages'
 import { PagesGuard } from './components/AuthGuard';
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-quill/dist/quill.snow.css";
@@ -88,12 +88,18 @@ const App = () => {
               path="/liquidation/:slug/edit"
               element={<EditLiquidation />}
             />
+            {/* ================ Archives ===================== */}
+            <Route path="/archives" element={<ArchivesCategories />} />
+            <Route path="/archives/:slug" element={<Archives />} />
+            <Route path="/archives/:slug/add" element={<AddArchive />} />
             {/* ================ Activities ===================== */}
             <Route path="/activities" element={<Activities />} />
             <Route path="/activities/add" element={<AddActivities />} />
             <Route path="/activities/edit" element={<EditActivities />} />
             {/* ================ Family Tree ===================== */}
             <Route path="/family-tree/add" element={<AddToFamilyTree />} />
+            {/* ================ Votes ===================== */}
+            <Route path="/votes" element={<VotesCategories />} />
             {/* ================================================== */}
             <Route path="/tech-support" element={<TechSupport />} />
             <Route path="/notification" element={<Notifications />} />

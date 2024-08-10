@@ -18,6 +18,7 @@ const Home = () => {
   const { t } = useTranslation();
   const { setIdModal, idModal } = useContext(ModalContext);
   const { default_page } = JSON.parse(Cookies.get("user"));
+  const user = JSON.parse(Cookies.get("user"));
 
   const sections = [
     {
@@ -50,7 +51,7 @@ const Home = () => {
     },
     {
       title: "تصويت",
-      href: "/",
+      href: "/votes",
     },
     {
       title: "الدعم فني",
@@ -99,9 +100,9 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [occasionsRes?.success]);
 
-  return <TreeView />
+  // return <TreeView />
   
-  // if (default_page === 1) return <TreeView />
+  if (default_page === 1) return <TreeView />
     return (
       <>
         <div style={{ height: "40px" }}></div>

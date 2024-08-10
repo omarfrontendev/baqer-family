@@ -1,7 +1,7 @@
 import Tree from "react-d3-tree";
 import styles from "./.module.scss";
 
-export const renderForeignObjectNodeTest = ({ nodeDatum, toggleNode }) => {
+export const renderForeignObjectNodeTest = ({ nodeDatum }) => {
 
 //   console.log("nodeDatum: ", nodeDatum);
 

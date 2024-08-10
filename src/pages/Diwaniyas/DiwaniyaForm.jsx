@@ -155,8 +155,6 @@ const DiwaniyaForm = ({
         defaultDate
       />
 
-      {console.log(options)}
-
       <div className={styles.days__container}>
         <h5 className={styles.days__title}>أضف يوم و وقت الديوان</h5>
         <div style={{ position: "relative" }}>

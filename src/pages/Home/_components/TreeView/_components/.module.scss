@@ -11,14 +11,14 @@
     position: relative;
     &.male {
         border: 1px solid #0d49c2;
-        background-color: rgb(244 246 252);
+        // background-color: rgb(244 246 252);
         .name {
             background-color: #0d49c2;
         }
     }
     &.female {
         border: 1px solid #f236a4;
-        background-color: #fff8fc;
+        // background-color: #fff8fc;
         .name {
             background-color: #f236a4;
         }
@@ -43,6 +43,9 @@
             background-color: brown;
             right: -20px;
             transform: rotate(45deg);
+            &.is_relict {
+             background-color: #b4b4b4;   
+            }
         }
     }
     .btns{
@@ -55,7 +58,11 @@
         font-size: 14px;
         height: 22px;
         justify-content: space-between;
+        > button {
+            flex: 1;
+        }
         .edit__btn {
+            text-align: left;
             color: green;
             font-size: 16px;
         }
@@ -71,7 +78,22 @@
         z-index: 1;
         backdrop-filter: blur(5px);
     }
-    &.is_relict {
-        background-color: #DDD;
+    // &.is_relict {
+    //     background-color: #DDD;
+    // }
+    .collapsed__btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #333;
+        color: #FFF;
+        font-size: 10px;
+        display: flex;
+        width: 18px;
+        height: 18px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transform: translate(6%, 71%);
     }
 }

@@ -28,17 +28,21 @@ const Sidebar = ({ onClose }) => {
             <Link to="/profile/sadsadsda">{t("profile")}</Link>
           </li>
           <li onClick={onClose}>
-            <Link to="/">{t("familyArchive")}</Link>
+            <Link to="/archives">{t("familyArchive")}</Link>
           </li>
           <li onClick={onClose}>
             <Link to="/">{t("Inquiries")}</Link>
           </li>
           <li onClick={onClose}>
-            <button onClick={() => {
-              Cookies.remove("token");
-              Cookies.remove("user");
-              navigate('/login');
-            }}>{t("logout")}</button>
+            <button
+              onClick={() => {
+                Cookies.remove("token");
+                Cookies.remove("user");
+                navigate("/login");
+              }}
+            >
+              {t("logout")}
+            </button>
           </li>
         </ul>
       </nav>

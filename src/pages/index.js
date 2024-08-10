@@ -43,8 +43,17 @@ export { default as Activities } from "./Activities";
 export { default as AddActivities } from "./Activities/AddActivities";
 export { default as EditActivities } from "./Activities/EditActivities";
 
+// ================ Archives ===============
+export { default as Archives } from "./Archives";
+export { default as ArchivesCategories } from "./Archives/ArchiveCategories";
+export { default as AddArchive } from "./Archives/AddArchive";
+
 // ================ Family Tree ================
 export { default as AddToFamilyTree } from './FamilyTree/Add'
+
+// ================ Votes ===============
+export { default as VotesCategories } from "./Votes/VotesCategories";
+
 
 export { default as TechSupport } from "./TechSupport";
 export { default as Notifications } from "./NotificationsPage";

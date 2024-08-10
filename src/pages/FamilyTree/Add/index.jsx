@@ -17,10 +17,11 @@ const AddToFamilyTree = () => {
 
   const schema = yup
     .object({
-      photo: yup.mixed("").required(t("errors.required")),
+      photo: yup.mixed(""),
       name: yup.string("").required(t("errors.required")),
       type: yup.string("").required(t("errors.required")),
-      follower_to: yup.string("").required(t("errors.required")),
+      // follower_to: yup.string("").required(t("errors.required")),
+      follower_to: yup.string(""),
       is_alive: yup.string("").required(t("errors.required")),
       is_divorced: yup.string("").required(t("errors.required")),
       is_relict: yup.string("").required(t("errors.required")),
@@ -47,8 +48,6 @@ const AddToFamilyTree = () => {
     resolver: yupResolver(schema),
     mode: "all",
   });
-
-  console.log(watch()?.marry)
 
   // get add branch:=
   const { onRequest: onSendData } = useApi("/api/addTreeBranch", "post");
@@ -100,7 +99,7 @@ const AddToFamilyTree = () => {
 
   return (
     <>
-      <PageHeader title={t("addNewDiwaniya")} />
+      <PageHeader title={t("الإضافة إلى شجرة العائلة")} />
       <div className="container">
         <FamilyTreeForm
           onSubmit={handleSubmit((e) => onSubmit(e))}

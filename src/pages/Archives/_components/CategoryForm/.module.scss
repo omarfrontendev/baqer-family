@@ -1,0 +1,25 @@
+.form__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    .content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        // max-height: calc(100vh - 200px);
+        // overflow-x: hidden;
+        padding: 0 10px;
+    }
+    .custom__layout {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        .saturation {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .test {
+            height: 20px;
+        }
+    }
+}

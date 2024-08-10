@@ -1,6 +1,5 @@
 import styles from "./.module.scss";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaMinus, FaPlus } from "react-icons/fa";
 
 export const renderForeignObjectNode = ({
   nodeDatum,
@@ -9,20 +8,23 @@ export const renderForeignObjectNode = ({
   isDeleting,
   deleting,
   onUpdate,
+  onShowDetails,
 }) => {
   return (
-    <g
-      onClick={() => {
-        if (nodeDatum?.type === "2") {
-          toggleNode();
-        }
-      }}
-    >
-      <foreignObject width={100} height={150} x={-50} y={-35}>
+    <g>
+      <foreignObject width={100} height={150} x={-50} y={-55}>
         <div
           className={`${styles.box} ${
             nodeDatum?.type === "2" ? styles.female : styles.male
-          } ${nodeDatum?.is_relict === "1" ? styles.is_relict : ""}`}
+          }`}
+          onClick={(e) => {
+            if (e.target?.id) {
+              return;
+            } else {
+              // e.stopPropagation();
+              onShowDetails(nodeDatum);
+            }
+          }}
         >
           {isDeleting && deleting === nodeDatum?.id ? (
             <div className={styles.overlay}></div>
@@ -47,20 +49,42 @@ export const renderForeignObjectNode = ({
             <button
               className={styles.delete__btn}
               onClick={() => onDelete(nodeDatum?.id)}
+              id="delete__btn"
             >
-              <FaTrashAlt />
+              <FaTrashAlt id="delete__btn" />
             </button>
             <button
               className={styles.edit__btn}
               onClick={() => onUpdate(nodeDatum)}
+              id="delete__btn"
             >
-              <FaEdit />
+              <FaEdit id="delete__btn" />
             </button>
           </div>
           <p className={styles.name}>{nodeDatum.name}</p>
           {nodeDatum?.is_alive === "2" && <div className={styles.badge}></div>}
           {nodeDatum?.is_divorced === "1" && (
             <div className={`${styles.badge} ${styles.is_divorced}`}></div>
+          )}
+          {nodeDatum?.is_relict === "1" && (
+            <div
+              className={`${styles.badge} ${styles.is_divorced} ${styles.is_relict}`}
+            ></div>
+          )}
+          {nodeDatum?.children?.length && nodeDatum?.type === "2" ? (
+            <button
+              onClick={() => toggleNode()}
+              className={styles.collapsed__btn}
+              id="delete__btn"
+            >
+              {!nodeDatum?.__rd3t?.collapsed ? (
+                <FaMinus id="delete__btn" />
+              ) : (
+                <FaPlus id="delete__btn" />
+              )}
+            </button>
+          ) : (
+            ""
           )}
         </div>
       </foreignObject>

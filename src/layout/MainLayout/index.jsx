@@ -24,7 +24,6 @@ const MainLayout = ({ children }) => {
       </div>
       <div className={`${styles.content}`}>
         <Outlet />
-        {/* {children} */}
       </div>
     </div>
   );

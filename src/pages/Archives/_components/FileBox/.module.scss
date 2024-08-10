@@ -1,0 +1,56 @@
+.box {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #F6F6F6;
+    .right__col {
+        display: flex;
+        gap: 20px;
+        .image__box {
+            width: 81px;
+            height: 81px;
+            > img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .description {
+                font-size: 16px;
+                line-height: 16px;
+                margin-bottom: 1px;
+                margin-top: 2px;
+            }
+            .date {
+                font-size: 12px;
+                line-height: 12px;
+                color: #929292;
+            }
+            .button {
+                color: #FFF;
+                background-color: #26C0FF;
+                font-size: 12px;
+                padding: 3px 12px;
+                border-radius: 4px;
+                width: fit-content;
+            }
+        }
+    }
+    .user__card {
+        display: flex;
+        flex-direction: column;
+        .user__image {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: block;
+        }
+    }
+}

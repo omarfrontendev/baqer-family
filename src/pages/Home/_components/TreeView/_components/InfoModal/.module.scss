@@ -1,0 +1,19 @@
+.title {
+    margin-bottom: 32px;
+}
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    .single {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-basis: calc(50% - 16px);
+        .bullets {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+    }
+}
